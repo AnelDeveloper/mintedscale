@@ -5,7 +5,7 @@ import { VideoFrame } from "./video-frame";
 
 /**
  * Reserved, not invented. There are no partner testimonials yet, so the
- * section says so and shows the seats instead — which doubles as scarcity.
+ * section says so and holds the frames instead of filling them with fiction.
  */
 export function Films() {
   return (
@@ -38,7 +38,7 @@ export function Films() {
 
       <div className="mt-[clamp(2rem,4vw,3rem)]" data-reveal>
         <a href="#apply" className="ms-btn ms-btn-gold ms-sheen">
-          Take a seat
+          Apply to work with us
           <Arrow />
         </a>
       </div>

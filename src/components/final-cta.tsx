@@ -47,8 +47,8 @@ export function FinalCta() {
           data-reveal
           style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
         >
-          Four partners this quarter. Bring us an audience and an appetite — we bring
-          the strategy, the product, the technology and the launch.
+          Bring an audience and an appetite — we bring the strategy, the product,
+          the technology and the launch. Nothing to pay upfront.
         </p>
 
         <div

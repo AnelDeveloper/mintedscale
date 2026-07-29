@@ -16,7 +16,7 @@
  *   • studio.portrait   — a photo of you
  *   • hero.video        — the studio film
  *   • engine.video      — a screen recording of the system
- *   • films.items       — founding partner films, once they exist
+ *   • films.items       — partner films, once they exist
  */
 
 export const site = {
@@ -49,7 +49,7 @@ export const hero = {
   eyebrow: "The Creator Mint",
   headline: ["Your audience is", "more than followers."],
   sub: "We turn attention into brands, products and businesses — built and launched by one studio, on a revenue share. You pay nothing upfront.",
-  primaryCta: "Apply for a founding spot",
+  primaryCta: "Build my brand",
   secondaryCta: "See how it works",
   video: {
     src: "",
@@ -60,7 +60,7 @@ export const hero = {
   bar: [
     { value: "€0", label: "Upfront" },
     { value: "Rev share", label: "We earn when you earn" },
-    { value: "3", label: "Founding partners" },
+    { value: "100%", label: "Yours to keep" },
   ],
 } as const;
 
@@ -78,14 +78,14 @@ export const studio = {
     { value: "7", label: "Years building products", note: "Software & commerce" },
     { value: "€0", label: "Upfront to start", note: "Nothing to pay in advance" },
     { value: "Rev share", label: "We earn when you earn", note: "No win, no fee" },
-    { value: "3", label: "Founding partner spots", note: "Open now" },
+    { value: "100%", label: "Yours to keep", note: "Brand, product, customers" },
   ],
   portrait: { src: "", alt: "Anel Kujović, founder of MintedScale" },
   note: {
     lead: "I'm Anel. For seven years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
     body: "MintedScale is that capability pointed at creators. Most people offering to build your brand are marketers who can't ship software, so the strategy deck arrives and the product never does. I ship the product.",
     offer:
-      "The creator studio is new, and I'd rather say that than invent a client list. That's why the first three partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
+      "The creator studio is new, and I'd rather say that than invent a client list. That's why partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
     signature: "Anel Kujović · Founder",
   },
   /**
@@ -354,17 +354,17 @@ export const concepts = {
   ],
 } as const;
 
-/* ── Films (reserved for founding partners) ────────────────── */
+/* ── Films (frames held for real partner stories) ──────────── */
 
 export const films = {
   eyebrow: "Partner films",
   index: "07",
-  headline: ["Three seats.", "Three stories to come."],
-  body: "When a founding partner launches, their film goes here — what we built, what it earns, in their own words. Reserved, not invented.",
+  headline: ["The films go here", "when they're real."],
+  body: "When a partner launches, their film goes here — what we built, what it earns, in their own words. Reserved, not invented.",
   items: [
-    { id: "v1", seat: "Seat 01", status: "Open", src: "", poster: "" },
-    { id: "v2", seat: "Seat 02", status: "Open", src: "", poster: "" },
-    { id: "v3", seat: "Seat 03", status: "Open", src: "", poster: "" },
+    { id: "v1", seat: "Partner 01", status: "Reserved", src: "", poster: "" },
+    { id: "v2", seat: "Partner 02", status: "Reserved", src: "", poster: "" },
+    { id: "v3", seat: "Partner 03", status: "Reserved", src: "", poster: "" },
   ],
 } as const;
 
@@ -427,8 +427,8 @@ export const standard = {
     },
     {
       n: "04",
-      title: "Three partners, not thirty",
-      body: "Founding partners get the whole studio, not a slice of an account manager's week. That is only possible while the number is small — which is exactly now.",
+      title: "Tied to year two, not your invoice",
+      body: "A revenue share only pays if the brand keeps earning, so I am on the hook for what happens after launch week — retention, margin, the second product. Nobody billing you upfront has that incentive.",
     },
   ],
 } as const;
@@ -442,7 +442,7 @@ export const faq = {
   items: [
     {
       q: "What does it cost?",
-      a: "Nothing upfront. The first three partners work on a revenue share: I build the brand, the product and the technology at my own cost, and take a share of what it earns. If it earns nothing, I earn nothing. The percentage depends on how much we're building, so we set it together on the call — and it goes in writing, time-limited, before any work starts. You are not signing away your company.",
+      a: "Nothing upfront. We work on a revenue share: I build the brand, the product and the technology at my own cost, and take a share of what it earns. If it earns nothing, I earn nothing. The percentage depends on how much we're building, so we set it together on the call — and it goes in writing, time-limited, before any work starts. You are not signing away your company.",
     },
     {
       q: "You're new to creator brands. Why should I take the risk?",
@@ -473,10 +473,10 @@ export const application = {
   eyebrow: "Apply",
   index: "11",
   headline: ["Ready to turn your name", "into a brand?"],
-  body: "If you are a creator and want to build something bigger than content, let's talk. Three founding spots, no upfront fee.",
+  body: "If you are a creator and want to build something bigger than content, let's talk. No upfront fee — we earn when you earn.",
   terms: [
-    "Three founding partners, then the revenue share closes.",
     "Nothing to pay upfront — we earn when you earn.",
+    "You own the brand, the product and the customer list.",
     "Every application is read by me, not a form robot.",
     "Expect a reply within two business days.",
   ],
