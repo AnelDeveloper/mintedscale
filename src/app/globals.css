@@ -204,6 +204,23 @@
   letter-spacing: 0.005em;
 }
 
+/*
+  background-clip:text paints the gradient only inside the element's own box.
+  Our display line-heights are below 1, so a descender — the y in "7 yrs", the
+  p in "pratilaca" — falls outside that box and, with color:transparent, paints
+  nothing at all. It looks like the letter was sliced off.
+
+  The padding grows the painted box; the matching negative margin keeps layout
+  exactly where it was.
+*/
+.ms-gold,
+.ms-gold-sweep {
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
+  margin-top: -0.1em;
+  margin-bottom: -0.2em;
+}
+
 .ms-gold {
   background-image: var(--gold);
   -webkit-background-clip: text;
