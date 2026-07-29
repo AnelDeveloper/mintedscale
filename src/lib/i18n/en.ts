@@ -14,10 +14,10 @@ export const en = {
     role: "The Creator Mint",
     tagline: "Turning creators into brands.",
     description:
-      "MintedScale turns creator audiences into brands, products and businesses. Strategy, product and technology from one studio — built on a revenue share, so you pay nothing upfront.",
+      "MintedScale turns creator audiences into brands, products and businesses. Strategy, product and technology from one person — built on a revenue share, so you pay nothing upfront.",
   },
 
-  nav: ["Studio", "The Mint", "AI System", "Calculator", "Concepts"],
+  nav: ["Founder", "The Mint", "AI System", "Calculator", "Concepts"],
   applyCta: "Apply now",
   langLabel: "Language",
   menuOpen: "Open menu",
@@ -26,13 +26,13 @@ export const en = {
 
   hero: {
     headline: ["Your audience is", "more than followers."],
-    sub: "We turn attention into brands, products and businesses — built and launched by one studio, on a revenue share. You pay nothing upfront.",
+    sub: "I turn attention into brands, products and businesses — built and launched by one person, on a revenue share. You pay nothing upfront.",
     primaryCta: "Build my brand",
     secondaryCta: "See how it works",
     videoLabel: "How the mint works",
     bar: [
       { value: "€0", label: "Upfront" },
-      { value: "Rev share", label: "We earn when you earn" },
+      { value: "Rev share", label: "I earn when you earn" },
       { value: "7 yrs", label: "Building products" },
     ],
     earnings: {
@@ -44,14 +44,14 @@ export const en = {
   },
 
   studio: {
-    eyebrow: "The studio",
+    eyebrow: "The founder",
     index: "01",
     headline: ["Seven years of shipped product.", "Now pointed at creators."],
     stats: [
       { value: "7", label: "Years building products", note: "Software & commerce" },
       { value: "€0", label: "Upfront to start", note: "Nothing to pay in advance" },
-      { value: "Rev share", label: "We earn when you earn", note: "No win, no fee" },
-      { value: "4", label: "Practices, one studio", note: "Brand · Product · Growth · Tech" },
+      { value: "Rev share", label: "I earn when you earn", note: "No win, no fee" },
+      { value: "4", label: "Practices, one person", note: "Brand · Product · Growth · Tech" },
     ],
     portraitAlt: "Anel Kujović, founder of MintedScale",
     portraitSlot: "Portrait slot reserved",
@@ -59,12 +59,12 @@ export const en = {
       lead: "I'm Anel. For seven years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
       body: "MintedScale is that capability pointed at creators. Most people offering to build your brand are marketers who can't ship software, so the strategy deck arrives and the product never does. I ship the product.",
       offer:
-        "The creator studio is new, and I'd rather say that than invent a client list. That's why partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
+        "Creator brands are new for me, and I'd rather say that than invent a client list. That's why partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
       signature: "Anel Kujović · Founder",
     },
     clientsLabel: "Prior product work",
     clientsCaveat:
-      "Software and commerce work delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
+      "Software and commerce work I delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
     followLabel: "Follow the build",
   },
 
@@ -111,7 +111,7 @@ export const en = {
         title: "Discover",
         body: "Understand your audience, identity, and opportunities.",
         detail:
-          "We run your audience through the engine: who they are, what they already buy, where the demand is dense enough to price against. The output is a positioning thesis, not a mood board.",
+          "I run your audience through the engine: who they are, what they already buy, where the demand is dense enough to price against. The output is a positioning thesis, not a mood board.",
         output: "Audience thesis · Opportunity map",
         time: "Week 1–2",
       },
@@ -148,9 +148,9 @@ export const en = {
   engine: {
     eyebrow: "Built in-house",
     index: "04",
-    headline: ["We built our own", "AI monetization system."],
+    headline: ["I built my own", "AI monetization system."],
     body: "Most studios guess what your audience will buy, then bill you for the guess. I built software that reads the audience first — so the product is chosen from evidence, not taste.",
-    serif: "The guesswork is the expensive part. We removed it.",
+    serif: "The guesswork is the expensive part. I removed it.",
     videoLabel: "Inside the engine",
     asideBody:
       "Every partner build starts with an audit from the engine. You see the output before you commit to anything.",
@@ -178,7 +178,7 @@ export const en = {
       {
         code: "04",
         title: "Launch simulator",
-        body: "Projects the launch sequence before a single post goes out, so we know what to expect and where it breaks.",
+        body: "Projects the launch sequence before a single post goes out, so I know what to expect and where it breaks.",
         metric: "90-day forecast",
       },
     ],
@@ -211,20 +211,20 @@ export const en = {
       "Launch sequencing against your content calendar",
     ],
     disclaimer:
-      "A model, not a promise. It applies a launch-sequence conversion rate to your engaged audience — your niche, offer and list quality move it in both directions. We show the arithmetic so you can argue with it.",
+      "A model, not a promise. It applies a launch-sequence conversion rate to your engaged audience — your niche, offer and list quality move it in both directions. I show the arithmetic so you can argue with it.",
   },
 
   concepts: {
     eyebrow: "Concept builds",
     index: "06",
     headline: ["Built on paper", "before it's built for real."],
-    body: "Three creators we'd love to work with, and exactly what we'd make for each. These are plans, not past clients — read them to judge the thinking, because the thinking is what you're hiring.",
+    body: "Three creators I'd love to work with, and exactly what I'd make for each. These are plans, not past clients — read them to judge the thinking, because the thinking is what you're hiring.",
     disclaimer:
-      "Concept builds. Illustrative creators, real method. The figures are projections from the model in our calculator, not results — MintedScale is taking its first partners now.",
+      "Concept builds. Illustrative creators, real method. The figures are projections from the model in my calculator, not results — MintedScale is taking its first partners now.",
     cta: "Get your own concept",
     conceptWord: "Concept",
     beforeLabel: "Where they are",
-    afterLabel: "What we'd build",
+    afterLabel: "What I'd build",
     projectedLabel: "Projected first launch",
     audienceRow: "Audience",
     engagedRow: "Engaged",
@@ -306,7 +306,7 @@ export const en = {
     eyebrow: "Partner films",
     index: "07",
     headline: ["Are you", "next?"],
-    body: "When a partner launches, their film goes here — what we built, what it earns, in their own words. Reserved, not invented.",
+    body: "When a partner launches, their film goes here — what I built, what it earns, in their own words. Reserved, not invented.",
     cta: "Take the first frame",
     slotLabel: "Are you next?",
     status: "Open",
@@ -314,10 +314,10 @@ export const en = {
   },
 
   capabilities: {
-    eyebrow: "What we build",
+    eyebrow: "What I build",
     index: "08",
-    headline: ["Four practices.", "One studio."],
-    body: "No vendors, no handoffs. The person who writes the thesis ships the product.",
+    headline: ["Four practices.", "One person."],
+    body: "No vendors, no handoffs. I write the strategy and I ship the product.",
     services: [
       {
         code: "01",
@@ -353,7 +353,7 @@ export const en = {
     items: [
       {
         q: "What does it cost?",
-        a: "Nothing upfront. We work on a revenue share: I build the brand, the product and the technology at my own cost, and take a share of what it earns. If it earns nothing, I earn nothing. The percentage depends on how much we're building, so we set it together on the call — and it goes in writing, time-limited, before any work starts. You are not signing away your company.",
+        a: "Nothing upfront. I work on a revenue share: I build the brand, the product and the technology at my own cost, and take a share of what it earns. If it earns nothing, I earn nothing. The percentage depends on how much we're building, so we set it together on the call — and it goes in writing, time-limited, before any work starts. You are not signing away your company.",
       },
       {
         q: "You're new to creator brands. Why should I take the risk?",
@@ -369,7 +369,7 @@ export const en = {
       },
       {
         q: "I already have a product. Can you still help?",
-        a: "Often that is the better starting point. We audit what exists, fix the positioning and pricing, and build the system around it rather than starting from zero.",
+        a: "Often that is the better starting point. I audit what exists, fix the positioning and pricing, and build the system around it rather than starting from zero.",
       },
       {
         q: "Who owns the brand?",
@@ -382,10 +382,10 @@ export const en = {
     eyebrow: "Apply",
     index: "11",
     headline: ["Ready to turn your name", "into a brand?"],
-    body: "If you are a creator and want to build something bigger than content, let's talk. No upfront fee — we earn when you earn.",
-    writeToUs: "Or write to us",
+    body: "If you are a creator and want to build something bigger than content, let's talk. No upfront fee — I earn when you earn.",
+    writeToUs: "Or write to me",
     terms: [
-      "Nothing to pay upfront — we earn when you earn.",
+      "Nothing to pay upfront — I earn when you earn.",
       "You own the brand, the product and the customer list.",
       "Every application is read by me, not a form robot.",
       "Expect a reply within two business days.",
@@ -396,34 +396,34 @@ export const en = {
   console: {
     header: "Private consultation",
     confidential: "Confidential",
-    tablistLabel: "How to reach us",
+    tablistLabel: "How to reach me",
     callTab: "Schedule a call",
-    callNote: "45 minutes, with a partner",
+    callNote: "45 minutes, with me",
     messageTab: "Send a message",
-    messageNote: "We reply within two days",
+    messageNote: "I reply within two days",
     stepDay: "Choose a day",
     stepTime: "Choose a time",
-    stepAbout: "Tell us about you",
-    loadingSlots: "Loading studio calendar",
+    stepAbout: "Tell me about you",
+    loadingSlots: "Loading my calendar",
     slotsError: "Calendar unavailable.",
     tryAgain: "Try again",
     orMessage: "or send a message instead.",
-    noSlots: "No open times right now — send a message and we will make room.",
+    noSlots: "No open times right now — send a message and I will make room.",
     pickDayFirst: "Pick a day first.",
-    provisional: "Times are provisional until a partner confirms.",
+    provisional: "Times are provisional until I confirm them.",
     minutes: "min",
-    privacyCall: "Your details go straight to a partner. Nothing is shared.",
+    privacyCall: "Your details come straight to me. Nothing is shared.",
     privacyMessage: "Sent to {email}. Nothing is shared.",
     submitCall: "Confirm my call",
     submitMessage: "Send application",
     sending: "Sending",
     preferGoogle: "Prefer Google?",
-    openAppointments: "Open our appointment page",
+    openAppointments: "Open my appointment page",
     fields: {
       name: "Full name",
       namePlaceholder: "Lena Ruiz",
       email: "Email",
-      emailPlaceholder: "you@studio.com",
+      emailPlaceholder: "you@email.com",
       platform: "Main platform",
       select: "Select",
       handle: "Username",
@@ -438,22 +438,22 @@ export const en = {
     },
     done: {
       received: "Application received",
-      thanks: "Thank you. We will get back to you shortly.",
+      thanks: "Thank you. I will get back to you shortly.",
       yourCall: "Your call",
       joining: "Joining details",
       meetLink: "Google Meet link",
       sentToEmail: "Sent to your email",
-      quote: "Quote {ref} if you need to reach us before then —",
+      quote: "Quote {ref} if you need to reach me before then —",
     },
     errors: {
       generic: "Something went wrong. Try again.",
-      unreachable: "We could not reach the studio. Email us at {email}.",
+      unreachable: "Could not reach me. Email {email} directly.",
       checkFields: "Check the highlighted fields.",
       slotTaken: "That time has just been taken. Pick another.",
       slotGone: "No longer available.",
       tooMany: "Too many attempts. Try again shortly.",
       malformed: "Malformed request.",
-      sendFailed: "We could not send that. Email us directly at {email}.",
+      sendFailed: "That did not send. Email {email} directly.",
       name: "Enter your full name.",
       nameLong: "That name is too long.",
       emailMissing: "Enter an email address.",
@@ -465,7 +465,7 @@ export const en = {
       handleLong: "That username is too long.",
       followers: "Enter a number, like 120000 or 120k.",
       followersUnreal: "Enter a realistic follower count.",
-      idea: "Tell us a little more — at least a sentence.",
+      idea: "Tell me a little more — at least a sentence.",
       ideaLong: "Keep it under 2,000 characters.",
       slotMissing: "Choose a time for your call.",
       slotInvalid: "That time is not valid.",
@@ -473,20 +473,20 @@ export const en = {
     },
     success: {
       call: "Your call is held.",
-      message: "Thank you. We will get back to you shortly.",
+      message: "Thank you. I will get back to you shortly.",
     },
   },
 
   finalCta: {
     eyebrow: "Now minting",
     headline: ["Your name can become", "a brand."],
-    body: "Bring an audience and an appetite — we bring the strategy, the product, the technology and the launch. Nothing to pay upfront.",
+    body: "Bring an audience and an appetite — I bring the strategy, the product, the technology and the launch. Nothing to pay upfront.",
     primary: "Start building",
-    secondary: "Email the studio",
+    secondary: "Email me",
   },
 
   footer: {
-    studio: "Studio",
+    studio: "Sections",
     contact: "Contact",
     apply: "Apply",
   },

@@ -17,10 +17,10 @@ export const bs: Dictionary = {
     role: "Kovnica za kreatore",
     tagline: "Pretvaramo kreatore u brendove.",
     description:
-      "MintedScale pretvara publiku kreatora u brendove, proizvode i biznise. Strategija, proizvod i tehnologija iz jednog studija — uz podjelu prihoda, tako da unaprijed ne plaćaš ništa.",
+      "MintedScale pretvara publiku kreatora u brendove, proizvode i biznise. Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda, tako da unaprijed ne plaćaš ništa.",
   },
 
-  nav: ["Studio", "Kovnica", "AI sistem", "Kalkulator", "Koncepti"],
+  nav: ["Osnivač", "Kovnica", "AI sistem", "Kalkulator", "Koncepti"],
   applyCta: "Prijavi se",
   langLabel: "Jezik",
   menuOpen: "Otvori meni",
@@ -29,13 +29,13 @@ export const bs: Dictionary = {
 
   hero: {
     headline: ["Tvoja publika je", "više od pratilaca."],
-    sub: "Pretvaramo pažnju u brendove, proizvode i biznise — gradi ih i lansira jedan studio, uz podjelu prihoda. Unaprijed ne plaćaš ništa.",
+    sub: "Pretvaram pažnju u brendove, proizvode i biznise — gradi ih i lansira jedan čovjek, uz podjelu prihoda. Unaprijed ne plaćaš ništa.",
     primaryCta: "Izgradi moj brend",
     secondaryCta: "Vidi kako radi",
     videoLabel: "Kako kovnica radi",
     bar: [
       { value: "€0", label: "Unaprijed" },
-      { value: "Podjela", label: "Zarađujemo kad ti zaradiš" },
+      { value: "Podjela", label: "Zarađujem kad ti zaradiš" },
       { value: "7 god", label: "Gradnje proizvoda" },
     ],
     earnings: {
@@ -43,18 +43,18 @@ export const bs: Dictionary = {
       inputs: "250.000 pratilaca · 3% stopa angažmana · proizvod od €125",
       cta: "Izračunaj svoje",
     },
-    pill: { lead: "Radili smo za", companies: "kompanije", tail: "7 godina iskustva" },
+    pill: { lead: "Radio sam za", companies: "kompanije", tail: "7 godina iskustva" },
   },
 
   studio: {
-    eyebrow: "Studio",
+    eyebrow: "Osnivač",
     index: "01",
     headline: ["Sedam godina isporučenih proizvoda.", "Sada usmjereno na kreatore."],
     stats: [
       { value: "7", label: "Godina gradnje proizvoda", note: "Softver i trgovina" },
       { value: "€0", label: "Unaprijed za početak", note: "Ništa se ne plaća unaprijed" },
-      { value: "Podjela", label: "Zarađujemo kad ti zaradiš", note: "Nema rezultata, nema naknade" },
-      { value: "4", label: "Discipline, jedan studio", note: "Brend · Proizvod · Rast · Tehnologija" },
+      { value: "Podjela", label: "Zarađujem kad ti zaradiš", note: "Nema rezultata, nema naknade" },
+      { value: "4", label: "Discipline, jedan čovjek", note: "Brend · Proizvod · Rast · Tehnologija" },
     ],
     portraitAlt: "Anel Kujović, osnivač MintedScale-a",
     portraitSlot: "Mjesto za fotografiju",
@@ -62,12 +62,12 @@ export const bs: Dictionary = {
       lead: "Ja sam Anel. Sedam godina gradim softver i trgovinske proizvode za kompanije — platforme, aplikacije, web prodavnice i sisteme plaćanja. Onu neefektnu infrastrukturu bez koje biznis zapravo ne radi.",
       body: "MintedScale je ta sposobnost usmjerena na kreatore. Većina onih koji nude da ti izgrade brend su marketingaši koji ne umiju isporučiti softver, pa strategija stigne a proizvod nikad. Ja isporučujem proizvod.",
       offer:
-        "Studio za kreatore je nov i radije ću to reći nego izmisliti listu klijenata. Zato partneri unaprijed ne plaćaju ništa: ja gradim, ti lansiraš, a ja uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja.",
+        "Brendovi za kreatore su mi novi i radije ću to reći nego izmisliti listu klijenata. Zato partneri unaprijed ne plaćaju ništa: ja gradim, ti lansiraš, a ja uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja.",
       signature: "Anel Kujović · Osnivač",
     },
     clientsLabel: "Dosadašnji rad na proizvodima",
     clientsCaveat:
-      "Softver i trgovinska rješenja isporučena ovim kompanijama. Brendovi kreatora su novo poglavlje — ti rezultati dolaze ovdje kada se dogode, ne prije.",
+      "Softver i trgovinska rješenja koja sam isporučio ovim kompanijama. Brendovi kreatora su novo poglavlje — ti rezultati dolaze ovdje kada se dogode, ne prije.",
     followLabel: "Prati gradnju",
   },
 
@@ -112,16 +112,16 @@ export const bs: Dictionary = {
       {
         n: "01",
         title: "Otkrivanje",
-        body: "Razumijemo tvoju publiku, identitet i prilike.",
+        body: "Razumijem tvoju publiku, identitet i prilike.",
         detail:
-          "Provlačimo tvoju publiku kroz sistem: ko su, šta već kupuju, gdje je potražnja dovoljno gusta da se na nju postavi cijena. Rezultat je teza o pozicioniranju, a ne kolaž slika.",
+          "Provlačim tvoju publiku kroz sistem: ko su, šta već kupuju, gdje je potražnja dovoljno gusta da se na nju postavi cijena. Rezultat je teza o pozicioniranju, a ne kolaž slika.",
         output: "Teza o publici · Mapa prilika",
         time: "Sedmica 1–2",
       },
       {
         n: "02",
         title: "Gradnja",
-        body: "Kreiramo identitet brenda, pozicioniranje i strategiju.",
+        body: "Kreiram identitet brenda, pozicioniranje i strategiju.",
         detail:
           "Ime, znak, ton i priča zbog koje cijena ima smisla. Građeno tako da preživi i kad tvoje lice izađe iz kadra.",
         output: "Sistem identiteta · Knjiga brenda",
@@ -130,7 +130,7 @@ export const bs: Dictionary = {
       {
         n: "03",
         title: "Lansiranje",
-        body: "Razvijamo proizvode, ponude i digitalnu imovinu.",
+        body: "Razvijam proizvode, ponude i digitalnu imovinu.",
         detail:
           "Proizvod, cijene, pakovanje, prodavnica i samo lansiranje — poredano uz tvoj kalendar objava, da pažnja padne na nešto što se može kupiti.",
         output: "Linija proizvoda · Prodavnica · Plan lansiranja",
@@ -139,7 +139,7 @@ export const bs: Dictionary = {
       {
         n: "04",
         title: "Rast",
-        body: "Pretvaramo tvoj brend u pravi biznis.",
+        body: "Pretvaram tvoj brend u pravi biznis.",
         detail:
           "Zadržavanje kupaca, marža, operacije i sistemi koji kompaniji daju da raste brže od tvog rasporeda objavljivanja.",
         output: "Operativni model · Sistemi rasta",
@@ -151,9 +151,9 @@ export const bs: Dictionary = {
   engine: {
     eyebrow: "Razvijeno u kući",
     index: "04",
-    headline: ["Izgradili smo vlastiti", "AI sistem za monetizaciju."],
+    headline: ["Izgradio sam vlastiti", "AI sistem za monetizaciju."],
     body: "Većina studija nagađa šta će tvoja publika kupiti, pa ti naplati nagađanje. Ja sam napravio softver koji prvo pročita publiku — pa se proizvod bira po dokazima, a ne po ukusu.",
-    serif: "Nagađanje je ono što košta. Nas ga nema.",
+    serif: "Nagađanje je ono što košta. Ja ga nemam.",
     videoLabel: "Unutar sistema",
     asideBody:
       "Svaka saradnja počinje analizom iz sistema. Rezultat vidiš prije nego se na išta obavežeš.",
@@ -181,7 +181,7 @@ export const bs: Dictionary = {
       {
         code: "04",
         title: "Simulacija lansiranja",
-        body: "Projektuje slijed lansiranja prije nego izađe ijedna objava, da znamo šta očekivati i gdje puca.",
+        body: "Projektuje slijed lansiranja prije nego izađe ijedna objava, da znam šta očekivati i gdje puca.",
         metric: "Projekcija na 90 dana",
       },
     ],
@@ -214,20 +214,20 @@ export const bs: Dictionary = {
       "Raspored lansiranja uz tvoj kalendar objava",
     ],
     disclaimer:
-      "Model, a ne obećanje. Primjenjuje stopu konverzije lansiranja na tvoju angažovanu publiku — tvoja niša, ponuda i kvalitet liste pomjeraju je u oba smjera. Računicu prikazujemo da možeš raspravljati s njom.",
+      "Model, a ne obećanje. Primjenjuje stopu konverzije lansiranja na tvoju angažovanu publiku — tvoja niša, ponuda i kvalitet liste pomjeraju je u oba smjera. Računicu prikazujem da možeš raspravljati s njom.",
   },
 
   concepts: {
     eyebrow: "Koncepti",
     index: "06",
     headline: ["Prvo na papiru,", "pa tek onda uživo."],
-    body: "Tri kreatora s kojima bismo rado radili i tačno ono što bismo za svakog napravili. Ovo su planovi, a ne bivši klijenti — pročitaj ih da procijeniš razmišljanje, jer razmišljanje je ono što unajmljuješ.",
+    body: "Tri kreatora s kojima bih rado radio i tačno ono što bih za svakog napravio. Ovo su planovi, a ne bivši klijenti — pročitaj ih da procijeniš razmišljanje, jer razmišljanje je ono što unajmljuješ.",
     disclaimer:
-      "Koncepti. Ilustrativni kreatori, stvarna metodologija. Cifre su projekcije iz modela u našem kalkulatoru, a ne rezultati — MintedScale tek prima prve partnere.",
+      "Koncepti. Ilustrativni kreatori, stvarna metodologija. Cifre su projekcije iz modela u mom kalkulatoru, a ne rezultati — MintedScale tek prima prve partnere.",
     cta: "Zatraži svoj koncept",
     conceptWord: "Koncept",
     beforeLabel: "Gdje su sada",
-    afterLabel: "Šta bismo izgradili",
+    afterLabel: "Šta bih izgradio",
     projectedLabel: "Projekcija prvog lansiranja",
     audienceRow: "Publika",
     engagedRow: "Angažovani",
@@ -313,7 +313,7 @@ export const bs: Dictionary = {
     eyebrow: "Filmovi partnera",
     index: "07",
     headline: ["Jesi li ti", "sljedeći?"],
-    body: "Kada partner lansira, njegov film ide ovdje — šta smo izgradili, koliko zarađuje, njegovim riječima. Rezervisano, a ne izmišljeno.",
+    body: "Kada partner lansira, njegov film ide ovdje — šta sam izgradio, koliko zarađuje, njegovim riječima. Rezervisano, a ne izmišljeno.",
     cta: "Uzmi prvi kadar",
     slotLabel: "Jesi li ti sljedeći?",
     status: "Slobodno",
@@ -321,10 +321,10 @@ export const bs: Dictionary = {
   },
 
   capabilities: {
-    eyebrow: "Šta gradimo",
+    eyebrow: "Šta gradim",
     index: "08",
-    headline: ["Četiri discipline.", "Jedan studio."],
-    body: "Bez podizvođača i bez predaje posla. Onaj ko piše tezu isporučuje i proizvod.",
+    headline: ["Četiri discipline.", "Jedan čovjek."],
+    body: "Bez podizvođača i bez predaje posla. Ja pišem strategiju i ja isporučujem proizvod.",
     services: [
       {
         code: "01",
@@ -360,7 +360,7 @@ export const bs: Dictionary = {
     items: [
       {
         q: "Koliko košta?",
-        a: "Unaprijed ništa. Radimo uz podjelu prihoda: ja gradim brend, proizvod i tehnologiju o svom trošku i uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja. Procenat ovisi o tome koliko toga gradimo, pa ga postavljamo zajedno na pozivu — i ide u pisani ugovor, vremenski ograničen, prije nego bilo šta počne. Ne potpisuješ svoju kompaniju.",
+        a: "Unaprijed ništa. Radim uz podjelu prihoda: ja gradim brend, proizvod i tehnologiju o svom trošku i uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja. Procenat ovisi o tome koliko toga gradimo, pa ga postavljamo zajedno na pozivu — i ide u pisani ugovor, vremenski ograničen, prije nego bilo šta počne. Ne potpisuješ svoju kompaniju.",
       },
       {
         q: "Nov si u brendovima za kreatore. Zašto bih riskirao?",
@@ -376,7 +376,7 @@ export const bs: Dictionary = {
       },
       {
         q: "Već imam proizvod. Možeš li i dalje pomoći?",
-        a: "Često je to i bolja polazna tačka. Analiziramo šta postoji, popravimo pozicioniranje i cijene, pa oko toga izgradimo sistem umjesto da krećemo od nule.",
+        a: "Često je to i bolja polazna tačka. Analiziram šta postoji, popravim pozicioniranje i cijene, pa oko toga izgradim sistem umjesto da krećemo od nule.",
       },
       {
         q: "Ko je vlasnik brenda?",
@@ -389,10 +389,10 @@ export const bs: Dictionary = {
     eyebrow: "Prijava",
     index: "11",
     headline: ["Spreman da svoje ime", "pretvoriš u brend?"],
-    body: "Ako si kreator i želiš izgraditi nešto veće od sadržaja, hajde da razgovaramo. Bez plaćanja unaprijed — zarađujemo kad ti zaradiš.",
-    writeToUs: "Ili nam piši",
+    body: "Ako si kreator i želiš izgraditi nešto veće od sadržaja, hajde da razgovaramo. Bez plaćanja unaprijed — zarađujem kad ti zaradiš.",
+    writeToUs: "Ili mi piši",
     terms: [
-      "Ništa se ne plaća unaprijed — zarađujemo kad ti zaradiš.",
+      "Ništa se ne plaća unaprijed — zarađujem kad ti zaradiš.",
       "Brend, proizvod i lista kupaca su tvoji.",
       "Svaku prijavu čitam ja, a ne robot.",
       "Odgovor očekuj u roku od dva radna dana.",
@@ -402,34 +402,34 @@ export const bs: Dictionary = {
   console: {
     header: "Privatne konsultacije",
     confidential: "Povjerljivo",
-    tablistLabel: "Kako do nas",
+    tablistLabel: "Kako do mene",
     callTab: "Zakaži poziv",
-    callNote: "45 minuta, s partnerom",
+    callNote: "45 minuta, sa mnom",
     messageTab: "Pošalji poruku",
-    messageNote: "Odgovaramo u roku od dva dana",
+    messageNote: "Odgovaram u roku od dva dana",
     stepDay: "Izaberi dan",
     stepTime: "Izaberi vrijeme",
-    stepAbout: "Reci nam o sebi",
-    loadingSlots: "Učitavanje kalendara studija",
+    stepAbout: "Reci mi o sebi",
+    loadingSlots: "Učitavanje mog kalendara",
     slotsError: "Kalendar nije dostupan.",
     tryAgain: "Pokušaj ponovo",
-    orMessage: "ili nam radije pošalji poruku.",
-    noSlots: "Trenutno nema slobodnih termina — pošalji poruku pa ćemo napraviti mjesta.",
+    orMessage: "ili mi radije pošalji poruku.",
+    noSlots: "Trenutno nema slobodnih termina — pošalji poruku pa ću napraviti mjesta.",
     pickDayFirst: "Prvo izaberi dan.",
-    provisional: "Termini su privremeni dok ih partner ne potvrdi.",
+    provisional: "Termini su privremeni dok ih ne potvrdim.",
     minutes: "min",
-    privacyCall: "Tvoji podaci idu direktno partneru. Ništa se ne dijeli dalje.",
+    privacyCall: "Tvoji podaci dolaze direktno meni. Ništa se ne dijeli dalje.",
     privacyMessage: "Šalje se na {email}. Ništa se ne dijeli dalje.",
     submitCall: "Potvrdi moj poziv",
     submitMessage: "Pošalji prijavu",
     sending: "Šaljem",
     preferGoogle: "Više voliš Google?",
-    openAppointments: "Otvori našu stranicu za zakazivanje",
+    openAppointments: "Otvori moju stranicu za zakazivanje",
     fields: {
       name: "Ime i prezime",
       namePlaceholder: "Lena Ruiz",
       email: "E-pošta",
-      emailPlaceholder: "ti@studio.com",
+      emailPlaceholder: "ti@email.com",
       platform: "Glavna platforma",
       select: "Izaberi",
       handle: "Korisničko ime",
@@ -443,22 +443,22 @@ export const bs: Dictionary = {
     },
     done: {
       received: "Prijava primljena",
-      thanks: "Hvala. Javit ćemo ti se uskoro.",
+      thanks: "Hvala. Javit ću ti se uskoro.",
       yourCall: "Tvoj poziv",
       joining: "Podaci za priključenje",
       meetLink: "Google Meet link",
       sentToEmail: "Poslano na tvoju e-poštu",
-      quote: "Navedi {ref} ako nam trebaš pisati prije toga —",
+      quote: "Navedi {ref} ako mi trebaš pisati prije toga —",
     },
     errors: {
       generic: "Nešto je pošlo po zlu. Pokušaj ponovo.",
-      unreachable: "Nismo mogli doći do studija. Piši nam na {email}.",
+      unreachable: "Nisi mogao doći do mene. Piši direktno na {email}.",
       checkFields: "Provjeri označena polja.",
       slotTaken: "Taj termin je upravo zauzet. Izaberi drugi.",
       slotGone: "Više nije dostupno.",
       tooMany: "Previše pokušaja. Pokušaj ponovo za koji trenutak.",
       malformed: "Neispravan zahtjev.",
-      sendFailed: "Nismo mogli poslati. Piši nam direktno na {email}.",
+      sendFailed: "Nije poslano. Piši direktno na {email}.",
       name: "Upiši ime i prezime.",
       nameLong: "To ime je predugo.",
       emailMissing: "Upiši adresu e-pošte.",
@@ -470,7 +470,7 @@ export const bs: Dictionary = {
       handleLong: "To korisničko ime je predugo.",
       followers: "Upiši broj, npr. 120000 ili 120k.",
       followersUnreal: "Upiši realan broj pratilaca.",
-      idea: "Reci nam malo više — barem jednu rečenicu.",
+      idea: "Reci mi malo više — barem jednu rečenicu.",
       ideaLong: "Neka bude ispod 2.000 znakova.",
       slotMissing: "Izaberi vrijeme za poziv.",
       slotInvalid: "To vrijeme nije ispravno.",
@@ -478,20 +478,20 @@ export const bs: Dictionary = {
     },
     success: {
       call: "Tvoj termin je rezervisan.",
-      message: "Hvala. Javit ćemo ti se uskoro.",
+      message: "Hvala. Javit ću ti se uskoro.",
     },
   },
 
   finalCta: {
     eyebrow: "Kovnica radi",
     headline: ["Tvoje ime može postati", "brend."],
-    body: "Donesi publiku i apetit — mi donosimo strategiju, proizvod, tehnologiju i lansiranje. Unaprijed se ne plaća ništa.",
+    body: "Donesi publiku i apetit — ja donosim strategiju, proizvod, tehnologiju i lansiranje. Unaprijed se ne plaća ništa.",
     primary: "Počni graditi",
-    secondary: "Piši studiju",
+    secondary: "Piši mi",
   },
 
   footer: {
-    studio: "Studio",
+    studio: "Sekcije",
     contact: "Kontakt",
     apply: "Prijavi se",
   },
