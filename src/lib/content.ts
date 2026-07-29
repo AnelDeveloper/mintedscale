@@ -97,11 +97,20 @@ export const studio = {
     caveat:
       "Software and commerce work delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
     items: [
-      { label: "Accelit IT", href: "https://accelit.com.au" },
-      { label: "Puzzles IT", href: "https://www.puzzlitapp.com" },
-      { label: "TDT Planner", href: "https://transportdrivertraining.com.au" },
-      { label: "NWAR Australia", href: "https://nationwideappliancerepairs.com.au" },
+      { label: "Accelit IT", initials: "AC", logo: "", href: "https://accelit.com.au" },
+      { label: "Puzzles IT", initials: "PZ", logo: "/clients/puzzles-it.png", href: "https://www.puzzlitapp.com" },
+      { label: "TDT Planner", initials: "TD", logo: "/clients/tdt-planner.png", href: "https://transportdrivertraining.com.au" },
+      { label: "NWAR Australia", initials: "NW", logo: "", href: "https://nationwideappliancerepairs.com.au" },
     ],
+  },
+
+  /**
+   * The trust pill at the top of the hero. Every word is checkable: four
+   * companies, seven years. No rating — there are no reviews to average.
+   */
+  pill: {
+    lead: "Shipped for",
+    tail: "7 years of product work",
   },
   follow: {
     label: "Follow the build",
@@ -268,7 +277,7 @@ export const concepts = {
   headline: ["Built on paper", "before it's built for real."],
   body: "Three creators we'd love to work with, and exactly what we'd make for each. These are plans, not past clients — read them to judge the thinking, because the thinking is what you're hiring.",
   disclaimer:
-    "Concept builds. Illustrative creators, real method — no results claimed, because MintedScale is taking its first partners now.",
+    "Concept builds. Illustrative creators, real method. The figures are projections from the model in our calculator, not results — MintedScale is taking its first partners now.",
   items: [
     {
       ref: "01",
@@ -293,6 +302,7 @@ export const concepts = {
           "Subscription & retention flows",
         ],
       },
+      projection: { audience: 400_000, engagement: 3.5, conversion: 0.08, price: 89 },
       ladder: "Entry €29 · Core €89 · Bundle €240",
       model: "DTC subscription · Retail wholesale",
       horizon: "11 months to full line",
@@ -320,6 +330,7 @@ export const concepts = {
           "Enterprise licensing track",
         ],
       },
+      projection: { audience: 1_000_000, engagement: 4, conversion: 0.008, price: 890 },
       ladder: "Entry €49 · Cohort €890 · Licence €4,800",
       model: "Cohort tuition · Software subscription",
       horizon: "14 months to licensing",
@@ -347,6 +358,7 @@ export const concepts = {
           "Trade & showroom channel",
         ],
       },
+      projection: { audience: 600_000, engagement: 2.5, conversion: 0.04, price: 340 },
       ladder: "Print €60 · Object €340 · Lighting €1,200",
       model: "Product margin · Licensing royalties",
       horizon: "16 months to first collection",

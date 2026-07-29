@@ -1,5 +1,4 @@
-import { calculator, hero, site } from "@/lib/content";
-import { CoinMark } from "./coin-mark";
+import { calculator, hero, site, studio } from "@/lib/content";
 import { VideoFrame } from "./video-frame";
 
 /**
@@ -23,15 +22,8 @@ export function Hero() {
         <div className="grid items-center gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
           {/* ── Left: the pitch ── */}
           <div className="min-w-0">
-            <div className="ms-rise flex items-center gap-3" style={{ animationDelay: "40ms" }}>
-              <CoinMark size={30} id="hero" />
-              <p className="ms-eyebrow">
-                <span>{hero.eyebrow}</span>
-                <span className="text-gold-600" aria-hidden="true">
-                  ◆
-                </span>
-                <span>{site.established}</span>
-              </p>
+            <div className="ms-rise" style={{ animationDelay: "40ms" }}>
+              <TrustPill />
             </div>
 
             <h1 className="ms-display mt-[clamp(1.25rem,2.5vw,1.75rem)] text-[clamp(1.95rem,4vw,3.25rem)]">
@@ -99,6 +91,56 @@ export function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * The stacked-avatar trust badge, built from real prior clients.
+ *
+ * The reference site puts a star rating and a client count here. We have
+ * neither — no creator has been through the studio yet, so there is nothing
+ * to rate. What is true is four companies and seven years, so that is what
+ * it says. Drop a logo file into `logo` and it replaces the monogram.
+ */
+function TrustPill() {
+  const { items } = studio.clients;
+
+  return (
+    <div className="ms-panel ms-gloss inline-flex flex-wrap items-center gap-x-4 gap-y-2 !rounded-full py-2 pl-2 pr-5">
+      <ul className="flex items-center">
+        {items.map((client, i) => (
+          <li
+            key={client.label}
+            /* Logos get a light backing — plenty of marks are dark ink on
+               transparent, and would vanish against the black. */
+            className={`relative grid h-8 w-8 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
+              client.logo ? "bg-bone" : "bg-ink"
+            }`}
+            style={{ marginLeft: i === 0 ? 0 : "-0.55rem", zIndex: items.length - i }}
+            title={client.label}
+          >
+            {client.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={client.logo} alt={client.label} className="h-full w-full object-cover" />
+            ) : (
+              <span className="ms-mono text-[0.5rem] tracking-[0.06em] text-gold-200">
+                {client.initials}
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <p className="ms-mono flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.5625rem]">
+        <span className="text-bone">
+          {studio.pill.lead} {items.length} companies
+        </span>
+        <span className="text-gold-600" aria-hidden="true">
+          ◆
+        </span>
+        <span>{studio.pill.tail}</span>
+      </p>
+    </div>
   );
 }
 

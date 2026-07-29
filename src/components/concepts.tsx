@@ -1,9 +1,51 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { concepts } from "@/lib/content";
 import { Arrow } from "./hero";
 import { Eyebrow } from "./section";
+
+const money = new Intl.NumberFormat("en-IE", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
+const count = new Intl.NumberFormat("en-US");
+
+type Projection = (typeof concepts.items)[number]["projection"];
+
+function project(p: Projection) {
+  const engaged = Math.round(p.audience * (p.engagement / 100));
+  const buyers = Math.round(engaged * p.conversion);
+  return { engaged, buyers, revenue: buyers * p.price };
+}
+
+/**
+ * Counts a figure up when its panel opens. People read a number that moves;
+ * they skim one that is just sitting there.
+ */
+function useTicker(target: number, key: string) {
+  const [shown, setShown] = useState(target);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setShown(target);
+      return;
+    }
+    let frame = 0;
+    const start = performance.now();
+    const step = (now: number) => {
+      const t = Math.min((now - start) / 900, 1);
+      const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      setShown(Math.round(target * eased));
+      if (t < 1) frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [target, key]);
+
+  return shown;
+}
 
 /**
  * Concept builds, not case studies. No results are claimed anywhere here —
@@ -95,6 +137,9 @@ export function Concepts() {
                   <span className="ms-mono mt-2 block text-[0.5625rem]">
                     {item.followers} · {item.platform}
                   </span>
+                  <span className="ms-figure ms-money mt-2.5 block text-[1.0625rem]">
+                    {money.format(project(item.projection).revenue)}
+                  </span>
                 </button>
               );
             })}
@@ -130,6 +175,48 @@ export function Concepts() {
 
 type Item = (typeof concepts.items)[number];
 
+/**
+ * The money band. Every input is on screen next to the output, so the figure
+ * is arguable rather than magic — same rule as the calculator.
+ */
+function ProjectionBand({ item }: { item: Item }) {
+  const p = item.projection;
+  const { engaged, buyers, revenue } = project(p);
+  const shown = useTicker(revenue, item.ref);
+
+  const workings = [
+    { label: "Audience", value: count.format(p.audience) },
+    { label: "Engaged", value: `${count.format(engaged)} · ${p.engagement}%` },
+    { label: "Buyers", value: `${count.format(buyers)} · ${(p.conversion * 100).toFixed(1)}%` },
+    { label: "Price", value: money.format(p.price) },
+  ];
+
+  return (
+    <div className="grid border-b border-[var(--rule)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <div className="border-b border-[var(--rule)] px-6 py-6 sm:px-9 lg:border-b-0 lg:border-r">
+        <p className="ms-mono text-[0.5625rem]">Projected first launch</p>
+        <p className="ms-figure ms-money mt-2 text-[clamp(1.9rem,3.8vw,2.9rem)]" aria-live="polite">
+          {money.format(shown)}
+        </p>
+      </div>
+
+      <dl className="grid grid-cols-2 sm:grid-cols-4">
+        {workings.map((w, i) => (
+          <div
+            key={w.label}
+            className={`px-6 py-5 sm:px-5 ${i < 2 ? "border-b border-[var(--rule)] sm:border-b-0" : ""} ${
+              i % 2 === 0 ? "border-r border-[var(--rule)]" : "sm:border-r sm:border-[var(--rule)]"
+            } sm:last:border-r-0`}
+          >
+            <dt className="ms-mono text-[0.5rem]">{w.label}</dt>
+            <dd className="mt-1.5 font-mono text-[0.8125rem] tabular-nums text-bone">{w.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
 function Sheet({ item }: { item: Item }) {
   return (
     <div key={item.ref} className="ms-rise">
@@ -143,6 +230,8 @@ function Sheet({ item }: { item: Item }) {
         </p>
         <p className="ms-mono text-[0.5625rem]">{item.field}</p>
       </div>
+
+      <ProjectionBand item={item} />
 
       <div className="grid sm:grid-cols-2">
         <div className="border-b border-[var(--rule)] px-6 py-7 sm:border-b-0 sm:border-r sm:px-9 sm:py-9">
