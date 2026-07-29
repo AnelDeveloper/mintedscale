@@ -1,6 +1,5 @@
 import { Apply } from "@/components/apply";
 import { Calculator } from "@/components/calculator";
-import { Capabilities } from "@/components/capabilities";
 import { Concepts } from "@/components/concepts";
 import { Diagnosis } from "@/components/diagnosis";
 import { Engine } from "@/components/engine";
@@ -13,6 +12,7 @@ import { ScrollEffects } from "@/components/scroll-effects";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { Studio } from "@/components/studio";
+import { Work } from "@/components/work";
 import { site } from "@/lib/config";
 import { getDictionary } from "@/lib/i18n";
 
@@ -50,6 +50,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <SiteNav t={t} />
       <main id="main">
         <Hero t={t} />
+        <Work t={t} />
         <Studio t={t} />
         <Diagnosis t={t} />
         <Method t={t} />
@@ -57,7 +58,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Calculator t={t} />
         <Concepts t={t} />
         <Films t={t} />
-        <Capabilities t={t} />
         <Faq t={t} />
         <Apply t={t} />
         <FinalCta t={t} />

@@ -25,26 +25,49 @@ export const site = {
   handle: "@mintedscale",
 };
 
-/** Real prior engagements. An empty `logo` falls back to the initials. */
+/**
+ * Real prior engagements. An empty `logo` falls back to the initials.
+ *
+ * TO ADD: `built` — the two or three things you actually delivered for each.
+ * Leave it empty and the panel simply omits that block rather than showing a
+ * gap, so nothing here ever claims work that wasn't done.
+ */
 export const clients = [
-  { label: "Accelit IT", initials: "AC", logo: "", href: "https://accelit.com.au" },
   {
+    key: "accelit",
+    label: "Accelit IT",
+    initials: "AC",
+    logo: "",
+    href: "https://accelit.com.au",
+    domain: "accelit.com.au",
+    built: [] as string[],
+  },
+  {
+    key: "puzzlit",
     label: "Puzzles IT",
     initials: "PZ",
     logo: "/clients/puzzles-it.png",
     href: "https://www.puzzlitapp.com",
+    domain: "puzzlitapp.com",
+    built: [] as string[],
   },
   {
-    label: "TDT Planner",
+    key: "tdt",
+    label: "TDT Training",
     initials: "TD",
     logo: "/clients/tdt-planner.png",
     href: "https://transportdrivertraining.com.au",
+    domain: "transportdrivertraining.com.au",
+    built: [] as string[],
   },
   {
-    label: "NWAR Australia",
+    key: "nwar",
+    label: "Nationwide Appliance Repairs",
     initials: "NW",
     logo: "",
     href: "https://nationwideappliancerepairs.com.au",
+    domain: "nationwideappliancerepairs.com.au",
+    built: [] as string[],
   },
 ];
 
@@ -108,4 +131,4 @@ export const conceptData = [
 
 export const platforms = ["Instagram", "TikTok", "YouTube", "X", "Twitch", "Other"];
 
-export const navTargets = ["#studio", "#method", "#engine", "#calculator", "#concepts"];
+export const navTargets = ["#work", "#method", "#engine", "#calculator", "#concepts"];

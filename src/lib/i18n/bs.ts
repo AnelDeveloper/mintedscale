@@ -20,7 +20,7 @@ export const bs: Dictionary = {
       "MintedScale pretvara publiku kreatora u brendove, proizvode i biznise. Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda, tako da unaprijed ne plaćaš ništa.",
   },
 
-  nav: ["Osnivač", "Kovnica", "AI sistem", "Kalkulator", "Koncepti"],
+  nav: ["Rad", "Kovnica", "AI sistem", "Kalkulator", "Koncepti"],
   applyCta: "Prijavi se",
   langLabel: "Jezik",
   menuOpen: "Otvori meni",
@@ -36,22 +36,55 @@ export const bs: Dictionary = {
     bar: [
       { value: "€0", label: "Unaprijed" },
       { value: "Podjela", label: "Zarađujem kad ti zaradiš" },
-      { value: "7 god", label: "Gradnje proizvoda" },
+      { value: "8+ god", label: "Gradnje proizvoda" },
     ],
     earnings: {
       lead: "Koliko kreator sa 250K zaradi na lansiranju",
       inputs: "250.000 pratilaca · 3% stopa angažmana · proizvod od €125",
       cta: "Izračunaj svoje",
     },
-    pill: { lead: "Radio sam za", companies: "kompanije", tail: "7 godina iskustva" },
+    pill: { lead: "Radio sam za", companies: "kompanije", tail: "8+ godina iskustva" },
+  },
+
+  work: {
+    eyebrow: "Dosadašnji rad",
+    index: "01",
+    headline: ["Rađeno za", "prave kompanije."],
+    body: "Osam godina platformi, aplikacija, prodavnica i operacija koje stoje iza njih. Brendovi za kreatore su novo poglavlje — svaku kompaniju ispod možeš otvoriti i provjeriti.",
+    selectLabel: "Izaberi projekat",
+    visitLabel: "Otvori sajt",
+    sectorLabel: "Sektor",
+    placeLabel: "Sjedište",
+    doesLabel: "Čime se bave",
+    builtLabel: "Šta sam izgradio",
+    builtPending: "Opis projekta slijedi — kompanija je stvarna, tekst još nije napisan.",
+    items: [
+      {
+        sector: "Poslovne IT usluge",
+        place: "Melbourne, Australija",
+        does: "Upravljana IT podrška, sigurnost i infrastruktura za mala i srednja preduzeća.",
+      },
+      {
+        sector: "Softverski proizvod",
+        place: "Australija",
+        does: "Kompanija koja razvija i isporučuje vlastitu aplikaciju.",
+      },
+      {
+        sector: "Obuka i licenciranje",
+        place: "Viktorija, Australija",
+        does: "Registrovana obrazovna organizacija za licence za teška vozila, viljuškare i građevinske mašine, na šest lokacija.",
+      },
+      {
+        sector: "Servis na terenu",
+        place: "Cijela Australija",
+        does: "Servis kućanskih aparata za domove i firme, zakazivanje online i izlazak na terenu širom zemlje.",
+      },
+    ],
   },
 
   studio: {
-    eyebrow: "Osnivač",
-    index: "01",
-    headline: ["Sedam godina isporučenih proizvoda.", "Sada usmjereno na kreatore."],
     stats: [
-      { value: "7", label: "Godina gradnje proizvoda", note: "Softver i trgovina" },
+      { value: "8+", label: "Godina gradnje proizvoda", note: "Softver i trgovina" },
       { value: "€0", label: "Unaprijed za početak", note: "Ništa se ne plaća unaprijed" },
       { value: "Podjela", label: "Zarađujem kad ti zaradiš", note: "Nema rezultata, nema naknade" },
       { value: "4", label: "Discipline, jedan čovjek", note: "Brend · Proizvod · Rast · Tehnologija" },
@@ -59,7 +92,7 @@ export const bs: Dictionary = {
     portraitAlt: "Anel Kujović, osnivač MintedScale-a",
     portraitSlot: "Mjesto za fotografiju",
     note: {
-      lead: "Ja sam Anel. Sedam godina gradim softver i trgovinske proizvode za kompanije — platforme, aplikacije, web prodavnice i sisteme plaćanja. Onu neefektnu infrastrukturu bez koje biznis zapravo ne radi.",
+      lead: "Ja sam Anel. Preko osam godina gradim softver i trgovinske proizvode za kompanije — platforme, aplikacije, web prodavnice i sisteme plaćanja. Onu neefektnu infrastrukturu bez koje biznis zapravo ne radi.",
       body: "MintedScale je ta sposobnost usmjerena na kreatore. Većina onih koji nude da ti izgrade brend su marketingaši koji ne umiju isporučiti softver, pa strategija stigne a proizvod nikad. Ja isporučujem proizvod.",
       offer:
         "Brendovi za kreatore su mi novi i radije ću to reći nego izmisliti listu klijenata. Zato partneri unaprijed ne plaćaju ništa: ja gradim, ti lansiraš, a ja uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja.",
@@ -320,42 +353,9 @@ export const bs: Dictionary = {
     frameWord: "Kadar",
   },
 
-  capabilities: {
-    eyebrow: "Šta gradim",
-    index: "08",
-    headline: ["Četiri discipline.", "Jedan čovjek."],
-    body: "Bez podizvođača i bez predaje posla. Ja pišem strategiju i ja isporučujem proizvod.",
-    services: [
-      {
-        code: "01",
-        title: "Strategija brenda",
-        body: "Teza na kojoj sve ostalo stoji.",
-        items: ["Pozicioniranje", "Identitet", "Smjer sadržaja"],
-      },
-      {
-        code: "02",
-        title: "Kreiranje proizvoda",
-        body: "Stvari koje se zaista mogu kupiti.",
-        items: ["Digitalni proizvodi", "Fizički proizvodi", "Koncepti brenda"],
-      },
-      {
-        code: "03",
-        title: "Sistemi rasta",
-        body: "Prihod koji ne ovisi o objavljivanju.",
-        items: ["Monetizacija", "Strategija publike", "Skaliranje"],
-      },
-      {
-        code: "04",
-        title: "Tehnologija",
-        body: "Infrastruktura na kojoj tvoj brend radi.",
-        items: ["Web stranice", "Aplikacije", "Digitalne platforme"],
-      },
-    ],
-  },
-
   faq: {
     eyebrow: "Pitanja",
-    index: "10",
+    index: "08",
     headline: ["Prije nego se", "prijaviš."],
     items: [
       {
@@ -364,7 +364,7 @@ export const bs: Dictionary = {
       },
       {
         q: "Nov si u brendovima za kreatore. Zašto bih riskirao?",
-        a: "Zbog načina na koji je postavljena cijena, finansijski rizik ne nosiš ti nego ja. Rad na proizvodima nije nov: sedam godina platformi, aplikacija i prodavnica za kompanije poput Accelit IT, Puzzles IT, TDT Planner i NWAR Australia. Novo je to što se primjenjuje na brendove kreatora, i radije ću to reći otvoreno nego izmisliti listu kreatora. Počni besplatnom analizom i procijeni rad prije nego se na išta obavežeš.",
+        a: "Zbog načina na koji je postavljena cijena, finansijski rizik ne nosiš ti nego ja. Rad na proizvodima nije nov: osam godina platformi, aplikacija i prodavnica za kompanije poput Accelit IT, Puzzles IT, TDT Planner i NWAR Australia. Novo je to što se primjenjuje na brendove kreatora, i radije ću to reći otvoreno nego izmisliti listu kreatora. Počni besplatnom analizom i procijeni rad prije nego se na išta obavežeš.",
       },
       {
         q: "Kolika mi publika treba?",
@@ -387,7 +387,7 @@ export const bs: Dictionary = {
 
   application: {
     eyebrow: "Prijava",
-    index: "11",
+    index: "09",
     headline: ["Spreman da svoje ime", "pretvoriš u brend?"],
     body: "Ako si kreator i želiš izgraditi nešto veće od sadržaja, hajde da razgovaramo. Bez plaćanja unaprijed — zarađujem kad ti zaradiš.",
     writeToUs: "Ili mi piši",

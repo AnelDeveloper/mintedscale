@@ -17,7 +17,7 @@ export const en = {
       "MintedScale turns creator audiences into brands, products and businesses. Strategy, product and technology from one person — built on a revenue share, so you pay nothing upfront.",
   },
 
-  nav: ["Founder", "The Mint", "AI System", "Calculator", "Concepts"],
+  nav: ["Work", "The Mint", "AI System", "Calculator", "Concepts"],
   applyCta: "Apply now",
   langLabel: "Language",
   menuOpen: "Open menu",
@@ -33,22 +33,56 @@ export const en = {
     bar: [
       { value: "€0", label: "Upfront" },
       { value: "Rev share", label: "I earn when you earn" },
-      { value: "7 yrs", label: "Building products" },
+      { value: "8+ yrs", label: "Building products" },
     ],
     earnings: {
       lead: "What a 250K creator makes on launch",
       inputs: "250,000 followers · 3% engagement rate · €125 product",
       cta: "Run your numbers",
     },
-    pill: { lead: "Shipped for", companies: "companies", tail: "7 years of product work" },
+    pill: { lead: "Shipped for", companies: "companies", tail: "8+ years of product work" },
+  },
+
+  /** Prior work showcase. Company facts are public; `built` comes from config. */
+  work: {
+    eyebrow: "Prior work",
+    index: "01",
+    headline: ["Built for", "real companies."],
+    body: "Eight years of platforms, apps, storefronts and the operations behind them. Creator brands are the new chapter — every company below is one you can open and check.",
+    selectLabel: "Select a project",
+    visitLabel: "Visit site",
+    sectorLabel: "Sector",
+    placeLabel: "Based in",
+    doesLabel: "What they do",
+    builtLabel: "What I built",
+    builtPending: "Project detail coming — the company is real, the write-up is not written yet.",
+    items: [
+      {
+        sector: "Business IT services",
+        place: "Melbourne, Australia",
+        does: "Managed IT support, cybersecurity and infrastructure for small and medium businesses.",
+      },
+      {
+        sector: "Software product",
+        place: "Australia",
+        does: "A product business shipping its own application.",
+      },
+      {
+        sector: "Training & licensing",
+        place: "Victoria, Australia",
+        does: "A registered training organisation running heavy vehicle, forklift and plant licensing across six locations.",
+      },
+      {
+        sector: "Field service",
+        place: "Australia-wide",
+        does: "Appliance repair for homes and businesses, booked online and dispatched nationally.",
+      },
+    ],
   },
 
   studio: {
-    eyebrow: "The founder",
-    index: "01",
-    headline: ["Seven years of shipped product.", "Now pointed at creators."],
     stats: [
-      { value: "7", label: "Years building products", note: "Software & commerce" },
+      { value: "8+", label: "Years building products", note: "Software & commerce" },
       { value: "€0", label: "Upfront to start", note: "Nothing to pay in advance" },
       { value: "Rev share", label: "I earn when you earn", note: "No win, no fee" },
       { value: "4", label: "Practices, one person", note: "Brand · Product · Growth · Tech" },
@@ -56,7 +90,7 @@ export const en = {
     portraitAlt: "Anel Kujović, founder of MintedScale",
     portraitSlot: "Portrait slot reserved",
     note: {
-      lead: "I'm Anel. For seven years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
+      lead: "I'm Anel. For over eight years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
       body: "MintedScale is that capability pointed at creators. Most people offering to build your brand are marketers who can't ship software, so the strategy deck arrives and the product never does. I ship the product.",
       offer:
         "Creator brands are new for me, and I'd rather say that than invent a client list. That's why partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
@@ -313,42 +347,9 @@ export const en = {
     frameWord: "Frame",
   },
 
-  capabilities: {
-    eyebrow: "What I build",
-    index: "08",
-    headline: ["Four practices.", "One person."],
-    body: "No vendors, no handoffs. I write the strategy and I ship the product.",
-    services: [
-      {
-        code: "01",
-        title: "Brand Strategy",
-        body: "The thesis everything else is built on.",
-        items: ["Positioning", "Identity", "Content direction"],
-      },
-      {
-        code: "02",
-        title: "Product Creation",
-        body: "Things people can actually buy.",
-        items: ["Digital products", "Physical products", "Brand concepts"],
-      },
-      {
-        code: "03",
-        title: "Growth Systems",
-        body: "Revenue that does not depend on posting.",
-        items: ["Monetization", "Audience strategy", "Scaling"],
-      },
-      {
-        code: "04",
-        title: "Technology",
-        body: "The infrastructure your brand runs on.",
-        items: ["Websites", "Apps", "Digital platforms"],
-      },
-    ],
-  },
-
   faq: {
     eyebrow: "Questions",
-    index: "10",
+    index: "08",
     headline: ["Before you", "apply."],
     items: [
       {
@@ -357,7 +358,7 @@ export const en = {
       },
       {
         q: "You're new to creator brands. Why should I take the risk?",
-        a: "Because of how it's priced, you aren't taking the financial risk — I am. The product work isn't new: seven years of platforms, apps and storefronts for companies like Accelit IT, Puzzles IT, TDT Planner and NWAR Australia. What's new is applying it to creator brands, and I'd rather say that plainly than invent a creator client list. Start with the free audit and judge the work before committing to anything.",
+        a: "Because of how it's priced, you aren't taking the financial risk — I am. The product work isn't new: eight years of platforms, apps and storefronts for companies like Accelit IT, Puzzles IT, TDT Planner and NWAR Australia. What's new is applying it to creator brands, and I'd rather say that plainly than invent a creator client list. Start with the free audit and judge the work before committing to anything.",
       },
       {
         q: "How big does my audience need to be?",
@@ -380,7 +381,7 @@ export const en = {
 
   application: {
     eyebrow: "Apply",
-    index: "11",
+    index: "09",
     headline: ["Ready to turn your name", "into a brand?"],
     body: "If you are a creator and want to build something bigger than content, let's talk. No upfront fee — I earn when you earn.",
     writeToUs: "Or write to me",
