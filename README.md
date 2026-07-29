@@ -21,21 +21,22 @@ revenue figures, no client counts and no testimonials. Inventing them would
 be the fastest way to lose the exact audience being sold to — creators are
 trained to spot fabricated numbers. Instead the proof is:
 
-- **Prior product work** — real companies, named, in `studio.clients`
+- **Prior product work** — real companies, named, in `config.ts` → `clients`
 - **Seven years of shipping** — a fact about the founder, not a claim about outcomes
 - **Concept builds** — plans shown in full, explicitly labelled as plans
 - **Revenue share** — the risk sits with the studio, which is why a creator should take a chance on a new one
 
-If you add a number to `src/lib/content.ts`, be ready to prove it.
+If you add a number to `src/lib/config.ts`, be ready to prove it.
 
 ### Still to fill in
 
+All of these live in `src/lib/config.ts`.
+
 | What | Where | Note |
 |---|---|---|
-| Client website URLs | `studio.clients.items[].href` | Empty `href` renders as plain text, so nothing ever points somewhere invented. Paste a URL and it becomes a link. |
-| Handles for TDT Planner and NWAR | `studio.clients.items[].label` | The other two already use `@accelit` / `@puzzlesit`. |
-| Your portrait | `studio.portrait.src` | Renders a reserved frame until then. |
-| Partner films | `films.items` | Three reserved seats. Fill one when a founding partner launches. |
+| Accelit and NWAR logos | `clients[].logo` | Square images in `public/clients/`. Empty falls back to the `initials` monogram, so the row looks finished either way. |
+| Your portrait | `media.portrait.src` | Renders a reserved frame until then. |
+| Partner films | `media.films[]` | Three reserved frames asking "Are you next?". Fill one when a partner launches. |
 
 As real creator results arrive, add them — that is when a results section
 earns its place on the page.
@@ -47,22 +48,23 @@ earns its place on the page.
 Every video is an empty slot until you fill it. Empty slots render as a marked
 reserved frame, so the layout is already correct.
 
-| Slot | Format | Field in `content.ts` |
+| Slot | Format | Field in `config.ts` |
 |---|---|---|
-| Hero film | 16:9 landscape | `hero.video` |
-| Engine film | 16:9 landscape | `engine.video` |
-| Creator testimonials ×4 | 9:16 portrait | `videoWall.items[]` |
+| Hero film | 16:9 landscape | `media.heroVideo` |
+| Engine film | 16:9 landscape | `media.engineVideo` |
+| Partner films ×3 | 9:16 portrait | `media.films[]` |
 
 Drop files in `public/videos/`, then:
 
 ```ts
-video: {
+heroVideo: {
   src: "/videos/how-the-mint-works.mp4",
   poster: "/videos/how-the-mint-works.jpg",
-  label: "How the mint works",
-  duration: "2:14",
 }
 ```
+
+The label beside the play button is copy, so it lives in the dictionaries
+(`hero.videoLabel`) and changes with the language.
 
 Encode H.264 MP4 (`-crf 23`, AAC audio) and always ship a poster — without one
 the frame is black until the first byte arrives.
@@ -165,7 +167,7 @@ Tokens live in `src/app/globals.css`. Component classes are inside
 `@layer components` on purpose, so Tailwind utilities always win a conflict —
 move them out and things like `hidden sm:inline-flex` silently stop working.
 
-Scroll reveals hide content until JS runs. An inline script in `layout.tsx` arms
+Scroll reveals hide content until JS runs. An inline script in `[locale]/layout.tsx` arms
 a 2-second fallback that reveals everything regardless, deliberately outside
 React: if hydration never happens, a React-based safety net would not fire either.
 
