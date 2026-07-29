@@ -90,20 +90,17 @@ export const studio = {
   },
   /**
    * Real prior engagements — the honest replacement for a revenue ticker.
-   *
-   * TODO — paste each company's website into `href` and it becomes a link.
-   * Left empty it renders as plain text, so nothing points anywhere wrong.
-   * Also swap the last two `label`s for their handles once you have them.
+   * An empty `href` renders as plain text rather than a dead link.
    */
   clients: {
     label: "Prior product work",
     caveat:
       "Software and commerce work delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
     items: [
-      { label: "@accelit", href: "" },
-      { label: "@puzzlesit", href: "" },
-      { label: "TDT Planner", href: "" },
-      { label: "NWAR Australia", href: "" },
+      { label: "@accelit", href: "https://accelit.com.au" },
+      { label: "@puzzlesit", href: "https://www.puzzlitapp.com" },
+      { label: "TDT Planner", href: "https://transportdrivertraining.com.au" },
+      { label: "NWAR Australia", href: "https://nationwideappliancerepairs.com.au" },
     ],
   },
   follow: {
@@ -445,7 +442,7 @@ export const faq = {
   items: [
     {
       q: "What does it cost?",
-      a: "Nothing upfront. The first three partners work on a revenue share: I build the brand, the product and the technology at my own cost, and take an agreed percentage of what it earns. If it earns nothing, I earn nothing. The exact split is agreed in writing before any work starts, and it is capped and time-limited — you are not signing away your company.",
+      a: "Nothing upfront. The first three partners work on a revenue share: I build the brand, the product and the technology at my own cost, and take a share of what it earns. If it earns nothing, I earn nothing. The percentage depends on how much we're building, so we set it together on the call — and it goes in writing, time-limited, before any work starts. You are not signing away your company.",
     },
     {
       q: "You're new to creator brands. Why should I take the risk?",
