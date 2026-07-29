@@ -71,6 +71,7 @@ export function Calculator() {
             <Dial
               id="calc-engagement"
               label="Engagement rate"
+              hint="Share of your followers who actually like, comment or watch — not your revenue share"
               display={`${engagement.toFixed(1)}%`}
               value={engagement}
               onChange={setEngagement}
@@ -144,6 +145,7 @@ export function Calculator() {
 function Dial({
   id,
   label,
+  hint,
   display,
   value,
   onChange,
@@ -153,6 +155,7 @@ function Dial({
 }: {
   id: string;
   label: string;
+  hint?: string;
   display: string;
   value: number;
   onChange: (v: number) => void;
@@ -170,6 +173,11 @@ function Dial({
         </label>
         <span className="ms-figure text-[1.375rem] text-gold-200">{display}</span>
       </div>
+      {hint ? (
+        <p className="ms-mono mb-3 text-[0.5rem] normal-case leading-[1.6] tracking-[0.1em] text-char">
+          {hint}
+        </p>
+      ) : null}
       <input
         id={id}
         type="range"

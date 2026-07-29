@@ -249,7 +249,7 @@ export const calculator = {
   index: "05",
   headline: ["What is your audience", "actually worth?"],
   body: "Move the dials. The maths is shown in full — no black box, no inflated promise.",
-  defaults: { followers: 120000, engagement: 3.5, price: 120 },
+  defaults: { followers: 250000, engagement: 3.5, price: 125 },
   bounds: {
     followers: { min: 5000, max: 3000000, step: 5000 },
     engagement: { min: 0.5, max: 12, step: 0.1 },

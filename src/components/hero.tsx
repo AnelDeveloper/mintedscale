@@ -5,7 +5,7 @@ import { VideoFrame } from "./video-frame";
  * Derived from the calculator's own model, not typed by hand — the headline
  * number in the hero can never drift away from what the calculator computes.
  */
-const SAMPLE = { followers: 100_000, engagement: 3, price: 120 };
+const SAMPLE = { followers: 250_000, engagement: 3, price: 125 };
 const SAMPLE_REVENUE = Math.round(
   SAMPLE.followers * (SAMPLE.engagement / 100) * calculator.launchConversion * SAMPLE.price,
 );
@@ -153,14 +153,15 @@ function EarningsCard() {
   // of the frame. It only floats once there is room to float in.
   return (
     <div className="ms-panel ms-gloss mt-4 p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:absolute sm:bottom-0 sm:left-[-1rem] sm:right-[clamp(2rem,12%,6rem)] sm:mt-0 sm:p-6">
-      <p className="ms-mono text-[0.5625rem]">What a 100K audience earns</p>
+      <p className="ms-mono text-[0.5625rem]">What a 250K creator makes on launch</p>
 
       <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]">
         {money.format(SAMPLE_REVENUE)}
       </p>
 
       <p className="ms-mono mt-2 text-[0.5rem] normal-case leading-[1.7] tracking-[0.1em]">
-        First launch · {SAMPLE.engagement}% engagement · {money.format(SAMPLE.price)} product
+        250,000 followers · {SAMPLE.engagement}% engagement rate ·{" "}
+        {money.format(SAMPLE.price)} product
       </p>
 
       <a
