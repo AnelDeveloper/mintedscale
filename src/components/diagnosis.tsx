@@ -4,12 +4,12 @@ import { Heading, Lede, Section } from "./section";
 export function Diagnosis() {
   return (
     <Section id="diagnosis" index={diagnosis.index} eyebrow={diagnosis.eyebrow}>
-      <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
+      <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
         <Heading lines={diagnosis.headline} />
         <Lede>{diagnosis.body}</Lede>
       </div>
 
-      <div className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] md:grid-cols-3">
+      <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] md:grid-cols-3">
         {diagnosis.faults.map((fault, i) => (
           <article
             key={fault.code}
@@ -29,7 +29,7 @@ export function Diagnosis() {
               <div className="h-px w-[7%] bg-[rgba(226,122,106,0.7)]" />
             </div>
 
-            <h3 className="ms-display-soft mt-8 text-[clamp(1.375rem,2.2vw,1.75rem)] text-bone">
+            <h3 className="ms-display-soft mt-8 text-[clamp(1.1rem,1.8vw,1.35rem)] text-bone">
               {fault.title}
             </h3>
             <p className="mt-4 text-[0.9375rem] leading-[1.7] text-ash">{fault.body}</p>

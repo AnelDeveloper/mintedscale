@@ -6,12 +6,12 @@ export function SiteFooter() {
 
   return (
     <footer className="relative border-t border-[var(--rule)]">
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3rem,7vh,5rem)]">
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(2.75rem,5vh,4rem)]">
         <div className="grid gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <div className="flex items-center gap-3">
               <CoinMark size={36} id="footer" />
-              <span className="ms-display text-[clamp(1.5rem,3vw,2rem)] leading-none">
+              <span className="ms-display text-[clamp(1.2rem,2vw,1.5rem)] leading-none">
                 <span className="text-bone">Minted</span>
                 <span className="ms-gold">Scale</span>
               </span>
@@ -68,7 +68,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-center justify-between gap-4 border-t border-[var(--rule)] pt-7">
+        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] flex flex-wrap items-center justify-between gap-4 border-t border-[var(--rule)] pt-7">
           <p className="ms-mono text-[0.5625rem]">
             © {year} {site.name}
           </p>

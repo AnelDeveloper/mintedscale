@@ -39,13 +39,13 @@ export function Calculator() {
 
   return (
     <section id="calculator" className="relative scroll-mt-24 border-t border-[var(--rule)]">
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
-        <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
+        <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
           <Eyebrow index={calculator.index}>{calculator.eyebrow}</Eyebrow>
         </div>
 
-        <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(2.2rem,5.6vw,4.6rem)]" data-reveal>
+        <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
+          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
             <span className="block text-bone">{calculator.headline[0]}</span>
             <span className="ms-gold-sweep block">{calculator.headline[1]}</span>
           </h2>
@@ -53,7 +53,7 @@ export function Calculator() {
         </div>
 
         <div
-          className="ms-panel ms-rim relative mt-[clamp(2.5rem,5vw,4rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]"
+          className="ms-panel ms-rim relative mt-[clamp(1.75rem,3.2vw,2.75rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]"
           data-reveal
         >
           {/* Dials */}
@@ -102,7 +102,7 @@ export function Calculator() {
           <div className="p-6 sm:p-9">
             <p className="ms-mono">Projected first launch</p>
             <p
-              className="ms-figure ms-gold mt-4 text-[clamp(3rem,8vw,5.5rem)]"
+              className="ms-figure ms-money mt-4 text-[clamp(2.25rem,5vw,3.75rem)]"
               aria-live="polite"
             >
               {money.format(model.firstLaunch)}
@@ -110,7 +110,7 @@ export function Calculator() {
 
             <div className="mt-7 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-[var(--rule)] pt-6">
               <p className="ms-mono">12-month potential</p>
-              <p className="ms-figure text-[clamp(1.5rem,3vw,2.25rem)] text-bone">
+              <p className="ms-figure ms-money text-[clamp(1.25rem,2.1vw,1.6rem)]">
                 {money.format(model.year)}
               </p>
             </div>

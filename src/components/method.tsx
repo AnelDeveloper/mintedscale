@@ -9,12 +9,12 @@ import { Heading, Lede, Section } from "./section";
 export function Method() {
   return (
     <Section id="method" index={method.index} eyebrow={method.eyebrow}>
-      <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
+      <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
         <Heading lines={method.headline} />
         <Lede>{method.body}</Lede>
       </div>
 
-      <ol className="mt-[clamp(3rem,6vw,5rem)]">
+      <ol className="mt-[clamp(2rem,3.6vw,3rem)]">
         {method.steps.map((step, i) => (
           <li
             key={step.n}
@@ -31,7 +31,7 @@ export function Method() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-[clamp(1.75rem,3.2vw,2.75rem)] md:grid-cols-[8rem_minmax(0,1fr)_minmax(0,1.15fr)] md:items-baseline">
               <div>
                 <span
-                  className="ms-figure block text-[clamp(2.75rem,5.5vw,4rem)] leading-none text-transparent transition-all duration-700 group-hover:text-gold-400"
+                  className="ms-figure block text-[clamp(1.9rem,3.4vw,2.6rem)] leading-none text-transparent transition-all duration-700 group-hover:text-gold-400"
                   style={{ WebkitTextStroke: "1px rgba(217,169,76,0.4)" }}
                   aria-hidden="true"
                 >
@@ -41,7 +41,7 @@ export function Method() {
               </div>
 
               <div>
-                <h3 className="ms-display text-[clamp(1.75rem,3vw,2.5rem)] text-bone">{step.title}</h3>
+                <h3 className="ms-display text-[clamp(1.35rem,2.3vw,1.8rem)] text-bone">{step.title}</h3>
                 <p className="mt-2.5 text-[0.9375rem] leading-[1.65] text-gold-200">{step.body}</p>
               </div>
 
@@ -57,7 +57,7 @@ export function Method() {
         ))}
       </ol>
 
-      <div className="mt-[clamp(2.5rem,5vw,3.5rem)]" data-reveal>
+      <div className="mt-[clamp(1.75rem,3vw,2.5rem)]" data-reveal>
         <a href="#apply" className="ms-btn ms-btn-gold ms-sheen">
           Start building your brand
           <Arrow />

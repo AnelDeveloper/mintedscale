@@ -17,13 +17,13 @@ export function Engine() {
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
-        <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
+        <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
           <Eyebrow index={engine.index}>{engine.eyebrow}</Eyebrow>
         </div>
 
-        <div className="grid gap-[clamp(2rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(2.2rem,5.6vw,4.6rem)]" data-reveal>
+        <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
+          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
             <span className="block text-bone">{engine.headline[0]}</span>
             <span className="ms-gold-sweep block">{engine.headline[1]}</span>
           </h2>
@@ -40,7 +40,7 @@ export function Engine() {
           </div>
         </div>
 
-        <div className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-[clamp(1.5rem,3vw,2.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start">
+        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-[clamp(1.5rem,3vw,2.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start">
           {/* Modules */}
           <div className="grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
             {engine.modules.map((module, i) => (
@@ -58,7 +58,7 @@ export function Engine() {
                   />
                 </div>
 
-                <h3 className="ms-display-soft mt-6 text-[clamp(1.25rem,2vw,1.5rem)] text-bone">
+                <h3 className="ms-display-soft mt-6 text-[clamp(1.05rem,1.7vw,1.25rem)] text-bone">
                   {module.title}
                 </h3>
                 <p className="mt-3 text-[0.875rem] leading-[1.7] text-ash">{module.body}</p>

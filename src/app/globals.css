@@ -23,6 +23,11 @@
   --color-gold-600: #b8842f;
   --color-gold-800: #8a5f1e;
 
+  /* Money reads green in every market on earth. "Mint" green also happens
+     to be the brand's own word — gold is identity, green is revenue. */
+  --color-money: #3fd98a;
+  --color-money-deep: #22a866;
+
   --font-display: var(--font-archivo), "Helvetica Neue", ui-sans-serif, sans-serif;
   --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
@@ -54,7 +59,21 @@
   --rule-gold: rgba(217, 169, 76, 0.28);
   --rule-gold-strong: rgba(240, 212, 134, 0.55);
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --shell: 80rem;
+  --shell: 78rem;
+
+  /* Rounded, glossy surfaces — the single biggest reason a dark page reads
+     as calm rather than shouty. */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 22px;
+
+  /* Gloss: a light crown at the top of a surface, fading fast. */
+  --gloss: linear-gradient(
+    180deg,
+    rgba(255, 250, 235, 0.07) 0%,
+    rgba(255, 250, 235, 0.02) 18%,
+    transparent 42%
+  );
 }
 
 @layer base {
@@ -163,8 +182,8 @@
 .ms-display {
   font-family: var(--font-display);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
   text-transform: uppercase;
   text-wrap: balance;
 }
@@ -257,6 +276,8 @@
 
 .ms-panel {
   position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
   background: linear-gradient(168deg, rgba(26, 21, 16, 0.72) 0%, rgba(12, 10, 8, 0.82) 100%);
   border: 1px solid var(--rule);
   backdrop-filter: blur(16px) saturate(120%);
@@ -285,6 +306,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  border-radius: var(--radius);
   background: linear-gradient(168deg, rgba(24, 19, 14, 0.7), rgba(11, 9, 8, 0.8));
   border: 1px solid var(--rule);
   transition: border-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -339,7 +361,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 1.05rem 1.9rem;
+  padding: 0.95rem 1.65rem;
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 500;
@@ -400,7 +423,8 @@
 
 .ms-field {
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
   background: rgba(9, 7, 6, 0.6);
   border: 1px solid var(--rule);
   color: var(--color-bone);
@@ -445,6 +469,7 @@
 
 .ms-chip {
   position: relative;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--rule);
   background: rgba(10, 8, 6, 0.55);
   color: var(--color-ash);
@@ -507,6 +532,7 @@
 .ms-video {
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius);
   background: linear-gradient(160deg, rgba(28, 22, 16, 0.9), rgba(9, 8, 6, 0.95));
   border: 1px solid var(--rule-gold);
   transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -531,6 +557,22 @@
 .ms-play:hover {
   transform: scale(1.08);
   box-shadow: 0 0 0 1px rgba(249, 237, 203, 0.9), 0 18px 56px -8px rgba(240, 212, 134, 0.9);
+}
+
+/* The glossy crown. Sits above the surface, below the content. */
+.ms-gloss::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--gloss);
+  border-radius: inherit;
+}
+
+/* Revenue figures. Gold is the brand; green is money. */
+.ms-money {
+  color: var(--color-money);
+  text-shadow: 0 0 28px rgba(63, 217, 138, 0.35);
 }
 
 .ms-step {
@@ -723,7 +765,11 @@
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    /* Delay matters as much as duration: a staggered entrance with
+       fill:both leaves content invisible until its delay elapses. */
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
   }
 
   .ms-js [data-reveal] {

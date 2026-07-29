@@ -4,12 +4,12 @@ import { Heading, Lede, Section } from "./section";
 export function Capabilities() {
   return (
     <Section id="capabilities" index={capabilities.index} eyebrow={capabilities.eyebrow}>
-      <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
+      <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
         <Heading lines={capabilities.headline} />
         <Lede>{capabilities.body}</Lede>
       </div>
 
-      <div className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
+      <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
         {capabilities.services.map((service, i) => (
           <article
             key={service.code}
@@ -19,7 +19,7 @@ export function Capabilities() {
           >
             <span className="ms-mono text-gold-400">{service.code}</span>
 
-            <h3 className="ms-display mt-7 text-[clamp(1.75rem,2.9vw,2.25rem)] text-bone transition-colors duration-500 group-hover:text-gold-100">
+            <h3 className="ms-display mt-7 text-[clamp(1.35rem,2.2vw,1.7rem)] text-bone transition-colors duration-500 group-hover:text-gold-100">
               {service.title}
             </h3>
             <p className="mt-3 max-w-[34ch] text-[0.9375rem] leading-[1.65] text-ash">

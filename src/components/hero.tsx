@@ -1,78 +1,91 @@
-import { hero, site } from "@/lib/content";
+import { calculator, hero, site } from "@/lib/content";
 import { CoinMark } from "./coin-mark";
 import { VideoFrame } from "./video-frame";
+
+/**
+ * Derived from the calculator's own model, not typed by hand — the headline
+ * number in the hero can never drift away from what the calculator computes.
+ */
+const SAMPLE = { followers: 100_000, engagement: 3, price: 120 };
+const SAMPLE_REVENUE = Math.round(
+  SAMPLE.followers * (SAMPLE.engagement / 100) * calculator.launchConversion * SAMPLE.price,
+);
+const money = new Intl.NumberFormat("en-IE", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
 
 export function Hero() {
   return (
     <section id="top" className="relative">
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] pb-[clamp(3rem,7vh,5rem)] pt-[clamp(7rem,16vh,10rem)]">
-        {/* Coin, struck and slowly turning under the light */}
-        <div className="ms-rise flex justify-center" style={{ animationDelay: "40ms" }}>
-          <span className="relative flex h-16 w-16 items-center justify-center">
-            <span
-              className="ms-orbit absolute inset-0 rounded-full"
-              style={{
-                background:
-                  "conic-gradient(from 0deg, transparent 0deg, rgba(240,212,134,0.55) 60deg, transparent 130deg, transparent 360deg)",
-                mask: "radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px))",
-                WebkitMask:
-                  "radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px))",
-              }}
-              aria-hidden="true"
-            />
-            <CoinMark size={52} id="hero" />
-          </span>
-        </div>
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] pb-[clamp(3rem,7vh,5rem)] pt-[clamp(6.5rem,13vh,8.5rem)]">
+        <div className="grid items-center gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          {/* ── Left: the pitch ── */}
+          <div className="min-w-0">
+            <div className="ms-rise flex items-center gap-3" style={{ animationDelay: "40ms" }}>
+              <CoinMark size={30} id="hero" />
+              <p className="ms-eyebrow">
+                <span>{hero.eyebrow}</span>
+                <span className="text-gold-600" aria-hidden="true">
+                  ◆
+                </span>
+                <span>{site.established}</span>
+              </p>
+            </div>
 
-        <div className="ms-rise mt-7 flex justify-center" style={{ animationDelay: "120ms" }}>
-          <p className="ms-eyebrow flex-wrap justify-center text-center">
-            <span>{hero.eyebrow}</span>
-            <span className="text-gold-600" aria-hidden="true">
-              ◆
-            </span>
-            <span>{site.established}</span>
-          </p>
-        </div>
+            <h1 className="ms-display mt-[clamp(1.25rem,2.5vw,1.75rem)] text-[clamp(1.95rem,4vw,3.25rem)]">
+              <span className="ms-rise block text-bone" style={{ animationDelay: "140ms" }}>
+                {hero.headline[0]}
+              </span>
+              <span className="ms-rise ms-gold-sweep block" style={{ animationDelay: "220ms" }}>
+                {hero.headline[1]}
+              </span>
+            </h1>
 
-        <h1 className="ms-display mt-[clamp(1.5rem,3.5vw,2.5rem)] text-center text-[clamp(2.6rem,9.2vw,7.4rem)]">
-          <span className="ms-rise block text-bone" style={{ animationDelay: "200ms" }}>
-            {hero.headline[0]}
-          </span>
-          <span className="ms-rise ms-gold-sweep block" style={{ animationDelay: "300ms" }}>
-            {hero.headline[1]}
-          </span>
-        </h1>
+            <p
+              className="ms-rise ms-serif mt-5 text-[clamp(1.05rem,1.7vw,1.35rem)] text-gold-200"
+              style={{ animationDelay: "300ms" }}
+            >
+              {site.tagline}
+            </p>
 
-        <p
-          className="ms-rise ms-serif mt-6 text-center text-[clamp(1.15rem,2.2vw,1.75rem)] text-gold-200"
-          style={{ animationDelay: "380ms" }}
-        >
-          {site.tagline}
-        </p>
+            <p
+              className="ms-rise mt-5 max-w-[46ch] text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-[1.7] text-ash"
+              style={{ animationDelay: "360ms" }}
+            >
+              {hero.sub}
+            </p>
 
-        <p
-          className="ms-rise mx-auto mt-7 max-w-[54ch] text-center text-[clamp(1rem,1.4vw,1.1875rem)] leading-[1.65] text-ash"
-          style={{ animationDelay: "440ms" }}
-        >
-          {hero.sub}
-        </p>
+            <div
+              className="ms-rise mt-8 flex flex-col gap-3 sm:flex-row"
+              style={{ animationDelay: "440ms" }}
+            >
+              <a href="#apply" className="ms-btn ms-btn-gold w-full sm:w-auto">
+                {hero.primaryCta}
+                <Arrow />
+              </a>
+              <a href="#method" className="ms-btn ms-btn-outline ms-sheen w-full sm:w-auto">
+                {hero.secondaryCta}
+              </a>
+            </div>
 
-        <div
-          className="ms-rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          style={{ animationDelay: "520ms" }}
-        >
-          <a href="#apply" className="ms-btn ms-btn-gold w-full px-8 py-[1.1rem] sm:w-auto">
-            {hero.primaryCta}
-            <Arrow />
-          </a>
-          <a href="#results" className="ms-btn ms-btn-outline ms-sheen w-full sm:w-auto">
-            {hero.secondaryCta}
-          </a>
-        </div>
+            {/* Terms at a glance — small, not a billboard */}
+            <dl className="ms-rise mt-8 flex flex-wrap gap-x-8 gap-y-4" style={{ animationDelay: "520ms" }}>
+              {hero.bar.map((item) => (
+                <div key={item.label}>
+                  <dt className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]">{item.value}</dt>
+                  <dd className="ms-mono mt-1.5 text-[0.5625rem]">{item.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
-        {/* The film */}
-        <div className="ms-rise mt-[clamp(3rem,6vw,4.5rem)]" style={{ animationDelay: "620ms" }}>
-          <div className="relative">
+          {/* ── Right: the film, with the number that matters clipped to it ── */}
+          <div
+            className="ms-rise relative min-w-0 sm:pb-[clamp(4rem,8vw,6rem)]"
+            style={{ animationDelay: "560ms" }}
+          >
             <VideoFrame
               src={hero.video.src}
               poster={hero.video.poster}
@@ -80,37 +93,42 @@ export function Hero() {
               duration={hero.video.duration}
               ratio="16/9"
             />
-          </div>
 
-          {/* Struck strip beneath the film */}
-          <div className="ms-panel ms-rim relative grid grid-cols-1 divide-y divide-[var(--rule)] border-t-0 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {hero.bar.map((item) => (
-              <div key={item.label} className="px-6 py-5 text-center">
-                <p className="ms-figure ms-gold text-[clamp(1.75rem,3.2vw,2.5rem)]">{item.value}</p>
-                <p className="ms-mono mt-2">{item.label}</p>
-              </div>
-            ))}
+            <EarningsCard />
           </div>
         </div>
-
-        <p
-          className="ms-rise ms-mono mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-[0.625rem]"
-          style={{ animationDelay: "720ms" }}
-        >
-          <span className="ms-live-dot block h-1.5 w-1.5 rounded-full bg-gold-300" aria-hidden="true" />
-          The mint is open
-          <span className="text-gold-800" aria-hidden="true">
-            ◆
-          </span>
-          <a
-            href="#apply"
-            className="text-gold-200 underline-offset-4 transition-opacity hover:underline hover:opacity-80"
-          >
-            Book a strategy call
-          </a>
-        </p>
       </div>
     </section>
+  );
+}
+
+/**
+ * The one number a creator actually came for. Honest because every input is
+ * printed next to it — this is a model, and it says so.
+ */
+function EarningsCard() {
+  // Stacked under the film on a phone — overlapping it there would bury most
+  // of the frame. It only floats once there is room to float in.
+  return (
+    <div className="ms-panel ms-gloss mt-4 p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:absolute sm:bottom-0 sm:left-[-1rem] sm:right-[clamp(2rem,12%,6rem)] sm:mt-0 sm:p-6">
+      <p className="ms-mono text-[0.5625rem]">What a 100K audience earns</p>
+
+      <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]">
+        {money.format(SAMPLE_REVENUE)}
+      </p>
+
+      <p className="ms-mono mt-2 text-[0.5rem] normal-case leading-[1.7] tracking-[0.1em]">
+        First launch · {SAMPLE.engagement}% engagement · {money.format(SAMPLE.price)} product
+      </p>
+
+      <a
+        href="#calculator"
+        className="ms-mono mt-4 inline-flex items-center gap-2 text-gold-200 underline-offset-4 transition-opacity duration-300 hover:underline hover:opacity-80"
+      >
+        Run your numbers
+        <Arrow />
+      </a>
+    </div>
   );
 }
 

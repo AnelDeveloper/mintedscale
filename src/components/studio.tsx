@@ -12,13 +12,13 @@ export function Studio() {
     <section id="studio" className="relative scroll-mt-24 border-t border-[var(--rule)]">
       <ClientRoster />
 
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4rem,9vh,7rem)]">
-        <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
+        <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
           <Eyebrow index={studio.index}>{studio.eyebrow}</Eyebrow>
         </div>
 
-        <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(2.2rem,5.4vw,4.2rem)]" data-reveal>
+        <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
+          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
             <span className="block text-bone">{studio.headline[0]}</span>
             <span className="ms-gold-sweep block">{studio.headline[1]}</span>
           </h2>
@@ -26,7 +26,7 @@ export function Studio() {
         </div>
 
         {/* Facts and terms — nothing here is a claim about creator results */}
-        <div className="mt-[clamp(2.5rem,5vw,4rem)] grid grid-cols-2 gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-4">
+        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid grid-cols-2 gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-4">
           {studio.stats.map((stat, i) => (
             <div
               key={stat.label}
@@ -39,8 +39,8 @@ export function Studio() {
               <p
                 className={`ms-figure ms-gold whitespace-nowrap ${
                   stat.value.length > 4
-                    ? "text-[clamp(1.5rem,2.9vw,2.1rem)]"
-                    : "text-[clamp(2.1rem,4.6vw,3.4rem)]"
+                    ? "text-[clamp(1.15rem,1.9vw,1.5rem)]"
+                    : "text-[clamp(1.6rem,3vw,2.35rem)]"
                 }`}
               >
                 {stat.value}
@@ -52,7 +52,7 @@ export function Studio() {
         </div>
 
         {/* Founder note */}
-        <div className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[22rem_minmax(0,1fr)]">
+        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[22rem_minmax(0,1fr)]">
           <Portrait />
 
           <div

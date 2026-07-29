@@ -597,7 +597,7 @@ function Confirmation({
       </div>
 
       <div className="px-5 py-[clamp(2.5rem,5vw,3.5rem)] sm:px-9">
-        <h3 className="ms-display ms-metal max-w-[18ch] text-[clamp(1.75rem,3.6vw,2.75rem)]">
+        <h3 className="ms-display ms-metal max-w-[18ch] text-[clamp(1.4rem,2.4vw,1.9rem)]">
           Thank you. We will get back to you shortly.
         </h3>
 

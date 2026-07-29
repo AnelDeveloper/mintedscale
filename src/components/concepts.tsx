@@ -30,13 +30,13 @@ export function Concepts() {
 
   return (
     <section id="concepts" className="relative scroll-mt-24 border-t border-[var(--rule)]">
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
-        <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
+        <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
           <Eyebrow index={concepts.index}>{concepts.eyebrow}</Eyebrow>
         </div>
 
-        <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(2.2rem,5.4vw,4.2rem)]" data-reveal>
+        <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
+          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
             <span className="block text-bone">{concepts.headline[0]}</span>
             <span className="ms-gold-sweep block">{concepts.headline[1]}</span>
           </h2>
@@ -50,7 +50,7 @@ export function Concepts() {
         </div>
 
         <div
-          className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[20rem_minmax(0,1fr)]"
+          className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[20rem_minmax(0,1fr)]"
           data-reveal
         >
           <div
@@ -134,7 +134,7 @@ function Sheet({ item }: { item: Item }) {
   return (
     <div key={item.ref} className="ms-rise">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-[var(--rule)] px-6 py-5 sm:px-9">
-        <p className="ms-display flex flex-wrap items-baseline gap-3 text-[clamp(1.375rem,2.6vw,2rem)]">
+        <p className="ms-display flex flex-wrap items-baseline gap-3 text-[clamp(1.15rem,1.9vw,1.5rem)]">
           <span className="text-ash">{item.handle}</span>
           <span className="text-gold-600" aria-hidden="true">
             →
@@ -182,7 +182,7 @@ function Sheet({ item }: { item: Item }) {
       <dl className="grid border-t border-[var(--rule)] sm:grid-cols-3">
         <div className="border-b border-[var(--rule)] px-6 py-5 sm:border-b-0 sm:border-r sm:px-9">
           <dt className="ms-mono">Price ladder</dt>
-          <dd className="mt-2 text-[0.875rem] leading-relaxed text-gold-200">{item.ladder}</dd>
+          <dd className="ms-money mt-2 text-[0.875rem] font-medium leading-relaxed">{item.ladder}</dd>
         </div>
         <div className="border-b border-[var(--rule)] px-6 py-5 sm:border-b-0 sm:border-r sm:px-9">
           <dt className="ms-mono">Business model</dt>

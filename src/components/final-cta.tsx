@@ -14,7 +14,7 @@ export function FinalCta() {
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(5.5rem,15vh,11rem)] text-center">
+      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4rem,9vh,6.5rem)] text-center">
         <div className="flex justify-center" data-reveal>
           <CoinMark size={44} id="final" />
         </div>
@@ -26,7 +26,7 @@ export function FinalCta() {
         </p>
 
         <h2
-          className="ms-display mx-auto mt-8 max-w-[15ch] text-[clamp(2.5rem,8.5vw,6.4rem)]"
+          className="ms-display mx-auto mt-8 max-w-[15ch] text-[clamp(2rem,4.3vw,3.5rem)]"
           data-reveal
           style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
         >
@@ -35,7 +35,7 @@ export function FinalCta() {
         </h2>
 
         <p
-          className="ms-serif mx-auto mt-7 text-[clamp(1.15rem,2.1vw,1.625rem)] text-gold-200"
+          className="ms-serif mx-auto mt-7 text-[clamp(1.05rem,1.7vw,1.3rem)] text-gold-200"
           data-reveal
           style={{ "--reveal-delay": "150ms" } as React.CSSProperties}
         >

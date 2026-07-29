@@ -359,12 +359,13 @@ export const concepts = {
 export const films = {
   eyebrow: "Partner films",
   index: "07",
-  headline: ["The films go here", "when they're real."],
+  headline: ["Are you", "next?"],
   body: "When a partner launches, their film goes here — what we built, what it earns, in their own words. Reserved, not invented.",
+  cta: "Take the first frame",
   items: [
-    { id: "v1", seat: "Partner 01", status: "Reserved", src: "", poster: "" },
-    { id: "v2", seat: "Partner 02", status: "Reserved", src: "", poster: "" },
-    { id: "v3", seat: "Partner 03", status: "Reserved", src: "", poster: "" },
+    { id: "v1", label: "Are you next?", status: "Open", src: "", poster: "" },
+    { id: "v2", label: "Are you next?", status: "Open", src: "", poster: "" },
+    { id: "v3", label: "Are you next?", status: "Open", src: "", poster: "" },
   ],
 } as const;
 
@@ -399,36 +400,6 @@ export const capabilities = {
       title: "Technology",
       body: "The infrastructure your brand runs on.",
       items: ["Websites", "Apps", "Digital platforms"],
-    },
-  ],
-} as const;
-
-/* ── Why us ────────────────────────────────────────────────── */
-
-export const standard = {
-  eyebrow: "Why us",
-  index: "09",
-  headline: ["Why work with", "a new studio."],
-  points: [
-    {
-      n: "01",
-      title: "You are not paying for the risk",
-      body: "No upfront fee. I build, you launch, and I take a share of what it earns. A studio with a waiting list has no reason to price like that — a new one does, and you get the benefit.",
-    },
-    {
-      n: "02",
-      title: "Seven years of shipped product",
-      body: "Platforms, apps, storefronts and payment systems delivered for companies across IT, planning and commerce. The creator work is the new chapter; the ability to actually ship the thing is not.",
-    },
-    {
-      n: "03",
-      title: "Strategy and execution, same hands",
-      body: "The person who writes the positioning builds the storefront and stands up the technology. Nothing is handed to a vendor, and nothing gets lost in translation.",
-    },
-    {
-      n: "04",
-      title: "Tied to year two, not your invoice",
-      body: "A revenue share only pays if the brand keeps earning, so I am on the hook for what happens after launch week — retention, margin, the second product. Nobody billing you upfront has that incentive.",
     },
   ],
 } as const;

@@ -20,9 +20,9 @@ export function Section({
       id={id}
       className={`relative scroll-mt-24 ${ruled ? "border-t border-[var(--rule)]" : ""} ${className}`}
     >
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
         {index && eyebrow ? (
-          <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+          <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
             <Eyebrow index={index}>{eyebrow}</Eyebrow>
           </div>
         ) : null}
@@ -58,7 +58,7 @@ export function Heading({
 }) {
   return (
     <h2
-      className={`${soft ? "ms-display-soft" : "ms-display"} text-[clamp(2.2rem,5.6vw,4.6rem)] ${className}`}
+      className={`${soft ? "ms-display-soft" : "ms-display"} text-[clamp(1.7rem,3.2vw,2.6rem)] ${className}`}
       data-reveal
     >
       <span className="block text-bone">{lines[0]}</span>

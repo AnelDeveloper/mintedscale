@@ -12,7 +12,6 @@ import { Method } from "@/components/method";
 import { ScrollEffects } from "@/components/scroll-effects";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
-import { Standard } from "@/components/standard";
 import { Studio } from "@/components/studio";
 import { faq, site } from "@/lib/content";
 
@@ -54,7 +53,6 @@ export default function HomePage() {
         <Concepts />
         <Films />
         <Capabilities />
-        <Standard />
         <Faq />
         <Apply />
         <FinalCta />

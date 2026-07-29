@@ -4,8 +4,8 @@ import { Section } from "./section";
 export function Faq() {
   return (
     <Section id="faq" index={faq.index} eyebrow={faq.eyebrow}>
-      <div className="grid gap-[clamp(2rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-        <h2 className="ms-display text-[clamp(2.2rem,5.6vw,4.6rem)] lg:sticky lg:top-28 lg:self-start" data-reveal>
+      <div className="grid gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+        <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)] lg:sticky lg:top-28 lg:self-start" data-reveal>
           <span className="block text-bone">{faq.headline[0]}</span>
           <span className="ms-gold-sweep block">{faq.headline[1]}</span>
         </h2>

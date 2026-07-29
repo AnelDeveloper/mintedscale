@@ -15,17 +15,17 @@ export function Apply() {
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
-        <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
+      <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
+        <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
           <Eyebrow index={application.index}>{application.eyebrow}</Eyebrow>
         </div>
 
-        <div className="grid gap-[clamp(2.5rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+        <div className="grid gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
           {/* min-w-0 on both columns: a grid item defaults to min-width:auto, which
               stops the booking console shrinking below the day rail's min-content
               and blows the whole page out horizontally on mobile. */}
           <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <h2 className="ms-display text-[clamp(2.1rem,4.8vw,3.6rem)]" data-reveal>
+            <h2 className="ms-display text-[clamp(1.7rem,3.1vw,2.5rem)]" data-reveal>
               <span className="block text-bone">{application.headline[0]}</span>
               <span className="ms-gold-sweep block">{application.headline[1]}</span>
             </h2>
