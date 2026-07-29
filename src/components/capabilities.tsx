@@ -1,16 +1,18 @@
-import { capabilities } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n";
 import { Heading, Lede, Section } from "./section";
 
-export function Capabilities() {
+export function Capabilities({ t }: { t: Dictionary }) {
+  const c = t.capabilities;
+
   return (
-    <Section id="capabilities" index={capabilities.index} eyebrow={capabilities.eyebrow}>
+    <Section id="capabilities" index={c.index} eyebrow={c.eyebrow}>
       <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
-        <Heading lines={capabilities.headline} />
-        <Lede>{capabilities.body}</Lede>
+        <Heading lines={c.headline} />
+        <Lede>{c.body}</Lede>
       </div>
 
       <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
-        {capabilities.services.map((service, i) => (
+        {c.services.map((service, i) => (
           <article
             key={service.code}
             className="ms-sheen group relative overflow-hidden bg-ink p-7 transition-colors duration-500 hover:bg-[rgba(22,18,14,0.95)] sm:p-9"

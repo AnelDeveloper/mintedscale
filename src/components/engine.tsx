@@ -1,10 +1,13 @@
-import { engine } from "@/lib/content";
+import { media } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { Arrow } from "./hero";
 import { Eyebrow, Lede } from "./section";
 import { VideoFrame } from "./video-frame";
 
 /** The AI monetization system — the thing no other studio on the list has. */
-export function Engine() {
+export function Engine({ t }: { t: Dictionary }) {
+  const e = t.engine;
+
   return (
     <section id="engine" className="relative scroll-mt-24 overflow-hidden border-t border-[var(--rule)]">
       {/* The engine runs hot: a gold field behind this section only */}
@@ -19,23 +22,23 @@ export function Engine() {
 
       <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
         <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
-          <Eyebrow index={engine.index}>{engine.eyebrow}</Eyebrow>
+          <Eyebrow index={e.index}>{e.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
           <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
-            <span className="block text-bone">{engine.headline[0]}</span>
-            <span className="ms-gold-sweep block">{engine.headline[1]}</span>
+            <span className="block text-bone">{e.headline[0]}</span>
+            <span className="ms-gold-sweep block">{e.headline[1]}</span>
           </h2>
 
           <div>
-            <Lede>{engine.body}</Lede>
+            <Lede>{e.body}</Lede>
             <p
-              className="ms-serif mt-6 text-[clamp(1.15rem,1.9vw,1.5rem)] leading-[1.4] text-gold-200"
+              className="ms-serif mt-6 text-[clamp(1.05rem,1.7vw,1.35rem)] leading-[1.4] text-gold-200"
               data-reveal
               style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
             >
-              {engine.serif}
+              {e.serif}
             </p>
           </div>
         </div>
@@ -43,7 +46,7 @@ export function Engine() {
         <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-[clamp(1.5rem,3vw,2.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start">
           {/* Modules */}
           <div className="grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
-            {engine.modules.map((module, i) => (
+            {e.modules.map((module, i) => (
               <article
                 key={module.code}
                 className="ms-sheen group relative overflow-hidden bg-ink p-6 transition-colors duration-500 hover:bg-[rgba(22,18,14,0.95)] sm:p-7"
@@ -64,8 +67,8 @@ export function Engine() {
                 <p className="mt-3 text-[0.875rem] leading-[1.7] text-ash">{module.body}</p>
 
                 <div className="mt-6 border-t border-[var(--rule)] pt-4">
-                  <p className="ms-figure ms-gold text-[1.5rem]">{module.metric}</p>
-                  <p className="ms-mono mt-1.5 text-[0.5625rem]">{module.metricLabel}</p>
+                  <p className="ms-figure ms-gold text-[1.2rem]">{module.metric}</p>
+                  <p className="ms-mono mt-1.5 text-[0.5625rem]">{e.producesLabel}</p>
                 </div>
               </article>
             ))}
@@ -78,20 +81,18 @@ export function Engine() {
             style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
             <VideoFrame
-              src={engine.video.src}
-              poster={engine.video.poster}
-              label={engine.video.label}
-              duration={engine.video.duration}
+              src={media.engineVideo.src}
+              poster={media.engineVideo.poster}
+              label={e.videoLabel}
+              reservedLabel={t.video.reserved}
+              playLabel={t.video.play}
               ratio="16/9"
             />
 
-            <div className="ms-panel ms-rim relative border-t-0 p-6">
-              <p className="text-[0.9375rem] leading-[1.7] text-bone">
-                Every partner build starts with an audit from the engine. You see the
-                output before you commit to anything.
-              </p>
+            <div className="ms-panel ms-gloss relative mt-4 p-6">
+              <p className="text-[0.9375rem] leading-[1.7] text-bone">{e.asideBody}</p>
               <a href="#apply" className="ms-btn ms-btn-gold ms-sheen mt-6 w-full">
-                Run my audit
+                {e.asideCta}
                 <Arrow />
               </a>
             </div>

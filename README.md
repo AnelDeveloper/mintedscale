@@ -171,24 +171,56 @@ React: if hydration never happens, a React-based safety net would not fire eithe
 
 ---
 
+## Languages
+
+Two: English at `/en`, Bosnian at `/bs` — labelled **BHS**, since Bosnian,
+Croatian and Serbian are one language for this purpose. Both are prerendered
+at build time, each with its own `<html lang>`, canonical URL and `hreflang`
+alternates, so both get indexed.
+
+`/` redirects by `Accept-Language`: a browser asking for bs, hr or sr lands on
+`/bs`, everything else on `/en`. The switcher in the header is real links, not
+a JS toggle, so each language is a URL you can share.
+
+Server-side messages are localised too — the visitor's language travels with
+the form payload, so a validation error comes back in the language they are
+reading.
+
+### Adding or changing copy
+
+```
+src/lib/i18n/
+  en.ts     English — also defines the Dictionary type
+  bs.ts     Bosnian, typed against it
+  index.ts  locales, getDictionary, {placeholder} filling
+```
+
+`bs.ts` is typed as `Dictionary`, so a forgotten key is a build error rather
+than a blank spot on the page. Add a key to `en.ts` first, then to `bs.ts`.
+
+**Numbers and URLs are not in the translations.** They live in
+`src/lib/config.ts` — figures, projections, client links, media slots. If a
+price sat in both language files, changing one and forgetting the other would
+quietly show different numbers depending on the visitor's language.
+
 ## Structure
 
 ```
 src/
+  middleware.ts           locale negotiation for /
   app/
-    layout.tsx            fonts, metadata, reveal bootstrap
-    page.tsx              section order + JSON-LD
+    [locale]/layout.tsx   fonts, metadata, hreflang, reveal bootstrap
+    [locale]/page.tsx     section order + JSON-LD
     globals.css           design tokens and component classes
     api/apply/            applications and bookings
     api/availability/     open slots (free/busy aware)
-  components/             one file per section
+  components/             one file per section, each takes `t`
   lib/
-    content.ts            ← all copy and data
-    validation.ts         shared browser/server rules
+    config.ts             ← figures, URLs, media slots (no language)
+    i18n/                 ← all copy, per language
+    validation.ts         shared browser/server rules, localised messages
     slots.ts              studio hours, timezone maths
     google-calendar.ts    service-account JWT, free/busy, event creation
     email.ts              Resend / SendGrid over HTTP
     email-templates.ts    the studio notification and creator receipt
 ```
-
-Change copy in `content.ts`. You should rarely need to touch a component.

@@ -12,17 +12,19 @@ export function VideoFrame({
   poster,
   label,
   duration,
+  reservedLabel,
+  playLabel,
   ratio = "16/9",
   className = "",
-  caption,
 }: {
   src?: string;
   poster?: string;
   label: string;
   duration?: string;
+  reservedLabel: string;
+  playLabel: string;
   ratio?: "16/9" | "9/16";
   className?: string;
-  caption?: React.ReactNode;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -32,8 +34,15 @@ export function VideoFrame({
   if (!src) {
     return (
       <div className={`ms-video ${aspect} ${className}`} style={{ borderStyle: "dashed" }}>
-        <ReservedFrame label={label} />
-        {caption}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+          <span className="ms-play h-14 w-14 opacity-40 sm:h-16 sm:w-16" aria-hidden="true">
+            <PlayGlyph />
+          </span>
+          <span className="ms-mono text-gold-200">{label}</span>
+          <span className="ms-mono text-[0.5625rem] normal-case tracking-[0.14em] text-char">
+            {reservedLabel}
+          </span>
+        </div>
       </div>
     );
   }
@@ -57,7 +66,7 @@ export function VideoFrame({
           type="button"
           onClick={() => void videoRef.current?.play()}
           className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 bg-[rgba(8,7,6,0.35)] transition-colors duration-500 hover:bg-[rgba(8,7,6,0.2)]"
-          aria-label={`Play: ${label}`}
+          aria-label={`${playLabel}: ${label}`}
         >
           <span className="ms-play h-16 w-16 sm:h-20 sm:w-20" aria-hidden="true">
             <PlayGlyph />
@@ -66,23 +75,6 @@ export function VideoFrame({
           {duration ? <span className="ms-mono text-[0.5625rem]">{duration}</span> : null}
         </button>
       ) : null}
-    </div>
-  );
-}
-
-function ReservedFrame({ label }: { label: string }) {
-  return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-      <span
-        className="ms-play h-14 w-14 opacity-40 sm:h-16 sm:w-16"
-        aria-hidden="true"
-      >
-        <PlayGlyph />
-      </span>
-      <span className="ms-mono text-gold-200">{label}</span>
-      <span className="ms-mono text-[0.5625rem] normal-case tracking-[0.14em] text-char">
-        Video slot reserved
-      </span>
     </div>
   );
 }

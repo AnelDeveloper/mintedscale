@@ -1,4 +1,4 @@
-import { site } from "./content";
+import { site } from "./config";
 import { BOOKING } from "./slots";
 import type { ValidatedApplication } from "./validation";
 
@@ -47,11 +47,11 @@ function shell(title: string, inner: string): string {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:${PANEL};border:1px solid ${RULE};">
   <tr><td style="border-bottom:1px solid ${RULE};padding:20px 28px;">
     <span style="font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.24em;text-transform:uppercase;color:${SILVER};">Minted</span><span style="font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.24em;text-transform:uppercase;color:${GOLD};">Scale</span>
-    <span style="font:400 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.2em;text-transform:uppercase;color:${STEEL};"> &nbsp;·&nbsp; ${esc(site.role)}</span>
+    <span style="font:400 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.2em;text-transform:uppercase;color:${STEEL};"> &nbsp;·&nbsp; ${esc("The Creator Mint")}</span>
   </td></tr>
   ${inner}
   <tr><td style="border-top:1px solid ${RULE};padding:18px 28px;">
-    <p style="margin:0;font:400 11px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.14em;text-transform:uppercase;color:${STEEL};">${esc(site.role)} &nbsp;·&nbsp; ${esc(site.established)}</p>
+    <p style="margin:0;font:400 11px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.14em;text-transform:uppercase;color:${STEEL};">${esc("The Creator Mint")} &nbsp;·&nbsp; ${esc(site.established)}</p>
   </td></tr>
 </table>
 </td></tr>
@@ -209,7 +209,7 @@ export function applicantReceipt({
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${detail}</table>
     </td></tr>
     <tr><td style="padding:24px 28px 28px;">
-      <p style="margin:0;font:400 14px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${STEEL};">${esc(site.tagline)}</p>
+      <p style="margin:0;font:400 14px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${STEEL};">${esc("Turning creators into brands.")}</p>
     </td></tr>`,
   );
 

@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { site } from "@/lib/content";
+import { site } from "@/lib/config";
 import { sendMail } from "@/lib/email";
 import { applicantReceipt, studioNotification } from "@/lib/email-templates";
 import { createBookingEvent, getBusyBlocks, isCalendarConfigured } from "@/lib/google-calendar";
+import { getDictionary } from "@/lib/i18n";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { generateCandidateSlots, removeBusy } from "@/lib/slots";
 import { createReference, isBot, validateApplication } from "@/lib/validation";
@@ -17,19 +18,24 @@ const STUDIO_INBOX = process.env.CONTACT_INBOX || site.email;
  * (`intent: "call"`) and a written application (`intent: "message"`).
  */
 export async function POST(request: Request) {
-  const limit = rateLimit(clientKey(request));
-  if (!limit.allowed) {
-    return NextResponse.json(
-      { ok: false, message: "Too many attempts. Try again shortly." },
-      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
-    );
-  }
-
-  let input: Record<string, string>;
+  let input: Record<string, string> = {};
   try {
     input = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, message: "Malformed request." }, { status: 400 });
+    // Fall through — an empty body fails validation with a localised message.
+  }
+
+  // The visitor's language travels with the payload, so every message the
+  // server sends back is in the language they are reading the page in.
+  const t = getDictionary(input.locale ?? "en");
+  const e = t.console.errors;
+
+  const limit = rateLimit(clientKey(request));
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { ok: false, message: e.tooMany },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
+    );
   }
 
   // Honeypot: answer like a success so the bot stops trying, send nothing.
@@ -37,10 +43,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, reference: createReference() });
   }
 
-  const { ok, errors, data } = validateApplication(input);
+  const { ok, errors, data } = validateApplication(input, e);
   if (!ok || !data) {
     return NextResponse.json(
-      { ok: false, message: "Check the highlighted fields.", errors },
+      { ok: false, message: e.checkFields, errors },
       { status: 422 },
     );
   }
@@ -56,8 +62,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           ok: false,
-          message: "That time has just been taken. Pick another.",
-          errors: { slotStart: "No longer available." },
+          message: e.slotTaken,
+          errors: { slotStart: e.slotGone },
         },
         { status: 409 },
       );
@@ -117,7 +123,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        message: `We could not send that. Email us directly at ${STUDIO_INBOX}.`,
+        message: e.sendFailed.replace("{email}", STUDIO_INBOX),
       },
       { status: 502 },
     );
@@ -128,10 +134,7 @@ export async function POST(request: Request) {
     reference,
     calendarWritten,
     meetLink,
-    message:
-      data.intent === "call"
-        ? "Your call is held."
-        : "Thank you. We will get back to you shortly.",
+    message: data.intent === "call" ? t.console.success.call : t.console.success.message,
   });
 }
 

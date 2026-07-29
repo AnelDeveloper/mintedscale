@@ -1,8 +1,11 @@
-import { application, site } from "@/lib/content";
+import { site } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { ApplicationConsole } from "./application-console";
 import { Eyebrow } from "./section";
 
-export function Apply() {
+export function Apply({ t }: { t: Dictionary }) {
+  const a = t.application;
+
   return (
     <section id="apply" className="relative scroll-mt-20 border-t border-[var(--rule)]">
       {/* The room brightens where the decision gets made */}
@@ -17,7 +20,7 @@ export function Apply() {
 
       <div className="relative mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
         <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
-          <Eyebrow index={application.index}>{application.eyebrow}</Eyebrow>
+          <Eyebrow index={a.index}>{a.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
@@ -26,8 +29,8 @@ export function Apply() {
               and blows the whole page out horizontally on mobile. */}
           <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
             <h2 className="ms-display text-[clamp(1.7rem,3.1vw,2.5rem)]" data-reveal>
-              <span className="block text-bone">{application.headline[0]}</span>
-              <span className="ms-gold-sweep block">{application.headline[1]}</span>
+              <span className="block text-bone">{a.headline[0]}</span>
+              <span className="ms-gold-sweep block">{a.headline[1]}</span>
             </h2>
 
             <p
@@ -35,7 +38,7 @@ export function Apply() {
               data-reveal
               style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
             >
-              {application.body}
+              {a.body}
             </p>
 
             <ul
@@ -43,12 +46,15 @@ export function Apply() {
               data-reveal
               style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
             >
-              {application.terms.map((term) => (
+              {a.terms.map((term) => (
                 <li
                   key={term}
                   className="flex items-baseline gap-3 border-b border-[var(--rule)] py-4 text-[0.9375rem] leading-[1.6] text-ash"
                 >
-                  <span className="mt-1.5 block h-1 w-1 shrink-0 rotate-45 bg-gold-500" aria-hidden="true" />
+                  <span
+                    className="mt-1.5 block h-1 w-1 shrink-0 rotate-45 bg-gold-500"
+                    aria-hidden="true"
+                  />
                   {term}
                 </li>
               ))}
@@ -59,7 +65,7 @@ export function Apply() {
               data-reveal
               style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
             >
-              Or write to us
+              {a.writeToUs}
               <br />
               <a
                 href={`mailto:${site.email}`}
@@ -75,7 +81,7 @@ export function Apply() {
             data-reveal
             style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
-            <ApplicationConsole />
+            <ApplicationConsole t={t} />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import { site, studio } from "@/lib/content";
+import { clients, media, site } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { CoinMark } from "./coin-mark";
 import { Eyebrow, Lede } from "./section";
 
@@ -7,27 +8,29 @@ import { Eyebrow, Lede } from "./section";
  * the founder: seven years of shipped product, named companies, and an
  * offer that puts the risk on us rather than the creator.
  */
-export function Studio() {
+export function Studio({ t }: { t: Dictionary }) {
+  const s = t.studio;
+
   return (
     <section id="studio" className="relative scroll-mt-24 border-t border-[var(--rule)]">
-      <ClientRoster />
+      <ClientRoster t={t} />
 
       <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
         <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
-          <Eyebrow index={studio.index}>{studio.eyebrow}</Eyebrow>
+          <Eyebrow index={s.index}>{s.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end">
           <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
-            <span className="block text-bone">{studio.headline[0]}</span>
-            <span className="ms-gold-sweep block">{studio.headline[1]}</span>
+            <span className="block text-bone">{s.headline[0]}</span>
+            <span className="ms-gold-sweep block">{s.headline[1]}</span>
           </h2>
-          <Lede>{studio.note.lead}</Lede>
+          <Lede>{s.note.lead}</Lede>
         </div>
 
         {/* Facts and terms — nothing here is a claim about creator results */}
         <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid grid-cols-2 gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-4">
-          {studio.stats.map((stat, i) => (
+          {s.stats.map((stat, i) => (
             <div
               key={stat.label}
               className="ms-sheen relative overflow-hidden bg-ink px-5 py-[clamp(1.75rem,3.2vw,2.75rem)] transition-colors duration-500 hover:bg-[rgba(20,17,16,0.9)] sm:px-7"
@@ -53,7 +56,7 @@ export function Studio() {
 
         {/* Founder note */}
         <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[22rem_minmax(0,1fr)]">
-          <Portrait />
+          <Portrait t={t} />
 
           <div
             className="bg-ink p-7 sm:p-9"
@@ -61,16 +64,16 @@ export function Studio() {
             style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
           >
             <p className="text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.75] text-bone">
-              {studio.note.body}
+              {s.note.body}
             </p>
             <p className="mt-6 text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.75] text-ash">
-              {studio.note.offer}
+              {s.note.offer}
             </p>
 
             <p className="ms-serif mt-8 border-t border-[var(--rule)] pt-6 text-[1.25rem] text-gold-200">
-              {site.tagline}
+              {t.site.tagline}
             </p>
-            <p className="ms-mono mt-3">{studio.note.signature}</p>
+            <p className="ms-mono mt-3">{s.note.signature}</p>
           </div>
         </div>
       </div>
@@ -78,23 +81,25 @@ export function Studio() {
   );
 }
 
-function Portrait() {
-  const { src, alt } = studio.portrait;
-
+function Portrait({ t }: { t: Dictionary }) {
   return (
     <div
       className="relative flex min-h-[16rem] items-center justify-center overflow-hidden bg-ink"
       data-reveal
     >
-      {src ? (
+      {media.portrait.src ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={alt} className="h-full w-full object-cover" />
+        <img
+          src={media.portrait.src}
+          alt={t.studio.portraitAlt}
+          className="h-full w-full object-cover"
+        />
       ) : (
         <div className="flex flex-col items-center gap-4 px-6 py-12 text-center">
           <CoinMark size={44} id="portrait" />
           <p className="ms-mono text-gold-200">{site.founder}</p>
           <p className="ms-mono text-[0.5625rem] normal-case tracking-[0.14em] text-char">
-            Portrait slot reserved
+            {t.studio.portraitSlot}
           </p>
         </div>
       )}
@@ -109,14 +114,19 @@ function Portrait() {
  * Static rather than a marquee on purpose: these are links, and a moving
  * target is impossible to tap on a phone, where there is no hover to pause it.
  */
-function ClientRoster() {
+function ClientRoster({ t }: { t: Dictionary }) {
+  const follow = [
+    { platform: "Instagram", href: site.instagram },
+    { platform: "TikTok", href: site.tiktok },
+  ];
+
   return (
     <div className="border-b border-[var(--rule)] bg-[rgba(14,12,10,0.55)]">
       <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(1.75rem,3vw,2.5rem)]">
-        <p className="ms-mono text-gold-400">{studio.clients.label}</p>
+        <p className="ms-mono text-gold-400">{t.studio.clientsLabel}</p>
 
         <ul className="mt-5 grid grid-cols-2 gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-4">
-          {studio.clients.items.map((client) => (
+          {clients.map((client) => (
             <li key={client.label} className="bg-ink">
               <ClientCell {...client} />
             </li>
@@ -125,12 +135,12 @@ function ClientRoster() {
 
         <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
           <p className="ms-mono max-w-[62ch] text-[0.5625rem] normal-case leading-[1.8] tracking-[0.12em]">
-            {studio.clients.caveat}
+            {t.studio.clientsCaveat}
           </p>
 
           <p className="ms-mono flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="text-char">{studio.follow.label}</span>
-            {studio.follow.items.map((item) => (
+            <span className="text-char">{t.studio.followLabel}</span>
+            {follow.map((item) => (
               <a
                 key={item.platform}
                 href={item.href}
@@ -138,7 +148,7 @@ function ClientRoster() {
                 rel="noreferrer noopener"
                 className="text-gold-200 underline-offset-4 transition-opacity duration-300 hover:underline hover:opacity-80"
               >
-                {item.platform} {item.handle}
+                {item.platform} {site.handle}
               </a>
             ))}
           </p>

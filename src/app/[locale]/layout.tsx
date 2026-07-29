@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
-import { site } from "@/lib/content";
-import "./globals.css";
+import { notFound } from "next/navigation";
+import { site } from "@/lib/config";
+import { getDictionary, isLocale, locales } from "@/lib/i18n";
+import "../globals.css";
 
 /* Display: Archivo, run heavy to match the MINTEDSCALE wordmark.
    Accent: Instrument Serif italic — the voice of the tagline.
-   Data: IBM Plex Mono. Body: Instrument Sans. */
+   Data: IBM Plex Mono. Body: Instrument Sans.
+   latin-ext is loaded for č ć ž š đ. */
 const archivo = Archivo({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   axes: ["wdth"],
   display: "swap",
   variable: "--font-archivo",
@@ -22,56 +25,76 @@ const instrumentSerif = Instrument_Serif({
 });
 
 const instrument = Instrument_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-instrument",
 });
 
 const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   display: "swap",
   variable: "--font-plex-mono",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://mintedscale.com"),
-  title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s — ${site.name}`,
-  },
-  description: site.description,
-  keywords: [
-    "creator brand studio",
-    "influencer brand building",
-    "creator monetization",
-    "AI monetization system",
-    "turn followers into a business",
-    "creator product launch",
-  ],
-  openGraph: {
-    type: "website",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    siteName: site.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-  },
-  robots: { index: true, follow: true },
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = getDictionary(locale);
+
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: `${site.name} — ${t.site.tagline}`,
+      template: `%s — ${site.name}`,
+    },
+    description: t.site.description,
+    alternates: {
+      canonical: `/${t.locale}`,
+      languages: { en: "/en", bs: "/bs", "x-default": "/en" },
+    },
+    openGraph: {
+      type: "website",
+      locale: t.locale,
+      title: `${site.name} — ${t.site.tagline}`,
+      description: t.site.description,
+      siteName: site.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${site.name} — ${t.site.tagline}`,
+      description: t.site.description,
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#080706",
   colorScheme: "dark",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const t = getDictionary(locale);
+
   return (
     <html
-      lang="en"
+      lang={t.htmlLang}
       className={`${archivo.variable} ${instrumentSerif.variable} ${instrument.variable} ${plexMono.variable}`}
     >
       <head>
@@ -96,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="ms-mono sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold-200 focus:px-4 focus:py-3 focus:text-ink"
         >
-          Skip to content
+          {t.skipToContent}
         </a>
         <div className="ms-atmosphere" aria-hidden="true" />
         <div className="ms-grain" aria-hidden="true" />

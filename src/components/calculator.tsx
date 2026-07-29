@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { calculator } from "@/lib/content";
+import { calculator } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { Arrow } from "./hero";
 import { Eyebrow, Lede } from "./section";
 
@@ -10,7 +11,6 @@ const money = new Intl.NumberFormat("en-IE", {
   currency: "EUR",
   maximumFractionDigits: 0,
 });
-
 const count = new Intl.NumberFormat("en-US");
 
 /**
@@ -18,9 +18,8 @@ const count = new Intl.NumberFormat("en-US");
  * this one shows its working — the arithmetic is on screen, so the number is
  * arguable rather than magic.
  */
-export function Calculator() {
-  // Annotated because `content.ts` is `as const`, which would otherwise pin
-  // each of these to its literal default value.
+export function Calculator({ t }: { t: Dictionary }) {
+  const c = t.calculator;
   const [followers, setFollowers] = useState<number>(calculator.defaults.followers);
   const [engagement, setEngagement] = useState<number>(calculator.defaults.engagement);
   const [price, setPrice] = useState<number>(calculator.defaults.price);
@@ -41,28 +40,28 @@ export function Calculator() {
     <section id="calculator" className="relative scroll-mt-24 border-t border-[var(--rule)]">
       <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(3.25rem,6.5vh,5rem)]">
         <div className="mb-[clamp(1.4rem,2.6vw,2.25rem)]" data-reveal>
-          <Eyebrow index={calculator.index}>{calculator.eyebrow}</Eyebrow>
+          <Eyebrow index={c.index}>{c.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
           <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
-            <span className="block text-bone">{calculator.headline[0]}</span>
-            <span className="ms-gold-sweep block">{calculator.headline[1]}</span>
+            <span className="block text-bone">{c.headline[0]}</span>
+            <span className="ms-gold-sweep block">{c.headline[1]}</span>
           </h2>
-          <Lede>{calculator.body}</Lede>
+          <Lede>{c.body}</Lede>
         </div>
 
         <div
-          className="ms-panel ms-rim relative mt-[clamp(1.75rem,3.2vw,2.75rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]"
+          className="ms-panel ms-gloss relative mt-[clamp(1.75rem,3.2vw,2.75rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]"
           data-reveal
         >
           {/* Dials */}
           <div className="border-b border-[var(--rule)] p-6 sm:p-9 lg:border-b-0 lg:border-r">
-            <p className="ms-mono mb-8">Your audience</p>
+            <p className="ms-mono mb-8">{c.audienceLabel}</p>
 
             <Dial
               id="calc-followers"
-              label="Followers"
+              label={c.followersLabel}
               display={count.format(followers)}
               value={followers}
               onChange={setFollowers}
@@ -70,8 +69,8 @@ export function Calculator() {
             />
             <Dial
               id="calc-engagement"
-              label="Engagement rate"
-              hint="Share of your followers who actually like, comment or watch — not your revenue share"
+              label={c.engagementLabel}
+              hint={c.engagementHint}
               display={`${engagement.toFixed(1)}%`}
               value={engagement}
               onChange={setEngagement}
@@ -79,7 +78,7 @@ export function Calculator() {
             />
             <Dial
               id="calc-price"
-              label="Product price"
+              label={c.priceLabel}
               display={money.format(price)}
               value={price}
               onChange={setPrice}
@@ -87,9 +86,9 @@ export function Calculator() {
             />
 
             <div className="mt-10 border-t border-[var(--rule)] pt-6">
-              <p className="ms-mono">What moves this number</p>
+              <p className="ms-mono">{c.leversLabel}</p>
               <ul className="mt-4 space-y-2.5">
-                {calculator.levers.map((lever) => (
+                {c.levers.map((lever) => (
                   <li key={lever} className="flex items-baseline gap-3 text-[0.875rem] text-ash">
                     <span className="block h-px w-3 shrink-0 bg-gold-600" aria-hidden="true" />
                     {lever}
@@ -101,16 +100,13 @@ export function Calculator() {
 
           {/* Output */}
           <div className="p-6 sm:p-9">
-            <p className="ms-mono">Projected first launch</p>
-            <p
-              className="ms-figure ms-money mt-4 text-[clamp(2.25rem,5vw,3.75rem)]"
-              aria-live="polite"
-            >
+            <p className="ms-mono">{c.projectedLabel}</p>
+            <p className="ms-figure ms-money mt-4 text-[clamp(2.25rem,5vw,3.75rem)]" aria-live="polite">
               {money.format(model.firstLaunch)}
             </p>
 
             <div className="mt-7 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-[var(--rule)] pt-6">
-              <p className="ms-mono">12-month potential</p>
+              <p className="ms-mono">{c.yearLabel}</p>
               <p className="ms-figure ms-money text-[clamp(1.25rem,2.1vw,1.6rem)]">
                 {money.format(model.year)}
               </p>
@@ -118,24 +114,27 @@ export function Calculator() {
 
             {/* Show the working — this is the part everyone else hides */}
             <dl className="mt-7 border-t border-[var(--rule)]">
-              <Row label="Engaged audience" value={count.format(model.engaged)} />
+              <Row label={c.engagedRow} value={count.format(model.engaged)} />
               <Row
-                label="Launch conversion"
-                value={`${(calculator.launchConversion * 100).toFixed(0)}% of engaged`}
+                label={c.conversionRow}
+                value={`${(calculator.launchConversion * 100).toFixed(0)}% ${c.conversionValue}`}
               />
-              <Row label="Expected buyers" value={count.format(model.buyers)} />
-              <Row label="Price each" value={money.format(price)} />
+              <Row label={c.buyersRow} value={count.format(model.buyers)} />
+              <Row label={c.priceRow} value={money.format(price)} />
             </dl>
 
             <a href="#apply" className="ms-btn ms-btn-gold ms-sheen mt-8 w-full">
-              I want this revenue
+              {c.cta}
               <Arrow />
             </a>
           </div>
         </div>
 
-        <p className="ms-mono mt-4 max-w-[70ch] text-[0.5625rem] normal-case leading-[1.8] tracking-[0.12em]" data-reveal>
-          {calculator.disclaimer}
+        <p
+          className="ms-mono mt-4 max-w-[70ch] text-[0.5625rem] normal-case leading-[1.8] tracking-[0.12em]"
+          data-reveal
+        >
+          {c.disclaimer}
         </p>
       </div>
     </section>

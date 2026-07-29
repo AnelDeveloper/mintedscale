@@ -1,4 +1,4 @@
-import { method } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n";
 import { Arrow } from "./hero";
 import { Heading, Lede, Section } from "./section";
 
@@ -6,16 +6,18 @@ import { Heading, Lede, Section } from "./section";
  * The only place 01–04 numbering is earned: a real sequence where each stage
  * depends on the one before it.
  */
-export function Method() {
+export function Method({ t }: { t: Dictionary }) {
+  const m = t.method;
+
   return (
-    <Section id="method" index={method.index} eyebrow={method.eyebrow}>
+    <Section id="method" index={m.index} eyebrow={m.eyebrow}>
       <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
-        <Heading lines={method.headline} />
-        <Lede>{method.body}</Lede>
+        <Heading lines={m.headline} />
+        <Lede>{m.body}</Lede>
       </div>
 
       <ol className="mt-[clamp(2rem,3.6vw,3rem)]">
-        {method.steps.map((step, i) => (
+        {m.steps.map((step, i) => (
           <li
             key={step.n}
             className="group relative border-t border-[var(--rule)] last:border-b"
@@ -41,7 +43,9 @@ export function Method() {
               </div>
 
               <div>
-                <h3 className="ms-display text-[clamp(1.35rem,2.3vw,1.8rem)] text-bone">{step.title}</h3>
+                <h3 className="ms-display text-[clamp(1.35rem,2.3vw,1.8rem)] text-bone">
+                  {step.title}
+                </h3>
                 <p className="mt-2.5 text-[0.9375rem] leading-[1.65] text-gold-200">{step.body}</p>
               </div>
 
@@ -59,7 +63,7 @@ export function Method() {
 
       <div className="mt-[clamp(1.75rem,3vw,2.5rem)]" data-reveal>
         <a href="#apply" className="ms-btn ms-btn-gold ms-sheen">
-          Start building your brand
+          {m.cta}
           <Arrow />
         </a>
       </div>

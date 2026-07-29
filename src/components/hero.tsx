@@ -1,13 +1,16 @@
-import { calculator, hero, site, studio } from "@/lib/content";
+import { calculator, clients, heroSample, media, site } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { VideoFrame } from "./video-frame";
 
 /**
  * Derived from the calculator's own model, not typed by hand — the headline
  * number in the hero can never drift away from what the calculator computes.
  */
-const SAMPLE = { followers: 250_000, engagement: 3, price: 125 };
 const SAMPLE_REVENUE = Math.round(
-  SAMPLE.followers * (SAMPLE.engagement / 100) * calculator.launchConversion * SAMPLE.price,
+  heroSample.followers *
+    (heroSample.engagement / 100) *
+    calculator.launchConversion *
+    heroSample.price,
 );
 const money = new Intl.NumberFormat("en-IE", {
   style: "currency",
@@ -15,7 +18,9 @@ const money = new Intl.NumberFormat("en-IE", {
   maximumFractionDigits: 0,
 });
 
-export function Hero() {
+export function Hero({ t }: { t: Dictionary }) {
+  const h = t.hero;
+
   return (
     <section id="top" className="relative">
       <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] pb-[clamp(3rem,7vh,5rem)] pt-[clamp(6.5rem,13vh,8.5rem)]">
@@ -23,15 +28,15 @@ export function Hero() {
           {/* ── Left: the pitch ── */}
           <div className="min-w-0">
             <div className="ms-rise" style={{ animationDelay: "40ms" }}>
-              <TrustPill />
+              <TrustPill t={t} />
             </div>
 
             <h1 className="ms-display mt-[clamp(1.25rem,2.5vw,1.75rem)] text-[clamp(1.95rem,4vw,3.25rem)]">
               <span className="ms-rise block text-bone" style={{ animationDelay: "140ms" }}>
-                {hero.headline[0]}
+                {h.headline[0]}
               </span>
               <span className="ms-rise ms-gold-sweep block" style={{ animationDelay: "220ms" }}>
-                {hero.headline[1]}
+                {h.headline[1]}
               </span>
             </h1>
 
@@ -39,14 +44,14 @@ export function Hero() {
               className="ms-rise ms-serif mt-5 text-[clamp(1.05rem,1.7vw,1.35rem)] text-gold-200"
               style={{ animationDelay: "300ms" }}
             >
-              {site.tagline}
+              {t.site.tagline}
             </p>
 
             <p
               className="ms-rise mt-5 max-w-[46ch] text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-[1.7] text-ash"
               style={{ animationDelay: "360ms" }}
             >
-              {hero.sub}
+              {h.sub}
             </p>
 
             <div
@@ -54,19 +59,24 @@ export function Hero() {
               style={{ animationDelay: "440ms" }}
             >
               <a href="#apply" className="ms-btn ms-btn-gold w-full sm:w-auto">
-                {hero.primaryCta}
+                {h.primaryCta}
                 <Arrow />
               </a>
               <a href="#method" className="ms-btn ms-btn-outline ms-sheen w-full sm:w-auto">
-                {hero.secondaryCta}
+                {h.secondaryCta}
               </a>
             </div>
 
             {/* Terms at a glance — small, not a billboard */}
-            <dl className="ms-rise mt-8 flex flex-wrap gap-x-8 gap-y-4" style={{ animationDelay: "520ms" }}>
-              {hero.bar.map((item) => (
+            <dl
+              className="ms-rise mt-8 flex flex-wrap gap-x-8 gap-y-4"
+              style={{ animationDelay: "520ms" }}
+            >
+              {h.bar.map((item) => (
                 <div key={item.label}>
-                  <dt className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]">{item.value}</dt>
+                  <dt className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]">
+                    {item.value}
+                  </dt>
                   <dd className="ms-mono mt-1.5 text-[0.5625rem]">{item.label}</dd>
                 </div>
               ))}
@@ -79,14 +89,15 @@ export function Hero() {
             style={{ animationDelay: "560ms" }}
           >
             <VideoFrame
-              src={hero.video.src}
-              poster={hero.video.poster}
-              label={hero.video.label}
-              duration={hero.video.duration}
+              src={media.heroVideo.src}
+              poster={media.heroVideo.poster}
+              label={h.videoLabel}
+              reservedLabel={t.video.reserved}
+              playLabel={t.video.play}
               ratio="16/9"
             />
 
-            <EarningsCard />
+            <EarningsCard t={t} />
           </div>
         </div>
       </div>
@@ -102,13 +113,11 @@ export function Hero() {
  * to rate. What is true is four companies and seven years, so that is what
  * it says. Drop a logo file into `logo` and it replaces the monogram.
  */
-function TrustPill() {
-  const { items } = studio.clients;
-
+function TrustPill({ t }: { t: Dictionary }) {
   return (
     <div className="ms-panel ms-gloss inline-flex flex-wrap items-center gap-x-4 gap-y-2 !rounded-full py-2 pl-2 pr-5">
       <ul className="flex items-center">
-        {items.map((client, i) => (
+        {clients.map((client, i) => (
           <li
             key={client.label}
             /* Logos get a light backing — plenty of marks are dark ink on
@@ -116,7 +125,7 @@ function TrustPill() {
             className={`relative grid h-8 w-8 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
               client.logo ? "bg-bone" : "bg-ink"
             }`}
-            style={{ marginLeft: i === 0 ? 0 : "-0.55rem", zIndex: items.length - i }}
+            style={{ marginLeft: i === 0 ? 0 : "-0.55rem", zIndex: clients.length - i }}
             title={client.label}
           >
             {client.logo ? (
@@ -131,14 +140,16 @@ function TrustPill() {
         ))}
       </ul>
 
-      <p className="ms-mono flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.5625rem]">
+      {/* The tail is the first thing to drop — translations run different
+          lengths, and a wrapped pill reads as a broken box. */}
+      <p className="ms-mono flex items-center gap-x-2.5 whitespace-nowrap text-[0.5625rem]">
         <span className="text-bone">
-          {studio.pill.lead} {items.length} companies
+          {t.hero.pill.lead} {clients.length} {t.hero.pill.companies}
         </span>
-        <span className="text-gold-600" aria-hidden="true">
+        <span className="hidden text-gold-600 md:inline" aria-hidden="true">
           ◆
         </span>
-        <span>{studio.pill.tail}</span>
+        <span className="hidden md:inline">{t.hero.pill.tail}</span>
       </p>
     </div>
   );
@@ -148,27 +159,26 @@ function TrustPill() {
  * The one number a creator actually came for. Honest because every input is
  * printed next to it — this is a model, and it says so.
  */
-function EarningsCard() {
+function EarningsCard({ t }: { t: Dictionary }) {
   // Stacked under the film on a phone — overlapping it there would bury most
   // of the frame. It only floats once there is room to float in.
   return (
     <div className="ms-panel ms-gloss mt-4 p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:absolute sm:bottom-0 sm:left-[-1rem] sm:right-[clamp(2rem,12%,6rem)] sm:mt-0 sm:p-6">
-      <p className="ms-mono text-[0.5625rem]">What a 250K creator makes on launch</p>
+      <p className="ms-mono text-[0.5625rem]">{t.hero.earnings.lead}</p>
 
       <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]">
         {money.format(SAMPLE_REVENUE)}
       </p>
 
       <p className="ms-mono mt-2 text-[0.5rem] normal-case leading-[1.7] tracking-[0.1em]">
-        250,000 followers · {SAMPLE.engagement}% engagement rate ·{" "}
-        {money.format(SAMPLE.price)} product
+        {t.hero.earnings.inputs}
       </p>
 
       <a
         href="#calculator"
         className="ms-mono mt-4 inline-flex items-center gap-2 text-gold-200 underline-offset-4 transition-opacity duration-300 hover:underline hover:opacity-80"
       >
-        Run your numbers
+        {t.hero.earnings.cta}
         <Arrow />
       </a>
     </div>

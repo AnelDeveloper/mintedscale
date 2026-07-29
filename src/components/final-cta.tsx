@@ -1,8 +1,11 @@
-import { site } from "@/lib/content";
+import { site } from "@/lib/config";
+import type { Dictionary } from "@/lib/i18n";
 import { CoinMark } from "./coin-mark";
 import { Arrow } from "./hero";
 
-export function FinalCta() {
+export function FinalCta({ t }: { t: Dictionary }) {
+  const f = t.finalCta;
+
   return (
     <section className="relative overflow-hidden border-t border-[var(--rule)]">
       <div
@@ -21,7 +24,7 @@ export function FinalCta() {
 
         <p className="ms-eyebrow mt-7 justify-center" data-reveal>
           <span className="ms-eyebrow-rule rotate-180" aria-hidden="true" />
-          <span>Now minting</span>
+          <span>{f.eyebrow}</span>
           <span className="ms-eyebrow-rule" aria-hidden="true" />
         </p>
 
@@ -30,8 +33,8 @@ export function FinalCta() {
           data-reveal
           style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
         >
-          <span className="block text-bone">Your name can become</span>
-          <span className="ms-gold-sweep block">a brand.</span>
+          <span className="block text-bone">{f.headline[0]}</span>
+          <span className="ms-gold-sweep block">{f.headline[1]}</span>
         </h2>
 
         <p
@@ -39,7 +42,7 @@ export function FinalCta() {
           data-reveal
           style={{ "--reveal-delay": "150ms" } as React.CSSProperties}
         >
-          {site.tagline}
+          {t.site.tagline}
         </p>
 
         <p
@@ -47,8 +50,7 @@ export function FinalCta() {
           data-reveal
           style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
         >
-          Bring an audience and an appetite — we bring the strategy, the product,
-          the technology and the launch. Nothing to pay upfront.
+          {f.body}
         </p>
 
         <div
@@ -57,11 +59,11 @@ export function FinalCta() {
           style={{ "--reveal-delay": "260ms" } as React.CSSProperties}
         >
           <a href="#apply" className="ms-btn ms-btn-gold w-full px-9 py-[1.15rem] sm:w-auto">
-            Start building
+            {f.primary}
             <Arrow />
           </a>
           <a href={`mailto:${site.email}`} className="ms-btn ms-btn-ghost ms-sheen w-full sm:w-auto">
-            Email the studio
+            {f.secondary}
           </a>
         </div>
       </div>

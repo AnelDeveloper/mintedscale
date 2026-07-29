@@ -1,11 +1,14 @@
-import { platforms } from "./content";
+import { platforms } from "./config";
+import type { Dictionary } from "./i18n";
 
 /**
  * One validator, imported by both the console and the API routes, so the
- * inline errors a creator sees match exactly what the server enforces.
+ * inline errors a creator sees match exactly what the server enforces —
+ * in whichever language they are reading the page.
  */
 
 export type Intent = "call" | "message";
+export type ErrorCopy = Dictionary["console"]["errors"];
 
 export type ApplicationInput = {
   intent: Intent;
@@ -17,6 +20,7 @@ export type ApplicationInput = {
   idea: string;
   slotStart?: string;
   visitorTimeZone?: string;
+  locale?: string;
   /** Honeypot — real people never fill this in. */
   company?: string;
 };
@@ -33,6 +37,7 @@ export type ValidatedApplication = {
   idea: string;
   slotStart?: string;
   visitorTimeZone?: string;
+  locale: string;
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
@@ -56,48 +61,45 @@ export function normaliseHandle(raw: string): string {
   return raw.trim().replace(/^@+/, "");
 }
 
-export function validateApplication(input: Partial<ApplicationInput>): {
-  ok: boolean;
-  errors: FieldErrors;
-  data?: ValidatedApplication;
-} {
+export function validateApplication(
+  input: Partial<ApplicationInput>,
+  e: ErrorCopy,
+): { ok: boolean; errors: FieldErrors; data?: ValidatedApplication } {
   const errors: FieldErrors = {};
   const intent: Intent = input.intent === "call" ? "call" : "message";
 
   const name = (input.name ?? "").trim();
-  if (name.length < 2) errors.name = "Enter your full name.";
-  else if (name.length > 80) errors.name = "That name is too long.";
+  if (name.length < 2) errors.name = e.name;
+  else if (name.length > 80) errors.name = e.nameLong;
 
   const email = (input.email ?? "").trim();
-  if (!email) errors.email = "Enter an email address.";
-  else if (!EMAIL.test(email)) errors.email = "That email address does not look right.";
-  else if (email.length > 160) errors.email = "That email address is too long.";
+  if (!email) errors.email = e.emailMissing;
+  else if (!EMAIL.test(email)) errors.email = e.emailInvalid;
+  else if (email.length > 160) errors.email = e.emailLong;
 
   const platform = (input.platform ?? "").trim();
-  if (!platform) errors.platform = "Choose a platform.";
-  else if (!(platforms as readonly string[]).includes(platform)) {
-    errors.platform = "Choose a platform from the list.";
-  }
+  if (!platform) errors.platform = e.platformMissing;
+  else if (!platforms.includes(platform)) errors.platform = e.platformInvalid;
 
   const handle = normaliseHandle(input.handle ?? "");
-  if (handle.length < 2) errors.handle = "Enter your username.";
-  else if (handle.length > 60) errors.handle = "That username is too long.";
+  if (handle.length < 2) errors.handle = e.handle;
+  else if (handle.length > 60) errors.handle = e.handleLong;
 
   const followers = parseFollowers(input.followers ?? "");
-  if (followers === null) errors.followers = "Enter a number, like 120000 or 120k.";
-  else if (followers > 2_000_000_000) errors.followers = "Enter a realistic follower count.";
+  if (followers === null) errors.followers = e.followers;
+  else if (followers > 2_000_000_000) errors.followers = e.followersUnreal;
 
   const idea = (input.idea ?? "").trim();
-  if (idea.length < 10) errors.idea = "Tell us a little more — at least a sentence.";
-  else if (idea.length > 2000) errors.idea = "Keep it under 2,000 characters.";
+  if (idea.length < 10) errors.idea = e.idea;
+  else if (idea.length > 2000) errors.idea = e.ideaLong;
 
   if (intent === "call") {
     const slotStart = (input.slotStart ?? "").trim();
-    if (!slotStart) errors.slotStart = "Choose a time for your call.";
+    if (!slotStart) errors.slotStart = e.slotMissing;
     else {
       const when = new Date(slotStart);
-      if (Number.isNaN(when.getTime())) errors.slotStart = "That time is not valid.";
-      else if (when.getTime() < Date.now()) errors.slotStart = "That time has already passed.";
+      if (Number.isNaN(when.getTime())) errors.slotStart = e.slotInvalid;
+      else if (when.getTime() < Date.now()) errors.slotStart = e.slotPast;
     }
   }
 
@@ -117,6 +119,7 @@ export function validateApplication(input: Partial<ApplicationInput>): {
       idea,
       slotStart: intent === "call" ? (input.slotStart ?? "").trim() : undefined,
       visitorTimeZone: (input.visitorTimeZone ?? "").trim() || undefined,
+      locale: (input.locale ?? "en").trim(),
     },
   };
 }

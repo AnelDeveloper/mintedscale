@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { application, platforms, site } from "@/lib/content";
+import { platforms, site } from "@/lib/config";
+import { fill, type Dictionary } from "@/lib/i18n";
 import type { FieldErrors, Intent } from "@/lib/validation";
 
 type Availability = {
@@ -18,21 +19,16 @@ type Result = {
   meetLink?: string;
 };
 
-const EMPTY_FORM = {
-  name: "",
-  email: "",
-  platform: "",
-  handle: "",
-  followers: "",
-  idea: "",
-};
+const EMPTY_FORM = { name: "", email: "", platform: "", handle: "", followers: "", idea: "" };
+type Form = typeof EMPTY_FORM;
 
 /** Google Calendar's own appointment page, if you would rather use it. */
 const APPOINTMENT_URL = process.env.NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL;
 
-export function ApplicationConsole() {
+export function ApplicationConsole({ t }: { t: Dictionary }) {
+  const c = t.console;
   const [mode, setMode] = useState<Intent>("call");
-  const [form, setForm] = useState(EMPTY_FORM);
+  const [form, setForm] = useState<Form>(EMPTY_FORM);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [notice, setNotice] = useState<string | null>(null);
@@ -95,8 +91,9 @@ export function ApplicationConsole() {
   }, [days, activeDate]);
 
   const activeSlots = days.find((d) => d.date === activeDate)?.slots ?? [];
+  const intl = t.locale === "bs" ? "bs-BA" : "en-GB";
 
-  const update = (field: keyof typeof EMPTY_FORM) => (value: string) => {
+  const update = (field: keyof Form) => (value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   };
@@ -118,6 +115,7 @@ export function ApplicationConsole() {
       intent: mode,
       slotStart: mode === "call" ? (slot ?? "") : undefined,
       visitorTimeZone,
+      locale: t.locale,
       company: honeypot.current?.value ?? "",
     };
 
@@ -132,7 +130,7 @@ export function ApplicationConsole() {
       if (!response.ok || !data.ok) {
         setErrors(data.errors ?? {});
         setStatus("error");
-        setNotice(data.message ?? "Something went wrong. Try again.");
+        setNotice(data.message ?? c.errors.generic);
         // A taken slot means the rail is stale — refresh it.
         if (response.status === 409) {
           setSlot(null);
@@ -147,34 +145,34 @@ export function ApplicationConsole() {
       requestAnimationFrame(() => confirmationRef.current?.focus());
     } catch {
       setStatus("error");
-      setNotice(`We could not reach the studio. Email us at ${site.email}.`);
+      setNotice(fill(c.errors.unreachable, { email: site.email }));
       requestAnimationFrame(() => noticeRef.current?.focus());
     }
   }
 
   if (result) {
-    return <Confirmation result={result} mode={mode} slot={slot} ref={confirmationRef} />;
+    return <Confirmation result={result} mode={mode} slot={slot} t={t} ref={confirmationRef} />;
   }
 
   const submitting = status === "submitting";
 
   return (
-    <div className="ms-panel ms-rim relative">
+    <div className="ms-panel ms-gloss relative">
       {/* Console header */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--rule)] px-5 py-4 sm:px-7">
         <span className="ms-mono flex items-center gap-2.5">
           <span className="ms-live-dot block h-1.5 w-1.5 rounded-full bg-gold-300" aria-hidden="true" />
-          Private consultation
+          {c.header}
         </span>
-        <span className="ms-mono text-[0.5625rem]">Confidential</span>
+        <span className="ms-mono text-[0.5625rem]">{c.confidential}</span>
       </div>
 
       {/* Route selector */}
-      <div role="tablist" aria-label="How to reach us" className="grid grid-cols-2 border-b border-[var(--rule)]">
+      <div role="tablist" aria-label={c.tablistLabel} className="grid grid-cols-2 border-b border-[var(--rule)]">
         {(
           [
-            { id: "call", label: "Schedule a call", note: "45 minutes, with a partner" },
-            { id: "message", label: "Send a message", note: "We reply within two days" },
+            { id: "call", label: c.callTab, note: c.callNote },
+            { id: "message", label: c.messageTab, note: c.messageNote },
           ] as const
         ).map((option, i) => {
           const selected = mode === option.id;
@@ -184,7 +182,7 @@ export function ApplicationConsole() {
               type="button"
               role="tab"
               aria-selected={selected}
-              onClick={() => switchMode(option.id)}
+              onClick={() => switchMode(option.id as Intent)}
               className={`relative px-5 py-5 text-left transition-colors duration-500 sm:px-7 ${
                 i === 0 ? "border-r border-[var(--rule)]" : ""
               } ${selected ? "bg-[rgba(217,169,76,0.1)]" : "hover:bg-[rgba(217,169,76,0.04)]"}`}
@@ -215,11 +213,11 @@ export function ApplicationConsole() {
           <>
             <Step
               n="01"
-              title="Choose a day"
+              title={c.stepDay}
               aside={
                 activeDate
                   ? new Date(`${activeDate}T12:00:00`)
-                      .toLocaleDateString(undefined, { month: "long", year: "numeric" })
+                      .toLocaleDateString(intl, { month: "long", year: "numeric" })
                       .toUpperCase()
                   : undefined
               }
@@ -227,52 +225,56 @@ export function ApplicationConsole() {
               {loadingSlots ? (
                 <p className="ms-mono flex items-center gap-3 py-3">
                   <span
-                    className="ms-spin block h-3 w-3 rounded-full border border-[var(--rule-gold)] border-t-silver"
+                    className="ms-spin block h-3 w-3 rounded-full border border-[var(--rule-gold)] border-t-gold-200"
                     aria-hidden="true"
                   />
-                  Loading studio calendar
+                  {c.loadingSlots}
                 </p>
               ) : slotsError ? (
                 <p className="ms-mono py-3">
-                  Calendar unavailable.{" "}
-                  <button type="button" onClick={loadAvailability} className="text-bone underline underline-offset-4">
-                    Try again
+                  {c.slotsError}{" "}
+                  <button
+                    type="button"
+                    onClick={loadAvailability}
+                    className="text-gold-200 underline underline-offset-4"
+                  >
+                    {c.tryAgain}
                   </button>{" "}
-                  or send a message instead.
+                  {c.orMessage}
                 </p>
               ) : days.length === 0 ? (
-                <p className="ms-mono py-3">No open times right now — send a message and we will make room.</p>
+                <p className="ms-mono py-3">{c.noSlots}</p>
               ) : (
                 <div className="ms-rail-wrap relative -mx-1">
                   <div className="ms-scroll-x ms-rail flex gap-2 overflow-x-auto px-1 pb-1">
-                  {days.map((day) => {
-                    const selected = day.date === activeDate;
-                    const d = new Date(`${day.date}T12:00:00`);
-                    return (
-                      <button
-                        key={day.date}
-                        type="button"
-                        onClick={() => {
-                          setActiveDate(day.date);
-                          setSlot(null);
-                        }}
-                        aria-pressed={selected}
-                        className={`ms-chip flex min-w-[4.75rem] shrink-0 flex-col items-center gap-1 px-3 py-3 ${
-                          selected ? "ms-chip-active" : ""
-                        }`}
-                      >
-                        <span className="ms-mono text-[0.5625rem] tracking-[0.18em]">
-                          {d.toLocaleDateString(undefined, { weekday: "short" })}
-                        </span>
-                        <span className="ms-display text-[1.25rem] leading-none">
-                          {d.toLocaleDateString(undefined, { day: "numeric" })}
-                        </span>
-                        <span className="ms-mono text-[0.5rem] tracking-[0.16em]">
-                          {d.toLocaleDateString(undefined, { month: "short" })}
-                        </span>
-                      </button>
-                    );
-                  })}
+                    {days.map((day) => {
+                      const selected = day.date === activeDate;
+                      const d = new Date(`${day.date}T12:00:00`);
+                      return (
+                        <button
+                          key={day.date}
+                          type="button"
+                          onClick={() => {
+                            setActiveDate(day.date);
+                            setSlot(null);
+                          }}
+                          aria-pressed={selected}
+                          className={`ms-chip flex min-w-[4.75rem] shrink-0 flex-col items-center gap-1 px-3 py-3 ${
+                            selected ? "ms-chip-active" : ""
+                          }`}
+                        >
+                          <span className="ms-mono text-[0.5625rem] tracking-[0.18em]">
+                            {d.toLocaleDateString(intl, { weekday: "short" })}
+                          </span>
+                          <span className="ms-display text-[1.25rem] leading-none">
+                            {d.toLocaleDateString(intl, { day: "numeric" })}
+                          </span>
+                          <span className="ms-mono text-[0.5rem] tracking-[0.16em]">
+                            {d.toLocaleDateString(intl, { month: "short" })}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -280,16 +282,16 @@ export function ApplicationConsole() {
 
             <Step
               n="02"
-              title="Choose a time"
+              title={c.stepTime}
               aside={
                 availability
-                  ? `${availability.durationMinutes} min · ${visitorTimeZone.replace(/_/g, " ")}`
+                  ? `${availability.durationMinutes} ${c.minutes} · ${visitorTimeZone.replace(/_/g, " ")}`
                   : undefined
               }
               error={errors.slotStart}
             >
               {activeSlots.length === 0 ? (
-                <p className="ms-mono py-3">Pick a day first.</p>
+                <p className="ms-mono py-3">{c.pickDayFirst}</p>
               ) : (
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
                   {activeSlots.map((iso) => {
@@ -307,7 +309,7 @@ export function ApplicationConsole() {
                           selected ? "ms-chip-active" : ""
                         }`}
                       >
-                        {new Date(iso).toLocaleTimeString(undefined, {
+                        {new Date(iso).toLocaleTimeString(intl, {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
@@ -318,18 +320,18 @@ export function ApplicationConsole() {
               )}
               {availability && !availability.live ? (
                 <p className="ms-mono mt-4 text-[0.5625rem] normal-case tracking-[0.14em]">
-                  Times are provisional until a partner confirms.
+                  {c.provisional}
                 </p>
               ) : null}
             </Step>
 
-            <Step n="03" title="Tell us about you">
-              <Fields form={form} errors={errors} update={update} ideaLabel="What do you want to build?" />
+            <Step n="03" title={c.stepAbout}>
+              <Fields form={form} errors={errors} update={update} t={t} ideaLabel={c.fields.ideaCall} />
             </Step>
           </>
         ) : (
-          <Step n="01" title="Tell us about you">
-            <Fields form={form} errors={errors} update={update} ideaLabel="Message" />
+          <Step n="01" title={c.stepAbout}>
+            <Fields form={form} errors={errors} update={update} t={t} ideaLabel={c.fields.ideaMessage} />
           </Step>
         )}
 
@@ -341,9 +343,7 @@ export function ApplicationConsole() {
 
         <div className="flex flex-col gap-4 border-t border-[var(--rule)] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
           <p className="ms-mono max-w-[36ch] text-[0.5625rem] normal-case leading-[1.7] tracking-[0.12em]">
-            {mode === "call"
-              ? "Your details go straight to a partner. Nothing is shared."
-              : `Sent to ${site.email}. Nothing is shared.`}
+            {mode === "call" ? c.privacyCall : fill(c.privacyMessage, { email: site.email })}
           </p>
           <button type="submit" disabled={submitting} className="ms-btn ms-btn-gold shrink-0">
             {submitting ? (
@@ -352,12 +352,12 @@ export function ApplicationConsole() {
                   className="ms-spin block h-3 w-3 rounded-full border border-[rgba(11,8,5,0.3)] border-t-[#0b0805]"
                   aria-hidden="true"
                 />
-                Sending
+                {c.sending}
               </>
             ) : mode === "call" ? (
-              "Confirm my call"
+              c.submitCall
             ) : (
-              "Send application"
+              c.submitMessage
             )}
           </button>
         </div>
@@ -376,14 +376,14 @@ export function ApplicationConsole() {
 
         {APPOINTMENT_URL && mode === "call" ? (
           <p className="ms-mono border-t border-[var(--rule)] px-5 py-4 text-[0.5625rem] normal-case tracking-[0.14em] sm:px-7">
-            Prefer Google?{" "}
+            {c.preferGoogle}{" "}
             <a
               href={APPOINTMENT_URL}
               target="_blank"
               rel="noreferrer noopener"
-              className="text-bone underline underline-offset-4"
+              className="text-gold-200 underline underline-offset-4"
             >
-              Open our appointment page
+              {c.openAppointments}
             </a>
           </p>
         ) : null}
@@ -410,16 +410,14 @@ function Step({
       <legend className="sr-only">{title}</legend>
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="ms-mono flex items-center gap-3">
-          <span className="text-bone">{n}</span>
+          <span className="text-gold-200">{n}</span>
           <span className="ms-eyebrow-rule" aria-hidden="true" />
           <span>{title}</span>
         </p>
         {aside ? <span className="ms-mono text-[0.5625rem]">{aside}</span> : null}
       </div>
       {children}
-      {error ? (
-        <p className="mt-3 text-[0.8125rem] text-[rgba(226,122,106,0.95)]">{error}</p>
-      ) : null}
+      {error ? <p className="mt-3 text-[0.8125rem] text-[rgba(226,122,106,0.95)]">{error}</p> : null}
     </fieldset>
   );
 }
@@ -428,29 +426,33 @@ function Fields({
   form,
   errors,
   update,
+  t,
   ideaLabel,
 }: {
-  form: typeof EMPTY_FORM;
+  form: Form;
   errors: FieldErrors;
-  update: (field: keyof typeof EMPTY_FORM) => (value: string) => void;
+  update: (field: keyof Form) => (value: string) => void;
+  t: Dictionary;
   ideaLabel: string;
 }) {
+  const f = t.console.fields;
+
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <Field id="ms-name" label="Full name" error={errors.name}>
+      <Field id="ms-name" label={f.name} error={errors.name}>
         <input
           id="ms-name"
           className={`ms-field ${errors.name ? "ms-field-invalid" : ""}`}
           value={form.name}
           onChange={(e) => update("name")(e.target.value)}
           autoComplete="name"
-          placeholder="Lena Ruiz"
+          placeholder={f.namePlaceholder}
           aria-invalid={Boolean(errors.name)}
           required
         />
       </Field>
 
-      <Field id="ms-email" label="Email" error={errors.email}>
+      <Field id="ms-email" label={f.email} error={errors.email}>
         <input
           id="ms-email"
           type="email"
@@ -458,13 +460,13 @@ function Fields({
           value={form.email}
           onChange={(e) => update("email")(e.target.value)}
           autoComplete="email"
-          placeholder="you@studio.com"
+          placeholder={f.emailPlaceholder}
           aria-invalid={Boolean(errors.email)}
           required
         />
       </Field>
 
-      <Field id="ms-platform" label="Main platform" error={errors.platform}>
+      <Field id="ms-platform" label={f.platform} error={errors.platform}>
         <select
           id="ms-platform"
           className={`ms-field ms-select ${errors.platform ? "ms-field-invalid" : ""}`}
@@ -473,7 +475,7 @@ function Fields({
           aria-invalid={Boolean(errors.platform)}
           required
         >
-          <option value="">Select</option>
+          <option value="">{f.select}</option>
           {platforms.map((platform) => (
             <option key={platform} value={platform}>
               {platform}
@@ -482,7 +484,7 @@ function Fields({
         </select>
       </Field>
 
-      <Field id="ms-handle" label="Username" error={errors.handle}>
+      <Field id="ms-handle" label={f.handle} error={errors.handle}>
         <div className="relative">
           <span
             className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ash"
@@ -495,7 +497,7 @@ function Fields({
             className={`ms-field pl-8 ${errors.handle ? "ms-field-invalid" : ""}`}
             value={form.handle}
             onChange={(e) => update("handle")(e.target.value)}
-            placeholder="yourname"
+            placeholder={f.handlePlaceholder}
             aria-invalid={Boolean(errors.handle)}
             required
           />
@@ -504,8 +506,8 @@ function Fields({
 
       <Field
         id="ms-followers"
-        label="Followers"
-        hint="120000 or 120k"
+        label={f.followers}
+        hint={f.followersHint}
         error={errors.followers}
         className="sm:col-span-2"
       >
@@ -515,7 +517,7 @@ function Fields({
           className={`ms-field ${errors.followers ? "ms-field-invalid" : ""}`}
           value={form.followers}
           onChange={(e) => update("followers")(e.target.value)}
-          placeholder="412000"
+          placeholder={f.followersPlaceholder}
           aria-invalid={Boolean(errors.followers)}
           required
         />
@@ -528,7 +530,7 @@ function Fields({
           className={`ms-field resize-y ${errors.idea ? "ms-field-invalid" : ""}`}
           value={form.idea}
           onChange={(e) => update("idea")(e.target.value)}
-          placeholder="What you make, who watches, and the business you want on the other side of it."
+          placeholder={f.ideaPlaceholder}
           aria-invalid={Boolean(errors.idea)}
           required
         />
@@ -570,15 +572,20 @@ function Confirmation({
   result,
   mode,
   slot,
+  t,
   ref,
 }: {
   result: Result;
   mode: Intent;
   slot: string | null;
+  t: Dictionary;
   ref: React.Ref<HTMLDivElement>;
 }) {
+  const c = t.console;
+  const intl = t.locale === "bs" ? "bs-BA" : "en-GB";
+
   const when = slot
-    ? new Date(slot).toLocaleString(undefined, {
+    ? new Date(slot).toLocaleString(intl, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -588,34 +595,34 @@ function Confirmation({
     : null;
 
   return (
-    <div ref={ref} tabIndex={-1} className="ms-panel ms-rim ms-rise relative overflow-hidden">
+    <div ref={ref} tabIndex={-1} className="ms-panel ms-gloss ms-rise relative overflow-hidden">
       <span className="ms-strike-beam" aria-hidden="true" />
 
       <div className="flex items-center justify-between gap-4 border-b border-[var(--rule)] px-5 py-4 sm:px-7">
-        <span className="ms-mono">Application received</span>
-        <span className="ms-mono text-[0.5625rem] text-bone">{result.reference}</span>
+        <span className="ms-mono">{c.done.received}</span>
+        <span className="ms-mono text-[0.5625rem] text-gold-200">{result.reference}</span>
       </div>
 
-      <div className="px-5 py-[clamp(2.5rem,5vw,3.5rem)] sm:px-9">
-        <h3 className="ms-display ms-metal max-w-[18ch] text-[clamp(1.4rem,2.4vw,1.9rem)]">
-          Thank you. We will get back to you shortly.
+      <div className="px-5 py-[clamp(2rem,4vw,3rem)] sm:px-9">
+        <h3 className="ms-display ms-gold max-w-[18ch] text-[clamp(1.4rem,2.4vw,1.9rem)]">
+          {c.done.thanks}
         </h3>
 
         {mode === "call" && when ? (
           <dl className="mt-9 grid gap-px border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-2">
             <div className="bg-[rgba(14,12,10,0.7)] px-5 py-4">
-              <dt className="ms-mono">Your call</dt>
+              <dt className="ms-mono">{c.done.yourCall}</dt>
               <dd className="mt-2 text-[0.9375rem] text-bone">{when}</dd>
             </div>
             <div className="bg-[rgba(14,12,10,0.7)] px-5 py-4">
-              <dt className="ms-mono">Joining details</dt>
+              <dt className="ms-mono">{c.done.joining}</dt>
               <dd className="mt-2 text-[0.9375rem] text-bone">
                 {result.meetLink ? (
                   <a href={result.meetLink} className="underline underline-offset-4">
-                    Google Meet link
+                    {c.done.meetLink}
                   </a>
                 ) : (
-                  "Sent to your email"
+                  c.done.sentToEmail
                 )}
               </dd>
             </div>
@@ -623,17 +630,17 @@ function Confirmation({
         ) : null}
 
         <ul className="mt-9 space-y-3">
-          {application.terms.map((term) => (
+          {t.application.terms.map((term) => (
             <li key={term} className="flex items-baseline gap-3 text-[0.9375rem] text-ash">
-              <span className="block h-px w-3 shrink-0 bg-[var(--rule-gold)]" aria-hidden="true" />
+              <span className="block h-px w-3 shrink-0 bg-gold-500" aria-hidden="true" />
               {term}
             </li>
           ))}
         </ul>
 
         <p className="ms-mono mt-9 border-t border-[var(--rule)] pt-5 text-[0.5625rem] normal-case tracking-[0.14em]">
-          Quote {result.reference} if you need to reach us before then —{" "}
-          <a href={`mailto:${site.email}`} className="text-bone underline underline-offset-4">
+          {fill(c.done.quote, { ref: result.reference })}{" "}
+          <a href={`mailto:${site.email}`} className="text-gold-200 underline underline-offset-4">
             {site.email}
           </a>
         </p>
