@@ -1,17 +1,22 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import { specimens } from "@/lib/content";
+import { concepts } from "@/lib/content";
 import { Arrow } from "./hero";
 import { Eyebrow } from "./section";
 
-export function Specimens() {
+/**
+ * Concept builds, not case studies. No results are claimed anywhere here —
+ * each panel is a plan, shown in enough detail that a creator can judge the
+ * thinking. That is the thing being sold.
+ */
+export function Concepts() {
   const [active, setActive] = useState(0);
   const baseId = useId();
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
-    const last = specimens.items.length - 1;
+    const last = concepts.items.length - 1;
     let next = active;
     if (event.key === "ArrowDown" || event.key === "ArrowRight") next = active === last ? 0 : active + 1;
     else if (event.key === "ArrowUp" || event.key === "ArrowLeft") next = active === 0 ? last : active - 1;
@@ -24,42 +29,42 @@ export function Specimens() {
   };
 
   return (
-    <section id="specimens" className="relative scroll-mt-24 border-t border-[var(--rule)]">
+    <section id="concepts" className="relative scroll-mt-24 border-t border-[var(--rule)]">
       <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] py-[clamp(4.5rem,10vh,8.5rem)]">
         <div className="mb-[clamp(2rem,4vw,3.5rem)]" data-reveal>
-          <Eyebrow index={specimens.index}>{specimens.eyebrow}</Eyebrow>
+          <Eyebrow index={concepts.index}>{concepts.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid gap-[clamp(1.5rem,4vw,4rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(2.2rem,5.6vw,4.6rem)]" data-reveal>
-            <span className="block text-bone">{specimens.headline[0]}</span>
-            <span className="ms-gold-sweep block">{specimens.headline[1]}</span>
+          <h2 className="ms-display text-[clamp(2.2rem,5.4vw,4.2rem)]" data-reveal>
+            <span className="block text-bone">{concepts.headline[0]}</span>
+            <span className="ms-gold-sweep block">{concepts.headline[1]}</span>
           </h2>
           <p
             className="max-w-[54ch] text-[clamp(1rem,1.35vw,1.1875rem)] leading-[1.65] text-ash"
             data-reveal
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
           >
-            {specimens.body}
+            {concepts.body}
           </p>
         </div>
 
         <div
-          className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[19rem_minmax(0,1fr)]"
+          className="mt-[clamp(2.5rem,5vw,4rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[20rem_minmax(0,1fr)]"
           data-reveal
         >
           <div
             role="tablist"
-            aria-label="Case studies"
+            aria-label="Concept builds"
             aria-orientation="vertical"
             onKeyDown={onKeyDown}
             className="ms-scroll-x flex min-w-0 overflow-x-auto bg-ink lg:block lg:overflow-visible"
           >
-            {specimens.items.map((spec, i) => {
+            {concepts.items.map((item, i) => {
               const selected = i === active;
               return (
                 <button
-                  key={spec.ref}
+                  key={item.ref}
                   ref={(el) => {
                     tabRefs.current[i] = el;
                   }}
@@ -79,43 +84,42 @@ export function Specimens() {
                     }`}
                     aria-hidden="true"
                   />
-                  <span className="ms-mono block text-gold-400">{spec.ref}</span>
+                  <span className="ms-mono block text-gold-400">Concept {item.ref}</span>
                   <span
-                    className={`ms-display-soft mt-3 block text-[1.25rem] transition-colors duration-500 ${
+                    className={`ms-display-soft mt-3 block text-[1.125rem] transition-colors duration-500 ${
                       selected ? "text-bone" : "text-ash"
                     }`}
                   >
-                    {spec.handle}
+                    {item.handle}
                   </span>
                   <span className="ms-mono mt-2 block text-[0.5625rem]">
-                    {spec.followers} · {spec.platform}
-                  </span>
-                  <span className="ms-figure mt-3 block text-[1.125rem] text-gold-300">
-                    {spec.after.revenue}
+                    {item.followers} · {item.platform}
                   </span>
                 </button>
               );
             })}
           </div>
 
-          {specimens.items.map((spec, i) => (
+          {concepts.items.map((item, i) => (
             <div
-              key={spec.ref}
+              key={item.ref}
               role="tabpanel"
               id={`${baseId}-panel-${i}`}
               aria-labelledby={`${baseId}-tab-${i}`}
               hidden={i !== active}
-              className="bg-ink"
+              className="min-w-0 bg-ink"
             >
-              {i === active ? <Sheet spec={spec} /> : null}
+              {i === active ? <Sheet item={item} /> : null}
             </div>
           ))}
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-4" data-reveal>
-          <p className="ms-mono text-[0.5625rem]">{specimens.disclaimer}</p>
-          <a href="#apply" className="ms-btn ms-btn-outline ms-sheen">
-            Apply to work with us
+          <p className="ms-mono max-w-[64ch] text-[0.5625rem] normal-case leading-[1.8] tracking-[0.12em]">
+            {concepts.disclaimer}
+          </p>
+          <a href="#apply" className="ms-btn ms-btn-outline ms-sheen shrink-0">
+            Get your own concept
             <Arrow />
           </a>
         </div>
@@ -124,34 +128,28 @@ export function Specimens() {
   );
 }
 
-type Spec = (typeof specimens.items)[number];
+type Item = (typeof concepts.items)[number];
 
-function Sheet({ spec }: { spec: Spec }) {
+function Sheet({ item }: { item: Item }) {
   return (
-    <div key={spec.ref} className="ms-rise">
+    <div key={item.ref} className="ms-rise">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-[var(--rule)] px-6 py-5 sm:px-9">
-        <p className="ms-display flex flex-wrap items-baseline gap-3 text-[clamp(1.5rem,2.8vw,2.25rem)]">
-          <span className="text-ash">{spec.handle}</span>
+        <p className="ms-display flex flex-wrap items-baseline gap-3 text-[clamp(1.375rem,2.6vw,2rem)]">
+          <span className="text-ash">{item.handle}</span>
           <span className="text-gold-600" aria-hidden="true">
             →
           </span>
-          <span className="ms-gold">{spec.after.brand}</span>
+          <span className="ms-gold">{item.after.brand}</span>
         </p>
-        <p className="ms-mono text-[0.5625rem]">{spec.field}</p>
+        <p className="ms-mono text-[0.5625rem]">{item.field}</p>
       </div>
 
       <div className="grid sm:grid-cols-2">
-        {/* BEFORE */}
         <div className="border-b border-[var(--rule)] px-6 py-7 sm:border-b-0 sm:border-r sm:px-9 sm:py-9">
-          <div className="flex items-baseline justify-between gap-4">
-            <p className="ms-mono">Before</p>
-            <p className="ms-figure text-[1.5rem] text-char">{spec.before.revenue}</p>
-          </div>
-          <p className="ms-mono mt-1 text-right text-[0.5rem]">{spec.before.revenueLabel}</p>
-
-          <p className="mt-6 text-[0.9375rem] leading-[1.7] text-ash">{spec.before.summary}</p>
+          <p className="ms-mono">Where they are</p>
+          <p className="mt-5 text-[0.9375rem] leading-[1.7] text-ash">{item.before.summary}</p>
           <ul className="mt-6 space-y-2.5">
-            {spec.before.points.map((point) => (
+            {item.before.points.map((point) => (
               <li key={point} className="flex items-baseline gap-3 text-[0.875rem] text-ash">
                 <span
                   className="block h-px w-3 shrink-0 bg-[rgba(226,122,106,0.5)]"
@@ -163,39 +161,36 @@ function Sheet({ spec }: { spec: Spec }) {
           </ul>
         </div>
 
-        {/* AFTER */}
-        <div className="relative px-6 py-7 sm:px-9 sm:py-9">
-          <div className="flex items-baseline justify-between gap-4">
-            <p className="ms-mono text-gold-400">After</p>
-            <p className="ms-figure ms-gold text-[clamp(1.75rem,3vw,2.5rem)]">
-              {spec.after.revenue}
-            </p>
-          </div>
-          <p className="ms-mono mt-1 text-right text-[0.5rem]">{spec.after.revenueLabel}</p>
-
-          <p className="ms-display mt-6 text-[1.5rem] text-bone">{spec.after.brand}</p>
-          <p className="ms-mono mt-1.5 text-[0.5625rem]">{spec.after.line}</p>
-          <p className="mt-5 text-[0.9375rem] leading-[1.7] text-bone">{spec.after.summary}</p>
+        <div className="px-6 py-7 sm:px-9 sm:py-9">
+          <p className="ms-mono text-gold-400">What we'd build</p>
+          <p className="ms-display mt-5 text-[1.5rem] text-bone">{item.after.brand}</p>
+          <p className="ms-mono mt-1.5 text-[0.5625rem]">{item.after.line}</p>
+          <p className="mt-5 text-[0.9375rem] leading-[1.7] text-bone">{item.after.summary}</p>
 
           <ul className="mt-6 space-y-2.5">
-            {spec.after.deliverables.map((item) => (
-              <li key={item} className="flex items-baseline gap-3 text-[0.875rem] text-bone">
+            {item.after.deliverables.map((d) => (
+              <li key={d} className="flex items-baseline gap-3 text-[0.875rem] text-bone">
                 <span className="block h-px w-3 shrink-0 bg-gold-500" aria-hidden="true" />
-                {item}
+                {d}
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <dl className="grid border-t border-[var(--rule)] sm:grid-cols-2">
+      {/* The design of the business, not a claimed outcome */}
+      <dl className="grid border-t border-[var(--rule)] sm:grid-cols-3">
+        <div className="border-b border-[var(--rule)] px-6 py-5 sm:border-b-0 sm:border-r sm:px-9">
+          <dt className="ms-mono">Price ladder</dt>
+          <dd className="mt-2 text-[0.875rem] leading-relaxed text-gold-200">{item.ladder}</dd>
+        </div>
         <div className="border-b border-[var(--rule)] px-6 py-5 sm:border-b-0 sm:border-r sm:px-9">
           <dt className="ms-mono">Business model</dt>
-          <dd className="mt-2 text-[0.9375rem] text-bone">{spec.model}</dd>
+          <dd className="mt-2 text-[0.875rem] leading-relaxed text-bone">{item.model}</dd>
         </div>
         <div className="px-6 py-5 sm:px-9">
           <dt className="ms-mono">Build horizon</dt>
-          <dd className="mt-2 text-[0.9375rem] text-bone">{spec.horizon}</dd>
+          <dd className="mt-2 text-[0.875rem] leading-relaxed text-bone">{item.horizon}</dd>
         </div>
       </dl>
     </div>

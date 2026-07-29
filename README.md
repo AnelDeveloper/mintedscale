@@ -12,19 +12,33 @@ npm run dev
 
 ---
 
-## ⚠️ Before you go live
+## The house rule
 
-Three things must be replaced. They are all in `src/lib/content.ts` and marked
-`PLACEHOLDER`.
+**Nothing on this page claims a result that has not happened.**
 
-| What | Where | Why it matters |
+MintedScale is taking its first creator partners, so there are no creator
+revenue figures, no client counts and no testimonials. Inventing them would
+be the fastest way to lose the exact audience being sold to — creators are
+trained to spot fabricated numbers. Instead the proof is:
+
+- **Prior product work** — real companies, named, in `studio.clients`
+- **Seven years of shipping** — a fact about the founder, not a claim about outcomes
+- **Concept builds** — plans shown in full, explicitly labelled as plans
+- **Revenue share** — the risk sits with the studio, which is why a creator should take a chance on a new one
+
+If you add a number to `src/lib/content.ts`, be ready to prove it.
+
+### Still to fill in
+
+| What | Where | Note |
 |---|---|---|
-| Top-line figures (`€2.4M+`, `140+`, `92`, `4.9/5`) | `results.headlineStats` | These are stand-ins. Publishing invented revenue as fact is a claim you would have to defend. |
-| Money ticker results | `results.ticker` | Same — swap for your own launches, or delete the ticker until you have them. |
-| Case studies | `specimens.items` | Fictional demo creators. The page labels them "Illustrative — fictional creators, real methodology," so they are honest as they stand, but real ones convert better. |
+| Client website URLs | `studio.clients.items[].href` | Empty `href` renders as plain text, so nothing ever points somewhere invented. Paste a URL and it becomes a link. |
+| Handles for TDT Planner and NWAR | `studio.clients.items[].label` | The other two already use `@accelit` / `@puzzlesit`. |
+| Your portrait | `studio.portrait.src` | Renders a reserved frame until then. |
+| Partner films | `films.items` | Three reserved seats. Fill one when a founding partner launches. |
 
-The results section renders a visible note pointing at this file. Delete that
-line (`src/components/results.tsx`) once the numbers are real.
+As real creator results arrive, add them — that is when a results section
+earns its place on the page.
 
 ---
 
@@ -77,14 +91,21 @@ console so you can see exactly what would have gone out.
 
 ```bash
 RESEND_API_KEY=re_...          # or SENDGRID_API_KEY=SG...
-EMAIL_FROM="MintedScale <studio@mintedscale.com>"
-CONTACT_INBOX=anel@mintedscale.com
+EMAIL_FROM="MintedScale <no-reply@mintedscale.com>"   # sending address
+CONTACT_INBOX=anel@mintedscale.com                    # receiving address
 ```
 
 Verify your sending domain with the provider first, or mail lands in spam.
 
-Two emails go out per application: the full application to the studio (reply-to
-set to the creator, so hitting reply reaches them), and a receipt to the creator.
+Two emails go out per application, both **from** `no-reply@`:
+
+| Mail | To | Reply-to |
+|---|---|---|
+| Full application | `CONTACT_INBOX` | the creator — hit reply and you reach them |
+| Receipt | the creator | `CONTACT_INBOX` — their reply reaches you |
+
+Nothing is ever sent *to* `no-reply@`, so that address never needs a mailbox.
+`anel@` does — set up receiving separately (Cloudflare Email Routing is free).
 
 ### Google Calendar
 

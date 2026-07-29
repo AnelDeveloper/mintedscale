@@ -1,19 +1,19 @@
 import { Apply } from "@/components/apply";
 import { Calculator } from "@/components/calculator";
 import { Capabilities } from "@/components/capabilities";
+import { Concepts } from "@/components/concepts";
 import { Diagnosis } from "@/components/diagnosis";
 import { Engine } from "@/components/engine";
 import { Faq } from "@/components/faq";
+import { Films } from "@/components/films";
 import { FinalCta } from "@/components/final-cta";
 import { Hero } from "@/components/hero";
 import { Method } from "@/components/method";
-import { Results } from "@/components/results";
 import { ScrollEffects } from "@/components/scroll-effects";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
-import { Specimens } from "@/components/specimens";
 import { Standard } from "@/components/standard";
-import { VideoWall } from "@/components/video-wall";
+import { Studio } from "@/components/studio";
 import { faq, site } from "@/lib/content";
 
 const schema = [
@@ -25,6 +25,7 @@ const schema = [
     slogan: site.tagline,
     email: site.email,
     url: "https://mintedscale.com",
+    founder: { "@type": "Person", name: site.founder },
     sameAs: site.socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
   },
   {
@@ -45,13 +46,13 @@ export default function HomePage() {
       <SiteNav />
       <main id="main">
         <Hero />
-        <Results />
+        <Studio />
         <Diagnosis />
         <Method />
         <Engine />
         <Calculator />
-        <Specimens />
-        <VideoWall />
+        <Concepts />
+        <Films />
         <Capabilities />
         <Standard />
         <Faq />

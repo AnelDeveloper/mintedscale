@@ -1,15 +1,22 @@
 /**
  * All page copy and data.
  *
- * ⚠️ BEFORE LAUNCH — replace every value marked PLACEHOLDER.
- * Publishing invented revenue figures or testimonials as if they were real
- * clients is a claim you would have to stand behind. Swap them for your own
- * numbers, or cut the section until you have them.
+ * HOUSE RULE: nothing here claims a result that has not happened.
+ * The proof on this page is prior product work for real companies plus
+ * seven years of shipping — not creator revenue, because there isn't any
+ * yet. Creator results get added to `studio.clients` and `films` as they
+ * actually land. If you add a number, be ready to prove it.
  *
- *   • results.headline  — PLACEHOLDER top-line figures
- *   • ticker            — PLACEHOLDER creator results
- *   • specimens         — fictional demonstration builds (labelled as such on the page)
- *   • videos / videoWall — empty slots; drop in your files under /public/videos
+ * TO CONFIRM before launch:
+ *   • studio.clients.items — check the exact legal names, and add any others
+ *     you're free to name. Per-project detail can be added later.
+ *
+ * Slots waiting on real material (they render as marked reserved frames,
+ * so the layout is already correct):
+ *   • studio.portrait   — a photo of you
+ *   • hero.video        — the studio film
+ *   • engine.video      — a screen recording of the system
+ *   • films.items       — founding partner films, once they exist
  */
 
 export const site = {
@@ -17,9 +24,10 @@ export const site = {
   role: "The Creator Mint",
   tagline: "Turning creators into brands.",
   description:
-    "MintedScale turns creator audiences into brands, products and businesses — powered by our own AI monetization system. Strategy, product, technology and launch, run by one studio.",
+    "MintedScale turns creator audiences into brands, products and businesses. Strategy, product and technology from one studio — built on a revenue share, so you pay nothing upfront.",
   email: "anel@mintedscale.com",
   established: "Est. MMXXVI",
+  founder: "Anel Kujović",
   socials: [
     { label: "Instagram", href: "https://instagram.com/mintedscale", handle: "@mintedscale" },
     { label: "TikTok", href: "https://tiktok.com/@mintedscale", handle: "@mintedscale" },
@@ -28,11 +36,11 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "Results", href: "#results" },
+  { label: "Studio", href: "#studio" },
   { label: "The Mint", href: "#method" },
   { label: "AI System", href: "#engine" },
   { label: "Calculator", href: "#calculator" },
-  { label: "Work", href: "#specimens" },
+  { label: "Concepts", href: "#concepts" },
 ] as const;
 
 /* ── Hero ──────────────────────────────────────────────────── */
@@ -40,48 +48,71 @@ export const nav = [
 export const hero = {
   eyebrow: "The Creator Mint",
   headline: ["Your audience is", "more than followers."],
-  sub: "We help creators turn attention into brands, products, and businesses — built, launched and scaled by one studio.",
-  primaryCta: "Build my brand",
-  secondaryCta: "See the numbers",
-  /** PLACEHOLDER: drop your film in /public/videos/ and set src + poster. */
+  sub: "We turn attention into brands, products and businesses — built and launched by one studio, on a revenue share. You pay nothing upfront.",
+  primaryCta: "Apply for a founding spot",
+  secondaryCta: "See how it works",
   video: {
     src: "",
     poster: "",
     label: "How the mint works",
-    duration: "2:14",
+    duration: "",
   },
   bar: [
     { value: "€0", label: "Upfront" },
-    { value: "48h", label: "To first plan" },
-    { value: "4", label: "Partners per quarter" },
+    { value: "Rev share", label: "We earn when you earn" },
+    { value: "3", label: "Founding partners" },
   ],
 } as const;
 
-/* ── Results ───────────────────────────────────────────────── */
+/* ── The studio (founder credibility, replaces client results) ─ */
 
-export const results = {
-  eyebrow: "Proven results",
+export const studio = {
+  eyebrow: "The studio",
   index: "01",
-  headline: "The numbers we mint.",
-  body: "Every partnership is measured the same way: what did the creator own at the end, and what did it earn.",
-  /** PLACEHOLDER FIGURES — replace with your own before launch. */
-  headlineStats: [
-    { value: 2400000, prefix: "€", suffix: "+", label: "Revenue minted", note: "Across partner brands" },
-    { value: 140, prefix: "", suffix: "+", label: "Creators transformed", note: "Since 2021" },
-    { value: 92, prefix: "", suffix: "", label: "Products launched", note: "Live and trading" },
-    { value: 4.9, prefix: "", suffix: "/5", label: "Partner rating", note: "Post-build survey", decimals: 1 },
+  headline: ["Seven years of shipped product.", "Now pointed at creators."],
+  /**
+   * Every figure is a fact about the founder or a term of the offer.
+   * None of them is a claim about creator results.
+   */
+  stats: [
+    { value: "7", label: "Years building products", note: "Software & commerce" },
+    { value: "€0", label: "Upfront to start", note: "Nothing to pay in advance" },
+    { value: "Rev share", label: "We earn when you earn", note: "No win, no fee" },
+    { value: "3", label: "Founding partner spots", note: "Open now" },
   ],
-  /** PLACEHOLDER: your own launch results. Handle → first-launch revenue. */
-  ticker: [
-    { handle: "@lenaruiz", amount: "€153K", note: "First launch" },
-    { handle: "@thekwame", amount: "€94K", note: "Cohort one" },
-    { handle: "@sofiedalgaard", amount: "€70K", note: "Collection one" },
-    { handle: "@marcusdrey", amount: "€61K", note: "First launch" },
-    { handle: "@ninaklos", amount: "€48K", note: "Launch week" },
-    { handle: "@theobrandt", amount: "€41K", note: "First launch" },
-    { handle: "@amaliviera", amount: "€33K", note: "Pre-sale" },
-    { handle: "@joskovac", amount: "€28K", note: "Launch week" },
-  ],
+  portrait: { src: "", alt: "Anel Kujović, founder of MintedScale" },
+  note: {
+    lead: "I'm Anel. For seven years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
+    body: "MintedScale is that capability pointed at creators. Most people offering to build your brand are marketers who can't ship software, so the strategy deck arrives and the product never does. I ship the product.",
+    offer:
+      "The creator studio is new, and I'd rather say that than invent a client list. That's why the first three partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
+    signature: "Anel Kujović · Founder",
+  },
+  /**
+   * Real prior engagements — the honest replacement for a revenue ticker.
+   *
+   * TODO — paste each company's website into `href` and it becomes a link.
+   * Left empty it renders as plain text, so nothing points anywhere wrong.
+   * Also swap the last two `label`s for their handles once you have them.
+   */
+  clients: {
+    label: "Prior product work",
+    caveat:
+      "Software and commerce work delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
+    items: [
+      { label: "@accelit", href: "" },
+      { label: "@puzzlesit", href: "" },
+      { label: "TDT Planner", href: "" },
+      { label: "NWAR Australia", href: "" },
+    ],
+  },
+  follow: {
+    label: "Follow the build",
+    items: [
+      { platform: "Instagram", handle: "@mintedscale", href: "https://instagram.com/mintedscale" },
+      { platform: "TikTok", handle: "@mintedscale", href: "https://tiktok.com/@mintedscale" },
+    ],
+  },
 } as const;
 
 /* ── Problem ───────────────────────────────────────────────── */
@@ -169,40 +200,40 @@ export const engine = {
   eyebrow: "Built in-house",
   index: "04",
   headline: ["We built our own", "AI monetization system."],
-  body: "Most studios guess what your audience will buy, then bill you for the guess. We built software that reads the audience first — so the product is chosen from evidence, not taste.",
+  body: "Most studios guess what your audience will buy, then bill you for the guess. I built software that reads the audience first — so the product is chosen from evidence, not taste.",
   serif: "The guesswork is the expensive part. We removed it.",
+  /** Each module states what it *produces*, not how much it has processed. */
   modules: [
     {
       code: "01",
       title: "Audience decode",
-      body: "Ingests your comments, DMs, watch-time and follower graph, then clusters what your audience actually wants to buy.",
-      metric: "12M+",
-      metricLabel: "Signals processed per audit",
+      body: "Reads your comments, DMs, watch-time and follower graph, then clusters what your audience actually wants to buy.",
+      metric: "Demand map",
+      metricLabel: "What it produces",
     },
     {
       code: "02",
       title: "Offer synthesis",
       body: "Generates and scores candidate products against demand density, price tolerance and how hard each is to ship.",
-      metric: "40+",
-      metricLabel: "Offers modelled per creator",
+      metric: "Ranked offers",
+      metricLabel: "What it produces",
     },
     {
       code: "03",
       title: "Price finder",
       body: "Models your ladder — entry, core and premium — against comparable launches in your niche.",
-      metric: "3-tier",
-      metricLabel: "Pricing ladder per brand",
+      metric: "3-tier ladder",
+      metricLabel: "What it produces",
     },
     {
       code: "04",
       title: "Launch simulator",
       body: "Projects the launch sequence before a single post goes out, so we know what to expect and where it breaks.",
-      metric: "90-day",
-      metricLabel: "Forecast horizon",
+      metric: "90-day forecast",
+      metricLabel: "What it produces",
     },
   ],
-  /** PLACEHOLDER: a screen recording of the system works well here. */
-  video: { src: "", poster: "", label: "Inside the engine", duration: "1:38" },
+  video: { src: "", poster: "", label: "Inside the engine", duration: "" },
 } as const;
 
 /* ── Calculator ────────────────────────────────────────────── */
@@ -229,30 +260,29 @@ export const calculator = {
     "Launch sequencing against your content calendar",
   ],
   disclaimer:
-    "An estimate, not a promise. Built from launch-sequence conversion against your engaged audience — your niche, offer and list quality move it in both directions.",
+    "A model, not a promise. It applies a launch-sequence conversion rate to your engaged audience — your niche, offer and list quality move it in both directions. We show the arithmetic so you can argue with it.",
 } as const;
 
-/* ── Case studies ──────────────────────────────────────────── */
+/* ── Concept builds (replaces fabricated case studies) ─────── */
 
-export const specimens = {
-  eyebrow: "Case studies",
+export const concepts = {
+  eyebrow: "Concept builds",
   index: "06",
-  headline: ["Struck,", "not sketched."],
-  body: "Three transformations, end to end. The creators below are fictional, built to demonstrate exactly how the mint runs.",
-  disclaimer: "Illustrative — fictional creators, real methodology.",
+  headline: ["Built on paper", "before it's built for real."],
+  body: "Three creators we'd love to work with, and exactly what we'd make for each. These are plans, not past clients — read them to judge the thinking, because the thinking is what you're hiring.",
+  disclaimer:
+    "Concept builds. Illustrative creators, real method — no results claimed, because MintedScale is taking its first partners now.",
   items: [
     {
       ref: "01",
-      handle: "@lenaruiz",
+      handle: "The training creator",
       platform: "Instagram",
-      followers: "412K",
+      followers: "~400K",
       field: "Training & recovery",
       before: {
         summary:
           "Four years of daily training content. Income from one-off brand deals, negotiated by DM, priced by guesswork.",
         points: ["No owned product", "Rate set by the sponsor", "Zero revenue between posts"],
-        revenue: "€0",
-        revenueLabel: "Owned revenue",
       },
       after: {
         brand: "VESSEL",
@@ -261,28 +291,25 @@ export const specimens = {
           "A recovery brand with its own point of view, sold direct, with a subscription that bills whether or not she posts.",
         deliverables: [
           "Identity system & packaging",
-          "vessel.co — direct storefront",
+          "Direct storefront on Shopify",
           "9-SKU recovery line",
-          "Subscription & retention model",
+          "Subscription & retention flows",
         ],
-        revenue: "€153K",
-        revenueLabel: "First-launch revenue",
       },
+      ladder: "Entry €29 · Core €89 · Bundle €240",
       model: "DTC subscription · Retail wholesale",
-      horizon: "11 months",
+      horizon: "11 months to full line",
     },
     {
       ref: "02",
-      handle: "@thekwame",
+      handle: "The finance creator",
       platform: "TikTok",
-      followers: "1.2M",
+      followers: "~1M",
       field: "Personal finance",
       before: {
         summary:
           "Explains money to a million people. Monetised by affiliate links to products he did not build or control.",
         points: ["Audience trusts him, buys elsewhere", "No pricing power", "Platform-dependent income"],
-        revenue: "€0",
-        revenueLabel: "Owned revenue",
       },
       after: {
         brand: "LEDGERHOUSE",
@@ -291,28 +318,25 @@ export const specimens = {
           "A school with a curriculum, a cohort calendar and software — priced as education, not as an affiliate click.",
         deliverables: [
           "Curriculum & cohort structure",
-          "Ledgerhouse app — iOS & web",
+          "Web app — tracking & lessons",
           "Certification programme",
           "Enterprise licensing track",
         ],
-        revenue: "€94K",
-        revenueLabel: "Cohort one",
       },
+      ladder: "Entry €49 · Cohort €890 · Licence €4,800",
       model: "Cohort tuition · Software subscription",
-      horizon: "14 months",
+      horizon: "14 months to licensing",
     },
     {
       ref: "03",
-      handle: "@sofiedalgaard",
+      handle: "The design creator",
       platform: "YouTube",
-      followers: "640K",
+      followers: "~600K",
       field: "Interiors & design",
       before: {
         summary:
-          "Long-form interiors films with a devoted audience. Revenue was ad share — high views, thin margin.",
+          "Long-form interiors films with a devoted audience. Revenue is ad share — high views, thin margin.",
         points: ["Income tied to CPM", "No physical product", "Taste with nothing attached to it"],
-        revenue: "€0",
-        revenueLabel: "Owned revenue",
       },
       after: {
         brand: "ATELIER SD",
@@ -321,36 +345,29 @@ export const specimens = {
           "A design house that manufactures under her name, with licensing deals that pay without a single upload.",
         deliverables: [
           "House identity & art direction",
-          "First object collection — 14 pieces",
-          "Manufacturing & licensing deals",
+          "First collection — 14 pieces",
+          "Manufacturing & licensing structure",
           "Trade & showroom channel",
         ],
-        revenue: "€70K",
-        revenueLabel: "Collection one",
       },
+      ladder: "Print €60 · Object €340 · Lighting €1,200",
       model: "Product margin · Licensing royalties",
-      horizon: "16 months",
+      horizon: "16 months to first collection",
     },
   ],
 } as const;
 
-/* ── Video wall ────────────────────────────────────────────── */
+/* ── Films (reserved for founding partners) ────────────────── */
 
-export const videoWall = {
-  eyebrow: "In their words",
+export const films = {
+  eyebrow: "Partner films",
   index: "07",
-  headline: ["Hear it from", "the creators."],
-  body: "Short films from partners on what changed after the mint.",
-  /**
-   * PLACEHOLDER SLOTS — portrait 9:16, the format creators already shoot.
-   * Add files to /public/videos and set `src` + `poster` to fill a slot.
-   * Empty slots render as a clearly-marked reserved frame.
-   */
+  headline: ["Three seats.", "Three stories to come."],
+  body: "When a founding partner launches, their film goes here — what we built, what it earns, in their own words. Reserved, not invented.",
   items: [
-    { id: "v1", name: "Creator one", handle: "@handle", result: "€153K first launch", src: "", poster: "" },
-    { id: "v2", name: "Creator two", handle: "@handle", result: "€94K cohort one", src: "", poster: "" },
-    { id: "v3", name: "Creator three", handle: "@handle", result: "€70K collection one", src: "", poster: "" },
-    { id: "v4", name: "Creator four", handle: "@handle", result: "€61K first launch", src: "", poster: "" },
+    { id: "v1", seat: "Seat 01", status: "Open", src: "", poster: "" },
+    { id: "v2", seat: "Seat 02", status: "Open", src: "", poster: "" },
+    { id: "v3", seat: "Seat 03", status: "Open", src: "", poster: "" },
   ],
 } as const;
 
@@ -360,7 +377,7 @@ export const capabilities = {
   eyebrow: "What we build",
   index: "08",
   headline: ["Four practices.", "One studio."],
-  body: "No vendors, no handoffs. The team that writes the thesis ships the product.",
+  body: "No vendors, no handoffs. The person who writes the thesis ships the product.",
   services: [
     {
       code: "01",
@@ -394,27 +411,27 @@ export const capabilities = {
 export const standard = {
   eyebrow: "Why us",
   index: "09",
-  headline: ["Why creators", "choose us."],
+  headline: ["Why work with", "a new studio."],
   points: [
     {
       n: "01",
-      title: "Business mindset, not just content",
-      body: "We read your audience as a market: who buys, at what price, how often. Content is the distribution channel, not the product.",
+      title: "You are not paying for the risk",
+      body: "No upfront fee. I build, you launch, and I take a share of what it earns. A studio with a waiting list has no reason to price like that — a new one does, and you get the benefit.",
     },
     {
       n: "02",
-      title: "Strategy and execution",
-      body: "The same team that writes the thesis builds the brand, ships the product and stands up the technology. Nothing is handed to a vendor.",
+      title: "Seven years of shipped product",
+      body: "Platforms, apps, storefronts and payment systems delivered for companies across IT, planning and commerce. The creator work is the new chapter; the ability to actually ship the thing is not.",
     },
     {
       n: "03",
-      title: "Brand building experience",
-      body: "We have taken names from a profile page to a manufactured, trading company — through naming, supply, storefront and launch.",
+      title: "Strategy and execution, same hands",
+      body: "The person who writes the positioning builds the storefront and stands up the technology. Nothing is handed to a vendor, and nothing gets lost in translation.",
     },
     {
       n: "04",
-      title: "Long-term partnerships",
-      body: "We take a small number of creators per year and stay through the difficult middle, where most projects quietly stall.",
+      title: "Three partners, not thirty",
+      body: "Founding partners get the whole studio, not a slice of an account manager's week. That is only possible while the number is small — which is exactly now.",
     },
   ],
 } as const;
@@ -427,16 +444,20 @@ export const faq = {
   headline: ["Before you", "apply."],
   items: [
     {
-      q: "How big does my audience need to be?",
-      a: "There is no hard floor, but engagement matters far more than follower count. A 30K audience that comments and buys is worth more to us than a 500K audience that scrolls past. If the numbers do not support a build yet, we will tell you plainly instead of taking the work.",
+      q: "What does it cost?",
+      a: "Nothing upfront. The first three partners work on a revenue share: I build the brand, the product and the technology at my own cost, and take an agreed percentage of what it earns. If it earns nothing, I earn nothing. The exact split is agreed in writing before any work starts, and it is capped and time-limited — you are not signing away your company.",
     },
     {
-      q: "What does it cost?",
-      a: "It depends on what we are building — a digital product line and a manufactured physical brand are very different projects. We price after the discovery call, once we know the scope, and you see the full number before anything starts.",
+      q: "You're new to creator brands. Why should I take the risk?",
+      a: "Because of how it's priced, you aren't taking the financial risk — I am. The product work isn't new: seven years of platforms, apps and storefronts for companies like Accelit IT, Puzzles IT, TDT Planner and NWAR Australia. What's new is applying it to creator brands, and I'd rather say that plainly than invent a creator client list. Start with the free audit and judge the work before committing to anything.",
+    },
+    {
+      q: "How big does my audience need to be?",
+      a: "There is no hard floor, but engagement matters far more than follower count. A 30K audience that comments and buys is worth more than a 500K audience that scrolls past. If the numbers do not support a build yet, I will tell you plainly instead of taking the work.",
     },
     {
       q: "How long until something is live?",
-      a: "First plan inside 48 hours of the call. A digital product typically launches in 8–12 weeks; a physical line takes longer because manufacturing does.",
+      a: "First plan inside 48 hours of the call. A digital product is an 8–12 week build; a physical line takes longer, because manufacturing does. You get the full schedule before we start, not after.",
     },
     {
       q: "I already have a product. Can you still help?",
@@ -444,11 +465,7 @@ export const faq = {
     },
     {
       q: "Who owns the brand?",
-      a: "You do — the name, the identity, the storefront, the customer list, all of it. We build assets in your name. That is the entire point.",
-    },
-    {
-      q: "What do you need from me?",
-      a: "Access to your audience data, a few hours a month, and honest answers on the call. We do the building.",
+      a: "You do — the name, the identity, the storefront, the customer list, all of it, in your name from day one. A revenue share is a share of revenue, not of ownership.",
     },
   ],
 } as const;
@@ -459,10 +476,11 @@ export const application = {
   eyebrow: "Apply",
   index: "11",
   headline: ["Ready to turn your name", "into a brand?"],
-  body: "If you are a creator and want to build something bigger than content, let's talk.",
+  body: "If you are a creator and want to build something bigger than content, let's talk. Three founding spots, no upfront fee.",
   terms: [
-    "We take four partners each quarter.",
-    "Every application is read by a partner, not a form robot.",
+    "Three founding partners, then the revenue share closes.",
+    "Nothing to pay upfront — we earn when you earn.",
+    "Every application is read by me, not a form robot.",
     "Expect a reply within two business days.",
   ],
 } as const;
