@@ -122,6 +122,7 @@ export default async function LocaleLayout({
           {t.skipToContent}
         </a>
         <div className="ms-atmosphere" aria-hidden="true" />
+        <div className="ms-aurora" aria-hidden="true" />
         <div className="ms-grain" aria-hidden="true" />
         <div className="relative z-[2]">{children}</div>
       </body>

@@ -131,11 +131,16 @@
 .ms-atmosphere {
   position: fixed;
   inset: 0;
+  /* The blooms deliberately run past the viewport edges; clipping here keeps
+     an oversized fixed layer from ever registering as scrollable overflow. */
+  overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Warm gold bloom, like light off a coin under a spot. */
+/* Warm gold bloom, like light off a coin under a spot. Drifts slowly so the
+   page feels lit rather than printed — 44s, and the loop returns to where it
+   started, so there is no seam. */
 .ms-atmosphere::before {
   content: "";
   position: absolute;
@@ -143,21 +148,54 @@
   left: 50%;
   width: min(170vw, 2000px);
   height: 130vh;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
+  will-change: transform;
   background: radial-gradient(
     ellipse 48% 44% at 50% 32%,
-    rgba(217, 169, 76, 0.16) 0%,
-    rgba(160, 114, 40, 0.07) 40%,
+    rgba(217, 169, 76, 0.2) 0%,
+    rgba(160, 114, 40, 0.09) 40%,
     transparent 74%
   );
+  animation: ms-bloom-a 44s ease-in-out infinite;
+}
+
+/*
+  Second bloom, deeper amber, low and off to one side. It drifts against the
+  first one — two lights crossing slowly read as a room; one light moving on
+  its own reads as a slideshow.
+*/
+.ms-aurora {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ms-aurora::before {
+  content: "";
+  position: absolute;
+  bottom: -40vh;
+  left: -10vw;
+  width: min(120vw, 1500px);
+  height: 110vh;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  background: radial-gradient(
+    ellipse 46% 42% at 40% 60%,
+    rgba(184, 132, 47, 0.13) 0%,
+    rgba(120, 84, 28, 0.06) 42%,
+    transparent 72%
+  );
+  animation: ms-bloom-b 67s ease-in-out infinite;
 }
 
 .ms-atmosphere::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(242, 237, 227, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 237, 227, 0.025) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(242, 237, 227, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 237, 227, 0.032) 1px, transparent 1px);
   background-size: 84px 84px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 0%, transparent 78%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 0%, transparent 78%);
@@ -695,6 +733,26 @@
     transparent
   );
   animation: ms-strike 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes ms-bloom-a {
+  0%,
+  100% {
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-45%, 2.5vh, 0) scale(1.07);
+  }
+}
+
+@keyframes ms-bloom-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vw, -3vh, 0) scale(1.1);
+  }
 }
 
 @keyframes ms-marquee {
