@@ -14,13 +14,13 @@ export const bs: Dictionary = {
   label: "BHS",
 
   site: {
-    role: "Kovnica za kreatore",
+    role: "Rast i izgradnja za kreatore",
     tagline: "Pretvaramo kreatore u brendove.",
     description:
       "MintedScale pretvara publiku kreatora u brendove, proizvode i biznise. Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda, tako da unaprijed ne plaćaš ništa.",
   },
 
-  nav: ["Rad", "Kovnica", "AI sistem", "Kalkulator", "Koncepti"],
+  nav: ["Rad", "Izgradnja", "AI sistem", "Kalkulator", "Koncepti"],
   applyCta: "Prijavi se",
   langLabel: "Jezik",
   menuOpen: "Otvori meni",
@@ -32,7 +32,7 @@ export const bs: Dictionary = {
     sub: "Pretvaram pažnju u brendove, proizvode i biznise — gradi ih i lansira jedan čovjek, uz podjelu prihoda. Unaprijed ne plaćaš ništa.",
     primaryCta: "Izgradi moj brend",
     secondaryCta: "Vidi kako radi",
-    videoLabel: "Kako kovnica radi",
+    videoLabel: "Kako sve funkcioniše",
     bar: [
       { value: "€0", label: "Unaprijed" },
       { value: "Podjela", label: "Zarađujem kad ti zaradiš" },
@@ -107,7 +107,7 @@ export const bs: Dictionary = {
   diagnosis: {
     eyebrow: "Problem",
     index: "02",
-    headline: ["Kreatori imaju pažnju.", "Rijetki grade imovinu."],
+    headline: ["Kreatori imaju pažnju.", "Rijetki grade brend."],
     body: "Milioni kreatora svaki dan grade publiku. Skoro ništa od te pažnje ne postane nešto što oni posjeduju. Pratioci se iznajmljuju — čim prestaneš objavljivati, prestaje i zarada. Brend je imovina. Vrijedi i dok spavaš, i može se prodati.",
     costLabel: "Cijena",
     faults: [
@@ -136,7 +136,7 @@ export const bs: Dictionary = {
   },
 
   method: {
-    eyebrow: "Kovnica",
+    eyebrow: "Rast i izgradnja",
     index: "03",
     headline: ["Od kreatora", "do brenda."],
     body: "Jedan slijed, odrađen redom. Svaka faza proizvede nešto što je tvoje prije nego počne sljedeća.",
@@ -483,7 +483,7 @@ export const bs: Dictionary = {
   },
 
   finalCta: {
-    eyebrow: "Kovnica radi",
+    eyebrow: "Sada primam partnere",
     headline: ["Tvoje ime može postati", "brend."],
     body: "Donesi publiku i apetit — ja donosim strategiju, proizvod, tehnologiju i lansiranje. Unaprijed se ne plaća ništa.",
     primary: "Počni graditi",

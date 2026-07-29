@@ -48,7 +48,7 @@ export function SiteNav({ t }: { t: Dictionary }) {
             <a
               key={label}
               href={navTargets[i]}
-              className="ms-mono py-2 transition-colors duration-300 hover:text-gold-200"
+              className="ms-mono whitespace-nowrap py-2 transition-colors duration-300 hover:text-gold-200"
             >
               {label}
             </a>
