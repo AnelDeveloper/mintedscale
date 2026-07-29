@@ -144,9 +144,11 @@
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 0%, transparent 78%);
 }
 
+/* inset:0, not -50% — the noise tiles anyway, and an oversized fixed layer
+   can register as scrollable overflow. */
 .ms-grain {
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
   opacity: 0.055;
@@ -537,12 +539,36 @@
 }
 
 .ms-scroll-x {
+  min-width: 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
 }
 
 .ms-scroll-x::-webkit-scrollbar {
   display: none;
+}
+
+/* Horizontal date rail: snaps chip-to-chip so a thumb-flick lands cleanly. */
+.ms-rail {
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ms-rail > * {
+  scroll-snap-align: start;
+}
+
+/* Fades the right edge so it reads as "there is more" rather than "cut off". */
+.ms-rail-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2.5rem;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(14, 12, 10, 0.95));
 }
 
 }

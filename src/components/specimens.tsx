@@ -53,7 +53,7 @@ export function Specimens() {
             aria-label="Case studies"
             aria-orientation="vertical"
             onKeyDown={onKeyDown}
-            className="ms-scroll-x flex overflow-x-auto bg-ink lg:block lg:overflow-visible"
+            className="ms-scroll-x flex min-w-0 overflow-x-auto bg-ink lg:block lg:overflow-visible"
           >
             {specimens.items.map((spec, i) => {
               const selected = i === active;

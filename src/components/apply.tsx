@@ -21,7 +21,10 @@ export function Apply() {
         </div>
 
         <div className="grid gap-[clamp(2.5rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          {/* min-w-0 on both columns: a grid item defaults to min-width:auto, which
+              stops the booking console shrinking below the day rail's min-content
+              and blows the whole page out horizontally on mobile. */}
+          <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
             <h2 className="ms-display text-[clamp(2.1rem,4.8vw,3.6rem)]" data-reveal>
               <span className="block text-bone">{application.headline[0]}</span>
               <span className="ms-gold-sweep block">{application.headline[1]}</span>
@@ -67,7 +70,11 @@ export function Apply() {
             </p>
           </div>
 
-          <div data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
+          <div
+            className="min-w-0"
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+          >
             <ApplicationConsole />
           </div>
         </div>

@@ -213,7 +213,17 @@ export function ApplicationConsole() {
       <form onSubmit={onSubmit} noValidate>
         {mode === "call" ? (
           <>
-            <Step n="01" title="Choose a day">
+            <Step
+              n="01"
+              title="Choose a day"
+              aside={
+                activeDate
+                  ? new Date(`${activeDate}T12:00:00`)
+                      .toLocaleDateString(undefined, { month: "long", year: "numeric" })
+                      .toUpperCase()
+                  : undefined
+              }
+            >
               {loadingSlots ? (
                 <p className="ms-mono flex items-center gap-3 py-3">
                   <span
@@ -233,7 +243,8 @@ export function ApplicationConsole() {
               ) : days.length === 0 ? (
                 <p className="ms-mono py-3">No open times right now — send a message and we will make room.</p>
               ) : (
-                <div className="ms-scroll-x -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+                <div className="ms-rail-wrap relative -mx-1">
+                  <div className="ms-scroll-x ms-rail flex gap-2 overflow-x-auto px-1 pb-1">
                   {days.map((day) => {
                     const selected = day.date === activeDate;
                     const d = new Date(`${day.date}T12:00:00`);
@@ -262,6 +273,7 @@ export function ApplicationConsole() {
                       </button>
                     );
                   })}
+                  </div>
                 </div>
               )}
             </Step>
