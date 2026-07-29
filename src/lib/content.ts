@@ -60,7 +60,7 @@ export const hero = {
   bar: [
     { value: "€0", label: "Upfront" },
     { value: "Rev share", label: "We earn when you earn" },
-    { value: "100%", label: "Yours to keep" },
+    { value: "7 yrs", label: "Building products" },
   ],
 } as const;
 
@@ -78,7 +78,7 @@ export const studio = {
     { value: "7", label: "Years building products", note: "Software & commerce" },
     { value: "€0", label: "Upfront to start", note: "Nothing to pay in advance" },
     { value: "Rev share", label: "We earn when you earn", note: "No win, no fee" },
-    { value: "100%", label: "Yours to keep", note: "Brand, product, customers" },
+    { value: "4", label: "Practices, one studio", note: "Brand · Product · Growth · Tech" },
   ],
   portrait: { src: "", alt: "Anel Kujović, founder of MintedScale" },
   note: {
