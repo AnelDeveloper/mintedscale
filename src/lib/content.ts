@@ -97,8 +97,8 @@ export const studio = {
     caveat:
       "Software and commerce work delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",
     items: [
-      { label: "@accelit", href: "https://accelit.com.au" },
-      { label: "@puzzlesit", href: "https://www.puzzlitapp.com" },
+      { label: "Accelit IT", href: "https://accelit.com.au" },
+      { label: "Puzzles IT", href: "https://www.puzzlitapp.com" },
       { label: "TDT Planner", href: "https://transportdrivertraining.com.au" },
       { label: "NWAR Australia", href: "https://nationwideappliancerepairs.com.au" },
     ],
