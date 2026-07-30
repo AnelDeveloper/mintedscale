@@ -1,7 +1,12 @@
 # Founder portrait
 
-`anel.jpg` — a photo of you, shown beside the founder note. Until it exists,
-the panel falls back to the coin monogram.
+`anel.jpg` — the photo beside the founder note. Present. Cropped out of the
+ad poster (kept at `design-assets/mintedscale-poster.png`, deliberately outside
+`public/` so it is not served): head, beard and the gold dissolve, 3:4, no
+fragments of the poster's other panels. 840x1120, JPEG at quality 82, 260KB —
+the PNG was 1.3MB, which is not worth it for a photograph on a landing page.
+
+To replace it, drop in another 3:4 crop under the same name.
 
 ## What to export
 
