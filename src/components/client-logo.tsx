@@ -18,11 +18,14 @@ export function ClientLogo({
   initials,
   label,
   size,
+  fill = false,
 }: {
   logo: string;
   initials: string;
   label: string;
   size: number;
+  /** True when the artwork is already a circle or full-bleed tile. */
+  fill?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -45,7 +48,7 @@ export function ClientLogo({
   return (
     <span
       className={`grid shrink-0 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
-        showLogo ? "bg-bone p-[9%]" : "bg-ink"
+        showLogo ? (fill ? "bg-bone" : "bg-bone p-[9%]") : "bg-ink"
       }`}
       style={{ width: size, height: size }}
       title={label}
@@ -58,7 +61,7 @@ export function ClientLogo({
           alt=""
           aria-hidden="true"
           onError={() => setFailed(true)}
-          className="h-full w-full object-contain"
+          className={`h-full w-full ${fill ? "object-cover" : "object-contain"}`}
         />
       ) : (
         <span

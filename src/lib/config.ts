@@ -32,6 +32,10 @@ export const site = {
  * file falls back to the initials monogram, so logos can be dropped into
  * public/clients/ at any time without touching code. See the README there.
  *
+ * `logoFill` is for artwork that is already a circle or a full-bleed tile: it
+ * fills the frame edge to edge instead of sitting padded on a bone backing,
+ * which would otherwise put a second ring around a logo that has its own.
+ *
  * TO ADD: `built` — the two or three things you actually delivered for each.
  * Leave it empty and the panel simply omits that block rather than showing a
  * gap, so nothing here ever claims work that wasn't done.
@@ -39,6 +43,7 @@ export const site = {
 export const clients = [
   {
     key: "accelit",
+    logoFill: false,
     label: "Accelit IT",
     initials: "AC",
     logo: "/clients/accelit.png",
@@ -48,6 +53,7 @@ export const clients = [
   },
   {
     key: "puzzlit",
+    logoFill: false,
     label: "Puzzles IT",
     initials: "PZ",
     logo: "/clients/puzzles-it.png",
@@ -57,6 +63,7 @@ export const clients = [
   },
   {
     key: "tdt",
+    logoFill: false,
     label: "TDT Training",
     initials: "TD",
     logo: "/clients/tdt-planner.png",
@@ -66,6 +73,7 @@ export const clients = [
   },
   {
     key: "nwar",
+    logoFill: true,
     label: "Nationwide Appliance Repairs",
     initials: "NW",
     logo: "/clients/nwar.png",

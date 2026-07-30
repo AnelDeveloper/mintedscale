@@ -81,7 +81,7 @@ export function Work({ t }: { t: Dictionary }) {
                     : ""
                 }`}
               >
-                <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={38} />
+                <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={38} fill={client.logoFill} />
                 <span className="min-w-0">
                   <span
                     className={`ms-display-soft block truncate text-[0.9375rem] transition-colors duration-500 ${
@@ -126,7 +126,7 @@ function Panel({ index, t }: { index: number; t: Dictionary }) {
     <div className="ms-panel ms-gloss ms-rise relative">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--rule)] p-6 sm:p-7">
         <div className="flex min-w-0 items-center gap-4">
-          <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={52} />
+          <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={52} fill={client.logoFill} />
           <div className="min-w-0">
             <p className="ms-display text-[clamp(1.15rem,2vw,1.6rem)] text-bone">{client.label}</p>
             <p className="ms-mono mt-1.5 text-[0.5625rem]">{copy.sector}</p>

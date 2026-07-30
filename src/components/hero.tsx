@@ -129,6 +129,7 @@ function TrustPill({ t }: { t: Dictionary }) {
               initials={client.initials}
               label={client.label}
               size={32}
+              fill={client.logoFill}
             />
           </li>
         ))}
