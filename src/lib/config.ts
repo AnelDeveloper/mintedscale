@@ -85,6 +85,8 @@ export const clients = [
 
 export const media = {
   portrait: { src: "" },
+  /** Phone shot of the audit output. Falls back to the engine video frame. */
+  engineApp: { src: "/engine/audit-app.png" },
   heroVideo: { src: "", poster: "" },
   engineVideo: { src: "", poster: "" },
   films: [

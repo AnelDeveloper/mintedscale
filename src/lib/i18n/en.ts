@@ -189,6 +189,8 @@ export const en = {
     asideBody:
       "Every partner build starts with an audit from the engine. You see the output before you commit to anything.",
     asideCta: "Run my audit",
+    appCaption: "The audit output",
+    appNote: "A projection from your own numbers — not revenue earned.",
     producesLabel: "What it produces",
     modules: [
       {

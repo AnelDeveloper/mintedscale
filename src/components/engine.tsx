@@ -1,5 +1,6 @@
 import { media } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
+import { AppShot } from "./app-shot";
 import { Arrow } from "./hero";
 import { Eyebrow, Lede } from "./section";
 import { VideoFrame } from "./video-frame";
@@ -80,13 +81,21 @@ export function Engine({ t }: { t: Dictionary }) {
             data-reveal
             style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
-            <VideoFrame
-              src={media.engineVideo.src}
-              poster={media.engineVideo.poster}
-              label={e.videoLabel}
-              reservedLabel={t.video.reserved}
-              playLabel={t.video.play}
-              ratio="16/9"
+            <AppShot
+              src={media.engineApp.src}
+              alt={e.appCaption}
+              caption={e.appCaption}
+              note={e.appNote}
+              fallback={
+                <VideoFrame
+                  src={media.engineVideo.src}
+                  poster={media.engineVideo.poster}
+                  label={e.videoLabel}
+                  reservedLabel={t.video.reserved}
+                  playLabel={t.video.play}
+                  ratio="16/9"
+                />
+              }
             />
 
             <div className="ms-panel ms-gloss relative mt-4 p-6">
