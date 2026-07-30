@@ -1,6 +1,6 @@
 import { media, site } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
-import { CoinMark } from "./coin-mark";
+import { FounderPortrait } from "./founder-portrait";
 
 /**
  * The founder band. Deliberately unlabelled — the section above already says
@@ -40,7 +40,12 @@ export function Studio({ t }: { t: Dictionary }) {
 
         {/* Founder note */}
         <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[22rem_minmax(0,1fr)]">
-          <Portrait t={t} />
+          <FounderPortrait
+            src={media.portrait.src}
+            alt={s.portraitAlt}
+            founder={site.founder}
+            slotLabel={s.portraitSlot}
+          />
 
           <div
             className="bg-ink p-7 sm:p-9"
@@ -65,31 +70,5 @@ export function Studio({ t }: { t: Dictionary }) {
         </div>
       </div>
     </section>
-  );
-}
-
-function Portrait({ t }: { t: Dictionary }) {
-  return (
-    <div
-      className="relative flex min-h-[16rem] items-center justify-center overflow-hidden bg-ink"
-      data-reveal
-    >
-      {media.portrait.src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={media.portrait.src}
-          alt={t.studio.portraitAlt}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        <div className="flex flex-col items-center gap-4 px-6 py-12 text-center">
-          <CoinMark size={44} id="portrait" />
-          <p className="ms-mono text-gold-200">{site.founder}</p>
-          <p className="ms-mono text-[0.5625rem] normal-case tracking-[0.14em] text-char">
-            {t.studio.portraitSlot}
-          </p>
-        </div>
-      )}
-    </div>
   );
 }
