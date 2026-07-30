@@ -34,7 +34,7 @@ export function FounderPortrait({
 
   return (
     <div
-      className="relative flex min-h-[16rem] items-center justify-center overflow-hidden bg-ink"
+      className="relative flex aspect-[10/19] items-center justify-center overflow-hidden bg-ink sm:aspect-[3/4] lg:aspect-auto lg:min-h-[16rem]"
       data-reveal
     >
       {showPhoto ? (

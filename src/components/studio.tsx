@@ -39,7 +39,7 @@ export function Studio({ t }: { t: Dictionary }) {
         </div>
 
         {/* Founder note */}
-        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[22rem_minmax(0,1fr)]">
+        <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-[16rem_minmax(0,1fr)]">
           <FounderPortrait
             src={media.portrait.src}
             alt={s.portraitAlt}
