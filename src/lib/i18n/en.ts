@@ -377,7 +377,7 @@ export const en = {
       },
       {
         q: "You're new to creator brands. Why should I take the risk?",
-        a: "Because of how it's priced, you aren't taking the financial risk — I am. The product work isn't new: eight years of platforms, apps and storefronts for companies like Accelit IT, Puzzles IT, TDT Planner and NWAR Australia. What's new is applying it to creator brands, and I'd rather say that plainly than invent a creator client list. Start with the free audit and judge the work before committing to anything.",
+        a: "Because of how it's priced, you aren't taking the financial risk — I am. The product work isn't new: eight years of platforms, apps and storefronts for companies like Accelit IT, Puzzles IT, TDT Training and Nationwide Appliance Repairs. What's new is applying it to creator brands, and I'd rather say that plainly than invent a creator client list. Start with the free audit and judge the work before committing to anything.",
       },
       {
         q: "How big does my audience need to be?",
