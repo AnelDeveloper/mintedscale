@@ -26,7 +26,11 @@ export const site = {
 };
 
 /**
- * Real prior engagements. An empty `logo` falls back to the initials.
+ * Real prior engagements.
+ *
+ * Every `logo` path is wired whether or not the file exists yet — a missing
+ * file falls back to the initials monogram, so logos can be dropped into
+ * public/clients/ at any time without touching code. See the README there.
  *
  * TO ADD: `built` — the two or three things you actually delivered for each.
  * Leave it empty and the panel simply omits that block rather than showing a
@@ -37,7 +41,7 @@ export const clients = [
     key: "accelit",
     label: "Accelit IT",
     initials: "AC",
-    logo: "",
+    logo: "/clients/accelit.png",
     href: "https://accelit.com.au",
     domain: "accelit.com.au",
     built: [] as string[],
@@ -64,7 +68,7 @@ export const clients = [
     key: "nwar",
     label: "Nationwide Appliance Repairs",
     initials: "NW",
-    logo: "",
+    logo: "/clients/nwar.png",
     href: "https://nationwideappliancerepairs.com.au",
     domain: "nationwideappliancerepairs.com.au",
     built: [] as string[],

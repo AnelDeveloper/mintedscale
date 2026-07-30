@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from "react";
 import { clients } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
+import { ClientLogo } from "./client-logo";
 import { Arrow } from "./hero";
 import { Eyebrow, Lede } from "./section";
 
@@ -80,7 +81,7 @@ export function Work({ t }: { t: Dictionary }) {
                     : ""
                 }`}
               >
-                <Badge client={client} size={38} />
+                <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={38} />
                 <span className="min-w-0">
                   <span
                     className={`ms-display-soft block truncate text-[0.9375rem] transition-colors duration-500 ${
@@ -116,29 +117,6 @@ export function Work({ t }: { t: Dictionary }) {
   );
 }
 
-type Client = (typeof clients)[number];
-
-function Badge({ client, size }: { client: Client; size: number }) {
-  return (
-    <span
-      className={`grid shrink-0 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
-        client.logo ? "bg-bone" : "bg-ink"
-      }`}
-      style={{ width: size, height: size }}
-      aria-hidden="true"
-    >
-      {client.logo ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={client.logo} alt="" className="h-full w-full object-cover" />
-      ) : (
-        <span className="ms-mono text-[0.5rem] tracking-[0.06em] text-gold-200">
-          {client.initials}
-        </span>
-      )}
-    </span>
-  );
-}
-
 function Panel({ index, t }: { index: number; t: Dictionary }) {
   const w = t.work;
   const client = clients[index];
@@ -148,7 +126,7 @@ function Panel({ index, t }: { index: number; t: Dictionary }) {
     <div className="ms-panel ms-gloss ms-rise relative">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--rule)] p-6 sm:p-7">
         <div className="flex min-w-0 items-center gap-4">
-          <Badge client={client} size={52} />
+          <ClientLogo logo={client.logo} initials={client.initials} label={client.label} size={52} />
           <div className="min-w-0">
             <p className="ms-display text-[clamp(1.15rem,2vw,1.6rem)] text-bone">{client.label}</p>
             <p className="ms-mono mt-1.5 text-[0.5625rem]">{copy.sector}</p>

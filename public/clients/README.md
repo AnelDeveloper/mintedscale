@@ -1,17 +1,29 @@
 # Client logos
 
-Square images, ideally 128×128 or larger, PNG or SVG with a transparent or
-dark background. They render inside a 32px circle in the hero trust pill.
+Drop a file here with the exact name below and it appears on the site — no
+code change needed. A name that does not match, or a file that is not there
+yet, falls back to the initials monogram rather than a broken image.
 
-Drop a file here, then point at it from `studio.clients.items[].logo` in
-`src/lib/content.ts`:
+| Company | Filename | Status |
+|---|---|---|
+| Accelit IT | `accelit.png` | **missing — shows "AC"** |
+| Puzzles IT | `puzzles-it.png` | present |
+| TDT Training | `tdt-planner.png` | present |
+| Nationwide Appliance Repairs | `nwar.png` | **missing — shows "NW"** |
 
-```ts
-{ label: "Accelit IT", initials: "AC", logo: "/clients/accelit.png", href: "…" }
-```
+`.svg`, `.png` and `.webp` all work; if you use a different extension, update
+`logo` in `src/lib/config.ts` to match.
 
-With `logo` empty the circle falls back to the `initials` monogram, so the
-pill looks finished either way.
+## What crops well
 
-Use a logo you have the right to display. These are your own clients, so that
-is normally fine — but ask if you are unsure.
+These render inside a circle at 32px (hero pill) and 52px (work panel), sized
+with `object-contain` so nothing is cut off.
+
+A **square, icon-only** crop is what you want. A wide wordmark technically
+fits, but at 32px the words are unreadable — the Nationwide logo with the full
+"NATIONWIDE APPLIANCE REPAIRS" text beside the N will shrink to a smudge. Use
+just the N if you have it.
+
+Transparent or white backgrounds are both fine — the circle puts a bone
+backing behind every logo, since most marks are dark ink and would vanish
+against the page.

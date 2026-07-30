@@ -1,5 +1,6 @@
 import { calculator, clients, heroSample, media, site } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
+import { ClientLogo } from "./client-logo";
 import { VideoFrame } from "./video-frame";
 
 /**
@@ -120,22 +121,15 @@ function TrustPill({ t }: { t: Dictionary }) {
         {clients.map((client, i) => (
           <li
             key={client.label}
-            /* Logos get a light backing — plenty of marks are dark ink on
-               transparent, and would vanish against the black. */
-            className={`relative grid h-8 w-8 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
-              client.logo ? "bg-bone" : "bg-ink"
-            }`}
+            className="relative"
             style={{ marginLeft: i === 0 ? 0 : "-0.55rem", zIndex: clients.length - i }}
-            title={client.label}
           >
-            {client.logo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={client.logo} alt={client.label} className="h-full w-full object-cover" />
-            ) : (
-              <span className="ms-mono text-[0.5rem] tracking-[0.06em] text-gold-200">
-                {client.initials}
-              </span>
-            )}
+            <ClientLogo
+              logo={client.logo}
+              initials={client.initials}
+              label={client.label}
+              size={32}
+            />
           </li>
         ))}
       </ul>
