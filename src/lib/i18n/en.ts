@@ -61,21 +61,38 @@ export const en = {
         sector: "Business IT services",
         place: "Melbourne, Australia",
         does: "Managed IT support, cybersecurity and infrastructure for small and medium businesses.",
+        built: [
+          "Web platform and mobile app",
+          "IT ticketing system",
+          "Cybersecurity",
+        ],
       },
       {
         sector: "Software product",
         place: "Australia",
         does: "A product business shipping its own application.",
+        built: [
+          "Web platform and mobile app",
+          "Shipped as the company's own product",
+        ],
       },
       {
         sector: "Training & licensing",
         place: "Victoria, Australia",
         does: "A registered training organisation running heavy vehicle, forklift and plant licensing across six locations.",
+        built: [
+          "Web platform and mobile app",
+          "For heavy vehicle and plant licensing",
+        ],
       },
       {
         sector: "Field service",
         place: "Australia-wide",
         does: "Appliance repair for homes and businesses, booked online and dispatched nationally.",
+        built: [
+          "Web platform and mobile app",
+          "For national field service",
+        ],
       },
     ],
   },

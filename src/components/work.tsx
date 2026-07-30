@@ -164,9 +164,9 @@ function Panel({ index, t }: { index: number; t: Dictionary }) {
         <div className="p-6 sm:p-7">
           <p className="ms-mono text-gold-400">{w.builtLabel}</p>
 
-          {client.built.length > 0 ? (
+          {copy.built.length > 0 ? (
             <ul className="mt-4 space-y-2.5">
-              {client.built.map((item) => (
+              {copy.built.map((item) => (
                 <li key={item} className="flex items-baseline gap-3 text-[0.9375rem] text-bone">
                   <span className="block h-px w-3 shrink-0 bg-gold-500" aria-hidden="true" />
                   {item}

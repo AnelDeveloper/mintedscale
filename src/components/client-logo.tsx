@@ -48,9 +48,15 @@ export function ClientLogo({
   return (
     <span
       className={`grid shrink-0 place-items-center overflow-hidden rounded-full border border-[var(--rule-gold)] ${
-        showLogo ? (fill ? "bg-bone" : "bg-bone p-[9%]") : "bg-ink"
+        showLogo ? "bg-bone" : "bg-ink"
       }`}
-      style={{ width: size, height: size }}
+      /*
+        Padding in px, derived from `size`. A percentage would resolve against
+        the *parent's* width, not this circle's — which collapsed the 38px
+        circles in the work cards to 0x0 because their parent is ~250px wide,
+        while the same class behaved fine in the hero where the parent is 32px.
+      */
+      style={{ width: size, height: size, padding: fill ? 0 : Math.round(size * 0.1) }}
       title={label}
     >
       {showLogo ? (

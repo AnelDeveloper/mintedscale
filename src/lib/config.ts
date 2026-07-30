@@ -36,6 +36,9 @@ export const site = {
  * fills the frame edge to edge instead of sitting padded on a bone backing,
  * which would otherwise put a second ring around a logo that has its own.
  *
+ * What was delivered for each lives in the dictionaries (`work.items[].built`)
+ * because it is prose and has to translate.
+ *
  * TO ADD: `built` — the two or three things you actually delivered for each.
  * Leave it empty and the panel simply omits that block rather than showing a
  * gap, so nothing here ever claims work that wasn't done.
@@ -46,20 +49,18 @@ export const clients = [
     logoFill: false,
     label: "Accelit IT",
     initials: "AC",
-    logo: "/clients/accelit.png",
+    logo: "/clients/accelit-256px.png",
     href: "https://accelit.com.au",
     domain: "accelit.com.au",
-    built: [] as string[],
   },
   {
     key: "puzzlit",
     logoFill: false,
     label: "Puzzles IT",
     initials: "PZ",
-    logo: "/clients/puzzles-it.png",
+    logo: "/clients/puzzles-it.svg",
     href: "https://www.puzzlitapp.com",
     domain: "puzzlitapp.com",
-    built: [] as string[],
   },
   {
     key: "tdt",
@@ -69,17 +70,15 @@ export const clients = [
     logo: "/clients/tdt-planner.png",
     href: "https://transportdrivertraining.com.au",
     domain: "transportdrivertraining.com.au",
-    built: [] as string[],
   },
   {
     key: "nwar",
     logoFill: true,
     label: "Nationwide Appliance Repairs",
     initials: "NW",
-    logo: "/clients/nwar.png",
+    logo: "/clients/nwar_.jpg",
     href: "https://nationwideappliancerepairs.com.au",
     domain: "nationwideappliancerepairs.com.au",
-    built: [] as string[],
   },
 ];
 

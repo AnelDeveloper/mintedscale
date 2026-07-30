@@ -63,21 +63,38 @@ export const bs: Dictionary = {
         sector: "Poslovne IT usluge",
         place: "Melbourne, Australija",
         does: "Upravljana IT podrška, sigurnost i infrastruktura za mala i srednja preduzeća.",
+        built: [
+          "Web platforma i mobilna aplikacija",
+          "Sistem za IT tikete",
+          "Cybersecurity",
+        ],
       },
       {
         sector: "Softverski proizvod",
         place: "Australija",
         does: "Kompanija koja razvija i isporučuje vlastitu aplikaciju.",
+        built: [
+          "Web platforma i mobilna aplikacija",
+          "Isporučeno kao vlastiti proizvod kompanije",
+        ],
       },
       {
         sector: "Obuka i licenciranje",
         place: "Viktorija, Australija",
         does: "Registrovana obrazovna organizacija za licence za teška vozila, viljuškare i građevinske mašine, na šest lokacija.",
+        built: [
+          "Web platforma i mobilna aplikacija",
+          "Za licenciranje teških vozila i mašina",
+        ],
       },
       {
         sector: "Servis na terenu",
         place: "Cijela Australija",
         does: "Servis kućanskih aparata za domove i firme, zakazivanje online i izlazak na terenu širom zemlje.",
+        built: [
+          "Web platforma i mobilna aplikacija",
+          "Za servis na terenu širom zemlje",
+        ],
       },
     ],
   },
