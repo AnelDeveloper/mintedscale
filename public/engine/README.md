@@ -1,20 +1,28 @@
-# Engine app shot
+# Engine media
 
-`audit-app.png` — the phone shot of the audit output, shown in the AI system
-section. Without it, that slot falls back to the reserved video frame.
+`engine-demo.mp4` + `engine-demo-poster.jpg` — a screen recording of the real
+MintedScale AI product, shown in the AI system section.
 
-Portrait, roughly 9:19.5 (a phone). A transparent background is best: the shot
-floats on the section's gold glow with a drop shadow, no frame of its own.
-Renders at up to 272px wide, so the figures on screen need to be large.
+Converted from the original QuickTime capture with macOS `avconvert`:
+
+```
+avconvert --preset Preset1280x720 --source in.mov --output engine-demo.mp4 --replace
+```
+
+The source `.mov` was H.264 already, but QuickTime is not a container every
+browser handles reliably, and `video/quicktime` is not universally accepted.
+The source is kept at `design-assets/engine-demo-source.mov`, outside `public/`
+so 4.3MB of unused file is not served to every visitor.
+
+The poster frame was captured at 1.5s. Without one the frame is black until
+the first bytes arrive.
 
 ## The caption is not decoration
 
-The shot's chart runs MAR→JUL with 1W/1M/3M/1Y/ALL toggles — the visual
-grammar of *historical* data. The figure beside it (€87,500) is a projection
-from the calculator's model, not revenue anybody earned.
+The deck in the recording shows a creator name, 254K followers and
+"€148,094 expected revenue". That creator is sample data. The caption says so:
 
-So the caption underneath reads "A projection from your own numbers — not
-revenue earned." Do not remove it. Every number in the shot matches the
-calculator's defaults exactly (250,000 × 3.5% × 8% × €125 = €87,500, ×3.4 =
-€297,500), which is what makes the figure defensible — and the caption is what
-stops the chart implying more than the number does.
+> A recording of the real product. The creator shown is sample data.
+
+Leave it. A product demo that reads as a client result is the one mistake this
+page is built to avoid.

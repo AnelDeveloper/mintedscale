@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MintedScale — potpis za email</title>
+<style>
+  body{margin:0;background:#080706;color:#f2ede3;
+       font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+       padding:48px 24px;}
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{font:700 20px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+     margin:0 0 6px;letter-spacing:-0.01em;}
+  .lead{color:#8f887c;margin:0 0 32px;font-size:14px;}
+  .label{font:400 11px/1 ui-monospace,Menlo,monospace;letter-spacing:0.22em;
+         text-transform:uppercase;color:#8f887c;margin:40px 0 12px;}
+  /* Bijela ploca = kako izgleda u stvarnom emailu. */
+  .canvas{background:#ffffff;padding:28px;border-radius:6px;}
+  .bar{display:flex;align-items:center;gap:14px;margin:18px 0 0;flex-wrap:wrap;}
+  button{appearance:none;border:0;cursor:pointer;
+         background:linear-gradient(180deg,#f0d486 0%,#d9a94c 55%,#b8842f 100%);
+         color:#1a1409;font:700 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+         padding:15px 26px;border-radius:6px;letter-spacing:0.01em;}
+  button:active{transform:translateY(1px);}
+  #status{font:400 13px/1 ui-monospace,Menlo,monospace;color:#8f887c;}
+  #status.ok{color:#3fd98a;}
+  #status.bad{color:#e29494;}
+  .steps{color:#c9c2b6;font-size:14px;padding-left:20px;margin:12px 0 0;}
+  .steps li{margin:0 0 9px;}
+  code{font:400 13px/1 ui-monospace,Menlo,monospace;color:#e8c271;}
+  .note{border-left:2px solid #d9a94c;padding:4px 0 4px 14px;color:#8f887c;font-size:13px;margin:18px 0 0;}
+  details{margin:14px 0 0;color:#8f887c;font-size:14px;}
+  summary{cursor:pointer;color:#c9c2b6;}
+  textarea{width:100%;height:200px;background:#141110;color:#c9c2b6;border:1px solid #241e18;
+           border-radius:6px;padding:14px;margin:12px 0 0;
+           font:400 12px/1.6 ui-monospace,Menlo,monospace;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Potpis za email</h1>
+  <p class="lead">Pritisni dugme &mdash; potpis ide u clipboard sa svim bojama.
+  Onda samo <code>Cmd+V</code> u Gmail.</p>
+
+  <div class="canvas">
+    <div id="sig">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+        <tr>
+          <td style="padding:0 0 3px;font-size:15px;font-weight:700;color:#080706;letter-spacing:-0.01em;">Anel Kujović</td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 10px;font-size:13px;color:#6b655c;">Founder &middot; <span style="color:#080706;font-weight:600;">Minted</span><span style="color:#8a5f1e;font-weight:600;">Scale</span> &nbsp;&middot;&nbsp; The Creator Mint</td>
+        </tr>
+        <tr>
+          <td style="border-top:1px solid #d9a94c;font-size:0;line-height:0;height:1px;">&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 0 0;font-size:12px;color:#6b655c;">
+            <a href="mailto:anel@mintedscale.com" style="color:#080706;text-decoration:none;">anel@mintedscale.com</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://mintedscale.com" style="color:#080706;text-decoration:none;">mintedscale.com</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://instagram.com/mintedscale" style="color:#080706;text-decoration:none;">@mintedscale</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="bar">
+    <button id="copy" type="button">Kopiraj potpis</button>
+    <span id="status">&nbsp;</span>
+  </div>
+
+  <p class="label">Sad u Gmail</p>
+  <ol class="steps">
+    <li>Gmail &rarr; zup&#269;anik gore desno &rarr; <strong>See all settings</strong>.</li>
+    <li>Tab <strong>General</strong> &rarr; skroluj do <strong>Signature</strong> &rarr; <strong>+ Create new</strong> &rarr; ime <code>MintedScale</code> &rarr; <strong>Create</strong>.</li>
+    <li><strong>Klikni unutar velikog praznog polja desno</strong> tako da kursor trep&#263;e, pa <code>Cmd+V</code>.
+        Bez tog klika Gmail nema gdje zalijepiti i izgleda kao da se ni&#353;ta ne de&#353;ava.</li>
+    <li>Ispod polja: <strong>For new emails use</strong> i <strong>On reply/forward use</strong> &rarr; oba na <code>MintedScale</code>.</li>
+    <li>Skroluj do <strong>samog dna stranice</strong> &rarr; <strong>Save Changes</strong>. Gmail ne &#269;uva sam.</li>
+  </ol>
+
+  <p class="note">Ako zalijepi&#353; pa vidi&#353; goli tekst bez zlatne linije &mdash; pritisnuo si
+  <code>Cmd+Shift+V</code>. To lijepi bez formatiranja. Mora obi&#269;an <code>Cmd+V</code>.</p>
+
+  <details>
+    <summary>Plan B &mdash; ako dugme ne radi</summary>
+    <p>Zalijepi ovaj kod u alat koji tra&#382;i HTML izvor (Resend, Mailchimp, Outlook desktop template).
+    Za Gmail ovo ne&#263;e raditi &mdash; Gmail nema polje za izvorni kod.</p>
+    <textarea readonly onclick="this.select()">&lt;table role="presentation" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;"&gt;
+  &lt;tr&gt;
+    &lt;td style="padding:0 0 3px;font-size:15px;font-weight:700;color:#080706;letter-spacing:-0.01em;"&gt;Anel Kujović&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="padding:0 0 10px;font-size:13px;color:#6b655c;"&gt;Founder &amp;middot; &lt;span style="color:#080706;font-weight:600;"&gt;Minted&lt;/span&gt;&lt;span style="color:#8a5f1e;font-weight:600;"&gt;Scale&lt;/span&gt; &amp;nbsp;&amp;middot;&amp;nbsp; The Creator Mint&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="border-top:1px solid #d9a94c;font-size:0;line-height:0;height:1px;"&gt;&amp;nbsp;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="padding:10px 0 0;font-size:12px;color:#6b655c;"&gt;
+      &lt;a href="mailto:anel@mintedscale.com" style="color:#080706;text-decoration:none;"&gt;anel@mintedscale.com&lt;/a&gt;
+      &amp;nbsp;&amp;middot;&amp;nbsp;
+      &lt;a href="https://mintedscale.com" style="color:#080706;text-decoration:none;"&gt;mintedscale.com&lt;/a&gt;
+      &amp;nbsp;&amp;middot;&amp;nbsp;
+      &lt;a href="https://instagram.com/mintedscale" style="color:#080706;text-decoration:none;"&gt;@mintedscale&lt;/a&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</textarea>
+  </details>
+
+</div>
+
+<script>
+  var status = document.getElementById('status');
+
+  function flash(msg, cls) {
+    status.textContent = msg;
+    status.className = cls;
+  }
+
+  /* Dva puta poku&#353;avamo, jer se ponasaju razlicito na file:// i na http://.
+     execCommand je prvi: radi i kad Clipboard API nije dozvoljen. */
+  document.getElementById('copy').addEventListener('click', function () {
+    var node = document.getElementById('sig');
+
+    var range = document.createRange();
+    range.selectNodeContents(node);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    sel.removeAllRanges();
+
+    if (ok) { flash('Kopirano — sad Cmd+V u Gmail', 'ok'); return; }
+
+    if (navigator.clipboard && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([node.innerHTML], { type: 'text/html' }),
+        'text/plain': new Blob([node.innerText], { type: 'text/plain' })
+      })]).then(function () {
+        flash('Kopirano — sad Cmd+V u Gmail', 'ok');
+      }).catch(function () {
+        flash('Nije uspjelo — otvori Plan B ispod', 'bad');
+      });
+      return;
+    }
+
+    flash('Nije uspjelo — otvori Plan B ispod', 'bad');
+  });
+</script>
+</body>
+</html>

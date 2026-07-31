@@ -1,6 +1,5 @@
 import { media } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
-import { AppShot } from "./app-shot";
 import { Arrow } from "./hero";
 import { Eyebrow, Lede } from "./section";
 import { VideoFrame } from "./video-frame";
@@ -85,22 +84,22 @@ export function Engine({ t }: { t: Dictionary }) {
             data-reveal
             style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
-            <AppShot
-              src={media.engineApp.src}
-              alt={e.appCaption}
-              caption={e.appCaption}
-              note={e.appNote}
-              fallback={
-                <VideoFrame
-                  src={media.engineVideo.src}
-                  poster={media.engineVideo.poster}
-                  label={e.videoLabel}
-                  reservedLabel={t.video.reserved}
-                  playLabel={t.video.play}
-                  ratio="16/9"
-                />
-              }
-            />
+            <figure>
+              <VideoFrame
+                src={media.engineVideo.src}
+                poster={media.engineVideo.poster}
+                label={e.videoLabel}
+                reservedLabel={t.video.reserved}
+                playLabel={t.video.play}
+                ratio="16/9"
+              />
+              {/* The deck in the recording carries a creator name and a
+                  revenue figure. Saying it is sample data keeps a product
+                  demo from reading as a client result. */}
+              <figcaption className="ms-mono mt-3 text-[0.5rem] normal-case leading-[1.7] tracking-[0.1em]">
+                {e.videoNote}
+              </figcaption>
+            </figure>
 
             <div className="ms-panel ms-gloss relative mt-4 p-6">
               <p className="text-[0.9375rem] leading-[1.7] text-bone">{e.asideBody}</p>

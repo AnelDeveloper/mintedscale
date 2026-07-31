@@ -213,6 +213,7 @@ export const bs: Dictionary = {
     asideBody:
       "Svaka saradnja počinje analizom iz sistema. Rezultat vidiš prije nego se na išta obavežeš.",
     asideCta: "Analiziraj moju publiku",
+    videoNote: "Snimak stvarnog proizvoda. Prikazani kreator je primjer, nije klijent.",
     appCaption: "Rezultat analize",
     appNote: "Projekcija na osnovu tvojih brojki — nije zarađen prihod.",
     producesLabel: "Rezultat",
