@@ -209,6 +209,8 @@ export const en = {
     videoNote: "A recording of the real product. The creator shown is sample data.",
     appCaption: "The audit output",
     appNote: "A projection from your own numbers — not revenue earned.",
+    enlarge: "Open full size",
+    close: "Close",
     shotsLabel: "Inside the product",
     shots: [
       "Deck — the creator's overview, with expected revenue as a range and a confidence figure",

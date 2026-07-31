@@ -216,6 +216,8 @@ export const bs: Dictionary = {
     videoNote: "Snimak stvarnog proizvoda. Prikazani kreator je primjer, nije klijent.",
     appCaption: "Rezultat analize",
     appNote: "Projekcija na osnovu tvojih brojki — nije zarađen prihod.",
+    enlarge: "Otvori u punoj veličini",
+    close: "Zatvori",
     shotsLabel: "Unutar proizvoda",
     shots: [
       "Pregled — nadzorna ploča kreatora, s očekivanim prihodom kao rasponom i stepenom pouzdanosti",
