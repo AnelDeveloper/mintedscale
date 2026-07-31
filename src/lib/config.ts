@@ -85,8 +85,17 @@ export const clients = [
 export const media = {
   portrait: { src: "/portrait/anel.jpg" },
 
+  /** Landscape shot of the founder at the desk — fills the hero until a film exists. */
+  heroImage: { src: "/portrait/anel-desk.jpg" },
   heroVideo: { src: "", poster: "" },
   engineVideo: { src: "/engine/engine-demo.mp4", poster: "/engine/engine-demo-poster.jpg" },
+  /** Screens from the real product, shown under the AI system section. */
+  engineShots: [
+    { key: "dashboard", src: "/engine/app-dashboard.jpg" },
+    { key: "plan", src: "/engine/app-plan.jpg" },
+    { key: "agents", src: "/engine/app-agents.jpg" },
+    { key: "tracker", src: "/engine/app-tracker.jpg" },
+  ],
   films: [
     { id: "v1", src: "", poster: "" },
     { id: "v2", src: "", poster: "" },

@@ -86,11 +86,12 @@ export function Hero({ t }: { t: Dictionary }) {
 
           {/* ── Right: the film, with the number that matters clipped to it ── */}
           <div
-            className="ms-rise relative min-w-0 sm:pb-[clamp(4rem,8vw,6rem)]"
+            className="ms-rise relative min-w-0 sm:pb-[clamp(6.5rem,12vw,9.5rem)]"
             style={{ animationDelay: "560ms" }}
           >
             <VideoFrame
               src={media.heroVideo.src}
+              image={media.heroImage.src}
               poster={media.heroVideo.poster}
               label={h.videoLabel}
               reservedLabel={t.video.reserved}

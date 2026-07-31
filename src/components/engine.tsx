@@ -110,6 +110,37 @@ export function Engine({ t }: { t: Dictionary }) {
             </div>
           </div>
         </div>
+
+        {/* Screens from the real product. Bigger than a thumbnail on purpose —
+            at 300px these read as generic dark UI and prove nothing. */}
+        <div className="mt-[clamp(2rem,3.6vw,3rem)]">
+          <p className="ms-mono text-gold-400" data-reveal>
+            {e.shotsLabel}
+          </p>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {media.engineShots.map((shot, i) => (
+              <figure
+                key={shot.key}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+              >
+                <div className="ms-card ms-gloss overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={shot.src}
+                    alt={e.shots[i]}
+                    loading="lazy"
+                    className="block h-auto w-full"
+                  />
+                </div>
+                <figcaption className="ms-mono mt-3 text-[0.5rem] normal-case leading-[1.7] tracking-[0.1em]">
+                  {e.shots[i]}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

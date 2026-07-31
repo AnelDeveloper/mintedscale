@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
  */
 export function VideoFrame({
   src,
+  image,
   poster,
   label,
   duration,
@@ -18,6 +19,8 @@ export function VideoFrame({
   className = "",
 }: {
   src?: string;
+  /** Shown when there is no video yet — a still beats a reserved frame. */
+  image?: string;
   poster?: string;
   label: string;
   duration?: string;
@@ -30,6 +33,15 @@ export function VideoFrame({
   const [playing, setPlaying] = useState(false);
 
   const aspect = ratio === "9/16" ? "aspect-[9/16]" : "aspect-video";
+
+  if (!src && image) {
+    return (
+      <div className={`ms-video ${aspect} ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt={label} className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+    );
+  }
 
   if (!src) {
     return (
