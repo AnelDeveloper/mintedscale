@@ -1,0 +1,85 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1200px; height:630px; background:#080706; overflow:hidden;
+         font-family:'Archivo',Helvetica,sans-serif; position:relative; }
+
+  /* the gold field, same recipe as the engine section */
+  .glow { position:absolute; inset:0;
+    background:radial-gradient(ellipse 58% 62% at 76% 24%, rgba(217,169,76,0.20) 0%, transparent 68%); }
+  .glow2 { position:absolute; inset:0;
+    background:radial-gradient(ellipse 44% 50% at 8% 96%, rgba(217,169,76,0.09) 0%, transparent 70%); }
+
+  /* portrait on the right, dissolved into the black so it reads as texture */
+  .portrait { position:absolute; top:0; right:0; width:520px; height:630px;
+    background:url('../../public/portrait/anel.jpg') center 22% / cover no-repeat; opacity:.92;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 22%, #000 62%);
+            mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 22%, #000 62%); }
+  .portrait::after { content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(8,7,6,.45) 0%, transparent 26%, transparent 68%, rgba(8,7,6,.85) 100%); }
+
+  .frame { position:absolute; inset:26px; border:1px solid rgba(217,169,76,0.26); border-radius:18px; }
+
+  .wrap { position:relative; height:100%; padding:74px 76px; display:flex; flex-direction:column; }
+
+  .top { display:flex; align-items:center; gap:16px; }
+  .mark { width:52px; height:52px; flex:none; }
+  .word { font-size:34px; font-weight:800; letter-spacing:-.018em; line-height:1; }
+  .bone { color:#f2ede3; }
+  .gold { background-image:linear-gradient(100deg,#b8842f 0%,#f7e7bc 18%,#d9a94c 38%,#f9edcb 55%,#c99a3e 74%,#f0d486 92%);
+          background-size:220% 100%; background-position:12% 0;
+          -webkit-background-clip:text; background-clip:text; color:transparent;
+          padding-top:.1em; padding-bottom:.2em; margin-top:-.1em; margin-bottom:-.2em; }
+
+  .badge { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em;
+           text-transform:uppercase; color:#e8c271; border:1px solid rgba(217,169,76,0.34);
+           border-radius:999px; padding:8px 16px; white-space:nowrap; }
+
+  h1 { margin-top:auto; font-size:66px; font-weight:800; letter-spacing:-.028em; line-height:1.06; max-width:16ch; }
+  .sub { margin-top:22px; font-size:21px; line-height:1.5; color:#a8a099; max-width:30ch; }
+
+  .rule { margin-top:auto; height:1px; background:linear-gradient(90deg, rgba(217,169,76,.55), rgba(242,237,227,.06) 72%, transparent); }
+
+  .facts { margin-top:22px; display:flex; gap:26px; align-items:center;
+           font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.17em;
+           text-transform:uppercase; color:#8d857d; white-space:nowrap; }
+  .facts b { color:#f0d486; font-weight:500; }
+  .dot { color:#b8842f; }
+</style></head><body>
+  <div class="glow"></div><div class="glow2"></div>
+  <div class="portrait"></div>
+  <div class="frame"></div>
+
+  <div class="wrap">
+    <div class="top">
+      <svg class="mark" viewBox="0 0 100 100" fill="none">
+        <defs>
+          <linearGradient id="r" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f9edcb"/><stop offset="45%" stop-color="#d9a94c"/><stop offset="100%" stop-color="#a9762a"/>
+          </linearGradient>
+          <linearGradient id="f" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f9edcb"/><stop offset="30%" stop-color="#f0d486"/>
+            <stop offset="62%" stop-color="#c99a3e"/><stop offset="100%" stop-color="#edcd7d"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" stroke="url(#r)" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="39" stroke="rgba(217,169,76,0.22)" stroke-width="1"/>
+        <rect x="46.5" y="8.5" width="7" height="7" transform="rotate(45 50 12)" fill="url(#f)"/>
+        <rect x="46.5" y="84.5" width="7" height="7" transform="rotate(45 50 88)" fill="url(#f)"/>
+        <text x="50" y="50" text-anchor="middle" dominant-baseline="central" fill="url(#f)"
+              font-family="Archivo,Helvetica,sans-serif" font-weight="800" font-size="34" letter-spacing="-1">MS</text>
+      </svg>
+      <span class="word"><span class="bone">Minted</span><span class="gold">Scale</span></span>
+      <span class="badge">SADA PRIMAM PARTNERE</span>
+    </div>
+
+    <h1><span class="bone">Pretvaram kreatore</span><br><span class="gold">u brendove.</span></h1>
+    <p class="sub">Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda.</p>
+
+    <div class="rule"></div>
+    <div class="facts"><b>8+ godina gradnje proizvoda</b> <span class="dot">◆</span> €0 unaprijed <span class="dot">◆</span> Podjela prihoda <span class="dot">◆</span> Est. MMXXVI</div>
+  </div>
+</body></html>

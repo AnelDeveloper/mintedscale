@@ -19,7 +19,10 @@ export const site = {
   email: "anel@mintedscale.com",
   established: "Est. MMXXVI",
   founder: "Anel Kujović",
-  url: "https://mintedscale.com",
+  // The www host, because the apex 308-redirects to it. Canonical links and
+  // the share-card URL are built from this, and a scraper that will not follow
+  // a redirect for an image would otherwise come away with nothing.
+  url: "https://www.mintedscale.com",
   instagram: "https://instagram.com/mintedscale",
   tiktok: "https://tiktok.com/@mintedscale",
   handle: "@mintedscale",

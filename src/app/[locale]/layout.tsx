@@ -41,6 +41,24 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+/**
+ * The share card, one per locale.
+ *
+ * Without og:image a scraper picks the first image it finds in the markup —
+ * which here is the first client logo in the hero, so links previewed as
+ * somebody else's brand. Baked as a flat JPEG rather than generated at request
+ * time: it never has to be rendered again, and a preview crawler that gives up
+ * after a second still gets it.
+ */
+function ogCard(t: ReturnType<typeof getDictionary>) {
+  return {
+    url: `/og-${t.locale}.jpg`,
+    width: 1200,
+    height: 630,
+    alt: `${site.name} — ${t.site.tagline}`,
+  };
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -62,15 +80,18 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
+      url: `/${t.locale}`,
       locale: t.locale,
       title: `${site.name} — ${t.site.tagline}`,
       description: t.site.description,
       siteName: site.name,
+      images: [ogCard(t)],
     },
     twitter: {
       card: "summary_large_image",
       title: `${site.name} — ${t.site.tagline}`,
       description: t.site.description,
+      images: [ogCard(t)],
     },
     robots: { index: true, follow: true },
   };
