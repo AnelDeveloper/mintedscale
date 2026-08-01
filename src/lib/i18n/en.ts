@@ -211,6 +211,7 @@ export const en = {
     appNote: "A projection from your own numbers — not revenue earned.",
     enlarge: "Open full size",
     close: "Close",
+    moreAgents: "Five of twenty-eight. The rest run inside the app.",
     shotsLabel: "Inside the product",
     shots: [
       "Deck — the creator's overview, with expected revenue as a range and a confidence figure",

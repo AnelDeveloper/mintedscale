@@ -218,6 +218,7 @@ export const bs: Dictionary = {
     appNote: "Projekcija na osnovu tvojih brojki — nije zarađen prihod.",
     enlarge: "Otvori u punoj veličini",
     close: "Zatvori",
+    moreAgents: "Pet od dvadeset osam. Ostali rade unutar aplikacije.",
     shotsLabel: "Unutar proizvoda",
     shots: [
       "Pregled — nadzorna ploča kreatora, s očekivanim prihodom kao rasponom i stepenom pouzdanosti",

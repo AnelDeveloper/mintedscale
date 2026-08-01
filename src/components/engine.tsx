@@ -45,39 +45,55 @@ export function Engine({ t }: { t: Dictionary }) {
         </div>
 
         <div className="mt-[clamp(1.75rem,3.2vw,2.75rem)] grid gap-[clamp(1.5rem,3vw,2.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start">
-          {/* Five agents, listed vertically the way the poster lists them —
-              a 2x2 grid would leave the fifth one orphaned. */}
-          <ul className="grid gap-px border border-[var(--rule)] bg-[var(--rule)]">
-            {e.modules.map((module, i) => (
-              <li
-                key={module.code}
-                className="ms-sheen group relative overflow-hidden bg-ink p-5 transition-colors duration-500 hover:bg-[rgba(22,18,14,0.95)] sm:p-6"
-                data-reveal
-                style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
-              >
-                <div className="flex items-baseline gap-4">
-                  <span className="ms-mono shrink-0 text-gold-400">{module.code}</span>
+          <div className="min-w-0">
+            {/* Five agents, listed vertically the way the poster lists them —
+                a 2x2 grid would leave the fifth one orphaned. */}
+            <ul className="grid gap-px border border-[var(--rule)] bg-[var(--rule)]">
+              {e.modules.map((module, i) => (
+                <li
+                  key={module.code}
+                  className="ms-sheen group relative overflow-hidden bg-ink p-5 transition-colors duration-500 hover:bg-[rgba(22,18,14,0.95)] sm:p-6"
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
+                >
+                  <div className="flex items-baseline gap-4">
+                    <span className="ms-mono shrink-0 text-gold-400">{module.code}</span>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="ms-display-soft text-[1.05rem] text-bone">{module.title}</h3>
-                      <p className="ms-mono text-[0.5625rem] text-gold-300">{module.tag}</p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 className="ms-display-soft text-[1.05rem] text-bone">{module.title}</h3>
+                        <p className="ms-mono text-[0.5625rem] text-gold-300">{module.tag}</p>
+                      </div>
+
+                      <p className="mt-2.5 max-w-[62ch] text-[0.875rem] leading-[1.7] text-ash">
+                        {module.body}
+                      </p>
+
+                      <p className="ms-mono mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.5625rem]">
+                        <span className="block h-px w-4 shrink-0 bg-gold-600" aria-hidden="true" />
+                        {e.producesLabel}
+                        <span className="text-gold-200">{module.metric}</span>
+                      </p>
                     </div>
-
-                    <p className="mt-2.5 max-w-[62ch] text-[0.875rem] leading-[1.7] text-ash">
-                      {module.body}
-                    </p>
-
-                    <p className="ms-mono mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.5625rem]">
-                      <span className="block h-px w-4 shrink-0 bg-gold-600" aria-hidden="true" />
-                      {e.producesLabel}
-                      <span className="text-gold-200">{module.metric}</span>
-                    </p>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+
+            {/* The screens further down show 28 agents. Naming five and saying
+                so beats leaving a reader to spot the gap themselves. */}
+            <p
+              className="ms-mono mt-4 flex items-start gap-2.5 text-[0.5625rem]"
+              data-reveal
+              style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
+            >
+              {/* The sentence gets its own span: a bare text node becomes an
+                  anonymous flex item, which keeps min-width:auto and so runs
+                  off a phone-width line instead of wrapping. */}
+              <span className="mt-[0.62em] block h-px w-4 shrink-0 bg-gold-600" aria-hidden="true" />
+              <span className="min-w-0">{e.moreAgents}</span>
+            </p>
+          </div>
 
           {/* Engine film + CTA */}
           <div
