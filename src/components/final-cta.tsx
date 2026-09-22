@@ -30,7 +30,7 @@ export function FinalCta({ t }: { t: Dictionary }) {
 
         <h2
           className="ms-display mx-auto mt-8 max-w-[15ch] text-[clamp(2rem,4.3vw,3.5rem)]"
-          data-reveal
+          data-reveal="strike"
           style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
         >
           <span className="block text-bone">{f.headline[0]}</span>

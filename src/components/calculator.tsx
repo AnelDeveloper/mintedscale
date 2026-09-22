@@ -44,7 +44,7 @@ export function Calculator({ t }: { t: Dictionary }) {
         </div>
 
         <div className="grid gap-[clamp(1.5rem,3vw,3rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
-          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal>
+          <h2 className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)]" data-reveal="strike">
             <span className="block text-bone">{c.headline[0]}</span>
             <span className="ms-gold-sweep block">{c.headline[1]}</span>
           </h2>

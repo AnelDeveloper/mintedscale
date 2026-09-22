@@ -9,7 +9,7 @@ export function Faq({ t }: { t: Dictionary }) {
       <div className="grid gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
         <h2
           className="ms-display text-[clamp(1.7rem,3.2vw,2.6rem)] lg:sticky lg:top-28 lg:self-start"
-          data-reveal
+          data-reveal="strike"
         >
           <span className="block text-bone">{f.headline[0]}</span>
           <span className="ms-gold-sweep block">{f.headline[1]}</span>

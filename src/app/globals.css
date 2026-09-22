@@ -720,11 +720,35 @@ html:has(dialog.ms-lightbox[open]) {
   transform: none;
 }
 
+/*
+  data-reveal="strike" — the headline variant, the same wipe the hero uses,
+  so display type arrives the same way everywhere on the page.
+
+  Longhand transition properties, not the shorthand: the shorthand would
+  reset transition-delay and throw away every --reveal-delay stagger.
+*/
+.ms-js [data-reveal="strike"] {
+  opacity: 1;
+  clip-path: inset(0 0 102% 0);
+  transform: translateY(0.26em);
+  transition-property: clip-path, transform;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Negative insets: the finished line, glow and descenders included, is never
+   clipped once it has arrived. */
+.ms-js [data-reveal="strike"].is-in {
+  clip-path: inset(-45% -14% -45% -5%);
+  transform: none;
+}
+
 /* Armed by the inline head script — the last word on visibility, so a page
    whose JS bundle never arrives still shows every word. */
 .ms-reveal-all [data-reveal] {
   opacity: 1 !important;
   transform: none !important;
+  clip-path: none !important;
 }
 
 /* THE STRIKE — the press stamping a panel. */
@@ -860,6 +884,130 @@ html:has(dialog.ms-lightbox[open]) {
   animation: ms-orbit 26s linear infinite;
 }
 
+/* ============================================================
+   THE OPENING — hero choreography
+   ============================================================ */
+
+/*
+  A headline line wiping up into place, the way a die strikes a blank.
+
+  clip-path rather than an overflow mask: the gold lines carry their own
+  descender padding (see .ms-gold), and a mask would slice exactly the part
+  that padding was added to protect. The end state uses negative insets so the
+  finished line — glow included — is never clipped at all.
+*/
+@keyframes ms-strike-in {
+  from {
+    clip-path: inset(0 0 102% 0);
+    transform: translateY(0.3em);
+  }
+  to {
+    clip-path: inset(-45% -14% -45% -5%);
+    transform: none;
+  }
+}
+
+.ms-strike-in {
+  display: block;
+  animation: ms-strike-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Everything else in the hero fades up under the headline. Same curve as the
+   strike so the whole entrance reads as one movement. */
+@keyframes ms-lift-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ms-lift-in {
+  animation: ms-lift-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* The arrow leans into the direction it points, but only on hover. */
+.ms-btn svg {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ms-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   THE FILM — the slot the intro plays in
+   ============================================================ */
+
+/*
+  Rings leaving the play glyph. The frame under the headline is the biggest
+  empty rectangle on the page until the film lands; a slow pulse says the slot
+  is alive rather than broken. Two rings, half a cycle apart.
+*/
+@keyframes ms-ring-out {
+  0% {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.ms-ring {
+  position: relative;
+}
+
+.ms-ring::before,
+.ms-ring::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 212, 134, 0.55);
+  pointer-events: none;
+  animation: ms-ring-out 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.ms-ring::after {
+  animation-delay: 2.2s;
+}
+
+/*
+  Parallax for the hero film. It travels a little against the page as you
+  scroll, so the pitch and the film read as two planes rather than one slab.
+
+  Driven by the scroll-driven-animation timeline, not a scroll listener:
+  nothing runs on the main thread, and browsers without it simply hold the
+  frame still, which is a perfectly good fallback.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes ms-drift {
+      from {
+        transform: translate3d(0, 1.5rem, 0);
+      }
+      to {
+        transform: translate3d(0, -1.5rem, 0);
+      }
+    }
+
+    .ms-drift {
+      animation: ms-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -880,10 +1028,13 @@ html:has(dialog.ms-lightbox[open]) {
   .ms-js [data-reveal] {
     opacity: 1;
     transform: none;
+    clip-path: none;
   }
 
   .ms-strike-beam,
-  .ms-grain {
+  .ms-grain,
+  .ms-ring::before,
+  .ms-ring::after {
     display: none;
   }
 

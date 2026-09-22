@@ -117,21 +117,36 @@ export default async function LocaleLayout({
     <html
       lang={t.htmlLang}
       className={`${archivo.variable} ${instrumentSerif.variable} ${instrument.variable} ${plexMono.variable}`}
+      /* The head script below writes classes onto <html> before React
+         hydrates, which React would otherwise report as a mismatch. */
+      suppressHydrationWarning
     >
       <head>
         {/*
           Two jobs, both before first paint:
           1. Flag JS so scroll reveals only hide content in browsers that can
              un-hide it — no script, no hidden text.
-          2. Arm a fallback that reveals everything after 2s regardless. This
-             deliberately lives outside React: if hydration is slow or never
-             happens, a React-based safety net would never fire either.
+          2. Arm a fallback that reveals everything if the reveal observer
+             never reports in. This deliberately lives outside React: if
+             hydration is slow or never happens, a React-based safety net
+             would never fire either.
+
+          Two details that decide whether the page animates at all:
+          the observer cancels this timer the moment it proves itself
+          (`__msRevealOk`), and the countdown only starts once the tab is
+          actually being looked at. A page opened in a background tab used to
+          burn through the timer unwatched and be fully revealed, without a
+          single animation, by the time anyone switched to it.
         */}
         <script
           dangerouslySetInnerHTML={{
             __html:
               "var d=document.documentElement;d.classList.add('ms-js');" +
-              "setTimeout(function(){d.classList.add('ms-reveal-all')},2000);",
+              "var go=function(){if(!window.__msRevealOk)d.classList.add('ms-reveal-all')};" +
+              "var arm=function(){window.__msRevealSafety=setTimeout(go,2000)};" +
+              "if(document.hidden){document.addEventListener('visibilitychange',function h(){" +
+              "if(!document.hidden){document.removeEventListener('visibilitychange',h);arm()}})}" +
+              "else{arm()}",
           }}
         />
       </head>

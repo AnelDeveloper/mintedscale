@@ -28,7 +28,7 @@ export function Apply({ t }: { t: Dictionary }) {
               stops the booking console shrinking below the day rail's min-content
               and blows the whole page out horizontally on mobile. */}
           <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <h2 className="ms-display text-[clamp(1.7rem,3.1vw,2.5rem)]" data-reveal>
+            <h2 className="ms-display text-[clamp(1.7rem,3.1vw,2.5rem)]" data-reveal="strike">
               <span className="block text-bone">{a.headline[0]}</span>
               <span className="ms-gold-sweep block">{a.headline[1]}</span>
             </h2>

@@ -9,7 +9,6 @@ import { useRef, useState } from "react";
  */
 export function VideoFrame({
   src,
-  image,
   poster,
   label,
   duration,
@@ -19,8 +18,6 @@ export function VideoFrame({
   className = "",
 }: {
   src?: string;
-  /** Shown when there is no video yet — a still beats a reserved frame. */
-  image?: string;
   poster?: string;
   label: string;
   duration?: string;
@@ -34,20 +31,22 @@ export function VideoFrame({
 
   const aspect = ratio === "9/16" ? "aspect-[9/16]" : "aspect-video";
 
-  if (!src && image) {
-    return (
-      <div className={`ms-video ${aspect} ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt={label} className="absolute inset-0 h-full w-full object-cover" />
-      </div>
-    );
-  }
-
   if (!src) {
     return (
-      <div className={`ms-video ${aspect} ${className}`} style={{ borderStyle: "dashed" }}>
+      <div className={`ms-video ms-gloss ${aspect} ${className}`}>
+        {/* A pool of light where the film will be, so the empty frame reads
+            as a stage waiting rather than a box that failed to load. */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_44%_52%_at_50%_46%,rgba(217,169,76,0.14),transparent_72%)]"
+        />
+        <span className="ms-strike-beam" aria-hidden="true" />
+
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-          <span className="ms-play h-14 w-14 opacity-40 sm:h-16 sm:w-16" aria-hidden="true">
+          <span
+            className="ms-play ms-ring h-14 w-14 opacity-70 sm:h-16 sm:w-16"
+            aria-hidden="true"
+          >
             <PlayGlyph />
           </span>
           <span className="ms-mono text-gold-200">{label}</span>
@@ -80,7 +79,7 @@ export function VideoFrame({
           className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 bg-[rgba(8,7,6,0.35)] transition-colors duration-500 hover:bg-[rgba(8,7,6,0.2)]"
           aria-label={`${playLabel}: ${label}`}
         >
-          <span className="ms-play h-16 w-16 sm:h-20 sm:w-20" aria-hidden="true">
+          <span className="ms-play ms-ring h-16 w-16 sm:h-20 sm:w-20" aria-hidden="true">
             <PlayGlyph />
           </span>
           <span className="ms-mono text-gold-200">{label}</span>

@@ -1,4 +1,4 @@
-import { calculator, clients, heroSample, media, site } from "@/lib/config";
+import { calculator, clients, heroSample, media } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
 import { ClientLogo } from "./client-logo";
 import { VideoFrame } from "./video-frame";
@@ -19,45 +19,57 @@ const money = new Intl.NumberFormat("en-IE", {
   maximumFractionDigits: 0,
 });
 
+/**
+ * The opening: the pitch, then the film.
+ *
+ * Stacked rather than side by side on purpose. The intro film is the one
+ * thing a creator will actually watch, and a half-width frame beside a
+ * paragraph treats it as decoration. Full width under the headline, it is
+ * the next thing after the words — and it starts just inside the fold, so
+ * the frame edge is visible before any scrolling and invites the rest.
+ */
 export function Hero({ t }: { t: Dictionary }) {
   const h = t.hero;
 
   return (
     <section id="top" className="relative">
-      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] pb-[clamp(3rem,7vh,5rem)] pt-[clamp(6.5rem,13vh,8.5rem)]">
-        <div className="grid items-center gap-[clamp(2rem,3.6vw,3.25rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-          {/* ── Left: the pitch ── */}
+      <div className="mx-auto w-full max-w-[var(--shell)] px-[var(--gutter)] pb-[clamp(3rem,7vh,5rem)] pt-[clamp(6rem,12vh,7.5rem)]">
+        {/* ── The pitch ── */}
+        <div className="ms-lift-in" style={{ animationDelay: "60ms" }}>
+          <TrustPill t={t} />
+        </div>
+
+        {/* The headline runs the full width now that nothing sits beside it.
+            Each line is struck separately, the second a beat behind the
+            first, so the headline arrives rather than fades in. */}
+        <h1 className="ms-display mt-[clamp(1.25rem,2.5vw,1.75rem)] text-[clamp(2.1rem,4.8vw,3.9rem)]">
+          <span className="ms-strike-in text-bone" style={{ animationDelay: "170ms" }}>
+            {h.headline[0]}
+          </span>
+          <span className="ms-strike-in" style={{ animationDelay: "300ms" }}>
+            <span className="ms-gold-sweep block">{h.headline[1]}</span>
+          </span>
+        </h1>
+
+        <div className="mt-[clamp(1.5rem,3vw,2.25rem)] grid items-end gap-[clamp(1.75rem,3.4vw,3rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div className="min-w-0">
-            <div className="ms-rise" style={{ animationDelay: "40ms" }}>
-              <TrustPill t={t} />
-            </div>
-
-            <h1 className="ms-display mt-[clamp(1.25rem,2.5vw,1.75rem)] text-[clamp(1.95rem,4vw,3.25rem)]">
-              <span className="ms-rise block text-bone" style={{ animationDelay: "140ms" }}>
-                {h.headline[0]}
-              </span>
-              <span className="ms-rise ms-gold-sweep block" style={{ animationDelay: "220ms" }}>
-                {h.headline[1]}
-              </span>
-            </h1>
-
             <p
-              className="ms-rise ms-serif mt-5 text-[clamp(1.05rem,1.7vw,1.35rem)] text-gold-200"
-              style={{ animationDelay: "300ms" }}
+              className="ms-lift-in ms-serif text-[clamp(1.05rem,1.7vw,1.35rem)] text-gold-200"
+              style={{ animationDelay: "430ms" }}
             >
               {t.site.tagline}
             </p>
 
             <p
-              className="ms-rise mt-5 max-w-[46ch] text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-[1.7] text-ash"
-              style={{ animationDelay: "360ms" }}
+              className="ms-lift-in mt-4 max-w-[48ch] text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-[1.7] text-ash"
+              style={{ animationDelay: "500ms" }}
             >
               {h.sub}
             </p>
 
             <div
-              className="ms-rise mt-8 flex flex-col gap-3 sm:flex-row"
-              style={{ animationDelay: "440ms" }}
+              className="ms-lift-in mt-7 flex flex-col gap-3 sm:flex-row"
+              style={{ animationDelay: "580ms" }}
             >
               <a href="#apply" className="ms-btn ms-btn-gold w-full sm:w-auto">
                 {h.primaryCta}
@@ -68,13 +80,15 @@ export function Hero({ t }: { t: Dictionary }) {
               </a>
             </div>
 
-            {/* Terms at a glance — small, not a billboard */}
-            <dl
-              className="ms-rise mt-8 flex flex-wrap gap-x-8 gap-y-4"
-              style={{ animationDelay: "520ms" }}
-            >
-              {h.bar.map((item) => (
-                <div key={item.label}>
+            {/* Terms at a glance — small, not a billboard. Each one lands in
+                turn so the row reads left to right rather than all at once. */}
+            <dl className="mt-7 flex flex-wrap gap-x-8 gap-y-4">
+              {h.bar.map((item, i) => (
+                <div
+                  key={item.label}
+                  className="ms-lift-in"
+                  style={{ animationDelay: `${660 + i * 70}ms` }}
+                >
                   <dt className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]">
                     {item.value}
                   </dt>
@@ -84,23 +98,25 @@ export function Hero({ t }: { t: Dictionary }) {
             </dl>
           </div>
 
-          {/* ── Right: the film, with the number that matters clipped to it ── */}
-          <div
-            className="ms-rise relative min-w-0 sm:pb-[clamp(6.5rem,12vw,9.5rem)]"
-            style={{ animationDelay: "560ms" }}
-          >
-            <VideoFrame
-              src={media.heroVideo.src}
-              image={media.heroImage.src}
-              poster={media.heroVideo.poster}
-              label={h.videoLabel}
-              reservedLabel={t.video.reserved}
-              playLabel={t.video.play}
-              ratio="16/9"
-            />
-
+          <div className="ms-lift-in min-w-0" style={{ animationDelay: "760ms" }}>
             <EarningsCard t={t} />
           </div>
+        </div>
+
+        {/* ── The film ── */}
+        <div
+          className="ms-lift-in mt-[clamp(2.25rem,4.5vw,3.5rem)]"
+          style={{ animationDelay: "860ms" }}
+        >
+          <VideoFrame
+            src={media.heroVideo.src}
+            poster={media.heroVideo.poster}
+            label={h.videoLabel}
+            reservedLabel={t.video.reserved}
+            playLabel={t.video.play}
+            ratio="16/9"
+            className="ms-drift"
+          />
         </div>
       </div>
     </section>
@@ -156,10 +172,8 @@ function TrustPill({ t }: { t: Dictionary }) {
  * printed next to it — this is a model, and it says so.
  */
 function EarningsCard({ t }: { t: Dictionary }) {
-  // Stacked under the film on a phone — overlapping it there would bury most
-  // of the frame. It only floats once there is room to float in.
   return (
-    <div className="ms-panel ms-gloss mt-4 p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:absolute sm:bottom-0 sm:left-[-1rem] sm:right-[clamp(2rem,12%,6rem)] sm:mt-0 sm:p-6">
+    <div className="ms-panel ms-gloss ms-rim p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:p-6">
       <p className="ms-mono text-[0.5625rem]">{t.hero.earnings.lead}</p>
 
       <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]">

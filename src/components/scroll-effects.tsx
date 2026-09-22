@@ -25,8 +25,21 @@ export function ScrollEffects() {
       if (box.top < viewportHeight && box.bottom > 0) el.classList.add("is-in");
     }
 
+    let delivered = false;
+
     const observer = new IntersectionObserver(
       (entries) => {
+        // The first callback is proof the observer works, so the blunt
+        // reveal-everything fallback armed in the document head can stand
+        // down. Left in place it shows every section two seconds after load,
+        // and nothing further down the page ever animates in.
+        if (!delivered) {
+          delivered = true;
+          window.__msRevealOk = true;
+          window.clearTimeout(window.__msRevealSafety);
+          document.documentElement.classList.remove("ms-reveal-all");
+        }
+
         for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-in");
@@ -39,17 +52,50 @@ export function ScrollEffects() {
 
     targets.forEach((el) => observer.observe(el));
 
-    // Last line of defence: if the observer never delivers — throttled tab,
-    // odd embedding, a browser we did not anticipate — show everything anyway.
-    const safety = window.setTimeout(revealAll, 2500);
+    /*
+      Last line of defence: an observer that never delivers a single callback
+      — throttled tab, odd embedding, a browser we did not anticipate — must
+      not leave the page blank. One that is delivering is left alone.
+
+      The clock only runs while the tab is visible. A hidden tab does not get
+      intersection callbacks at all, so a timer running in the background
+      would "catch" a perfectly healthy observer and flatten the page.
+    */
+    let safety = 0;
+    const arm = () => {
+      safety = window.setTimeout(() => {
+        if (!delivered) revealAll();
+      }, 2500);
+    };
+
+    const onVisible = () => {
+      if (document.hidden) return;
+      document.removeEventListener("visibilitychange", onVisible);
+      arm();
+    };
+
+    if (document.hidden) {
+      document.addEventListener("visibilitychange", onVisible);
+    } else {
+      arm();
+    }
 
     return () => {
       window.clearTimeout(safety);
+      document.removeEventListener("visibilitychange", onVisible);
       observer.disconnect();
     };
   }, []);
 
   return null;
+}
+
+declare global {
+  interface Window {
+    /** Both set by the inline head script; see the comment there. */
+    __msRevealSafety?: number;
+    __msRevealOk?: boolean;
+  }
 }
 
 /** Count-up for the proof figures. Fires once, when the number is on screen. */
@@ -95,8 +141,11 @@ export function useCountUp(
       observer.disconnect();
     };
 
+    let delivered = false;
+
     const observer = new IntersectionObserver(
       (entries) => {
+        delivered = true;
         if (entries[0]?.isIntersecting) start();
       },
       { threshold: 0.4 },
@@ -104,17 +153,39 @@ export function useCountUp(
 
     observer.observe(node);
 
-    // A figure stuck at zero is worse than one that never animated.
-    const safety = window.setTimeout(() => {
-      if (!started) {
-        started = true;
-        observer.disconnect();
-        onTick(target);
-      }
-    }, 2500);
+    /*
+      A figure stuck at zero is worse than one that never animated — but this
+      only rescues a broken observer. A working one reports in immediately,
+      whether the figure is on screen or not, and the count-up is left to fire
+      when the figure is actually scrolled to. The clock waits on a hidden tab
+      for the same reason it does in ScrollEffects: no callbacks arrive there.
+    */
+    let safety = 0;
+    const arm = () => {
+      safety = window.setTimeout(() => {
+        if (!delivered && !started) {
+          started = true;
+          observer.disconnect();
+          onTick(target);
+        }
+      }, 2500);
+    };
+
+    const onVisible = () => {
+      if (document.hidden) return;
+      document.removeEventListener("visibilitychange", onVisible);
+      arm();
+    };
+
+    if (document.hidden) {
+      document.addEventListener("visibilitychange", onVisible);
+    } else {
+      arm();
+    }
 
     return () => {
       window.clearTimeout(safety);
+      document.removeEventListener("visibilitychange", onVisible);
       observer.disconnect();
       cancelAnimationFrame(frame);
     };

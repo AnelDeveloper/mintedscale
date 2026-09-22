@@ -59,7 +59,7 @@ export function Heading({
   return (
     <h2
       className={`${soft ? "ms-display-soft" : "ms-display"} text-[clamp(1.7rem,3.2vw,2.6rem)] ${className}`}
-      data-reveal
+      data-reveal="strike"
     >
       <span className="block text-bone">{lines[0]}</span>
       {lines[1] ? <span className="ms-gold-sweep block">{lines[1]}</span> : null}
