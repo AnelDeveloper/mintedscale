@@ -17,6 +17,23 @@ export const en = {
       "MintedScale turns creator audiences into brands, products and businesses. Strategy, product and technology from one person — built on a revenue share, so you pay nothing upfront.",
   },
 
+  /**
+   * What search results and link previews show. Written for the words a
+   * creator would actually type, and kept inside the lengths Google shows
+   * before truncating: ~60 characters for the title, ~155 for the snippet.
+   */
+  seo: {
+    title: "MintedScale — Creator Brand & Product Studio, €0 Upfront",
+    description:
+      "I turn creator audiences into brands, products and apps — strategy, build and launch from one person, on a revenue share. You pay nothing upfront.",
+    ogAlt: "MintedScale — your audience is more than followers. Creator brands built on a revenue share.",
+    film: {
+      name: "How the mint works — MintedScale",
+      description:
+        "Anel Kujović, founder of MintedScale, explains how a creator's audience becomes a brand and a business: strategy, product and launch, built on a revenue share. Narrated in Bosnian.",
+    },
+  },
+
   nav: ["Work", "The Mint", "AI System", "Calculator", "Concepts"],
   applyCta: "Apply now",
   langLabel: "Language",

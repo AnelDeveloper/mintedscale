@@ -7,6 +7,8 @@ import { useEffect } from "react";
  * CSS handles the transition so server components stay server components.
  */
 export function ScrollEffects() {
+  useEffect(() => armCounters(), []);
+
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
@@ -98,96 +100,83 @@ declare global {
   }
 }
 
-/** Count-up for the proof figures. Fires once, when the number is on screen. */
-export function useCountUp(
-  ref: React.RefObject<HTMLElement | null>,
-  target: number,
-  onTick: (value: number) => void,
-  decimals = 0,
-) {
-  const round = (v: number) =>
-    decimals > 0 ? Number(v.toFixed(decimals)) : Math.round(v);
+/**
+ * The mint: any figure marked `data-count` strikes up from zero the first
+ * time it comes on screen, and locks on the real value.
+ *
+ * The server always renders the final number, so crawlers, visitors without
+ * JS and anyone who prefers reduced motion only ever see the true figure —
+ * and an observer that never reports simply leaves it standing. The value of
+ * the attribute is a delay in ms, to land the count with an entrance that is
+ * still playing. Figures with no digits ("Rev share") or a zero ("€0") are
+ * left alone: counting to nothing says nothing.
+ */
+function armCounters(): () => void {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-count]"));
+  if (reduced || nodes.length === 0 || typeof IntersectionObserver === "undefined") {
+    return () => {};
+  }
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
+  const timers: number[] = [];
+  const frames = new Set<number>();
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || typeof IntersectionObserver === "undefined") {
-      onTick(target);
-      return;
-    }
+  const strike = (el: HTMLElement) => {
+    const final = el.textContent ?? "";
+    const match = final.match(/\d[\d.,]*/);
+    if (!match || match.index === undefined) return;
 
-    let frame = 0;
-    let started = false;
+    const digits = match[0];
+    const target = Number(digits.replace(/[.,]/g, ""));
+    if (!target) return;
 
-    const run = () => {
-      const duration = 1500;
-      const start = performance.now();
-      const step = (now: number) => {
-        const p = Math.min((now - start) / duration, 1);
-        // easeOutExpo — fast arrival, long settle, reads as a counter locking in
-        const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-        onTick(round(target * eased));
-        if (p < 1) frame = requestAnimationFrame(step);
-      };
-      frame = requestAnimationFrame(step);
-    };
+    // Keep whatever grouping the figure was written with: "€7,500" stays
+    // comma-grouped all the way up, "1.000" stays dot-grouped.
+    const separator = digits.match(/\d([.,])\d{3}/)?.[1] ?? "";
+    const group = (n: number) =>
+      separator ? String(n).replace(/\B(?=(\d{3})+(?!\d))/g, separator) : String(n);
+    const before = final.slice(0, match.index);
+    const after = final.slice(match.index + digits.length);
 
-    const start = () => {
-      if (started) return;
-      started = true;
-      run();
-      observer.disconnect();
-    };
+    // Hold the finished width so the row beside it never reflows mid-count.
+    el.style.minWidth = `${el.getBoundingClientRect().width}px`;
+    el.textContent = `${before}${group(0)}${after}`;
 
-    let delivered = false;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        delivered = true;
-        if (entries[0]?.isIntersecting) start();
-      },
-      { threshold: 0.4 },
+    timers.push(
+      window.setTimeout(() => {
+        const start = performance.now();
+        const step = (now: number) => {
+          const p = Math.min((now - start) / 1400, 1);
+          // easeOutExpo — fast arrival, long settle, reads as a press locking in
+          const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+          el.textContent = p === 1 ? final : `${before}${group(Math.round(target * eased))}${after}`;
+          if (p < 1) {
+            const id = requestAnimationFrame(step);
+            frames.add(id);
+          } else {
+            el.style.minWidth = "";
+          }
+        };
+        frames.add(requestAnimationFrame(step));
+      }, Number(el.dataset.count) || 0),
     );
+  };
 
-    observer.observe(node);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        strike(entry.target as HTMLElement);
+      }
+    },
+    { threshold: 0.4 },
+  );
+  nodes.forEach((el) => observer.observe(el));
 
-    /*
-      A figure stuck at zero is worse than one that never animated — but this
-      only rescues a broken observer. A working one reports in immediately,
-      whether the figure is on screen or not, and the count-up is left to fire
-      when the figure is actually scrolled to. The clock waits on a hidden tab
-      for the same reason it does in ScrollEffects: no callbacks arrive there.
-    */
-    let safety = 0;
-    const arm = () => {
-      safety = window.setTimeout(() => {
-        if (!delivered && !started) {
-          started = true;
-          observer.disconnect();
-          onTick(target);
-        }
-      }, 2500);
-    };
-
-    const onVisible = () => {
-      if (document.hidden) return;
-      document.removeEventListener("visibilitychange", onVisible);
-      arm();
-    };
-
-    if (document.hidden) {
-      document.addEventListener("visibilitychange", onVisible);
-    } else {
-      arm();
-    }
-
-    return () => {
-      window.clearTimeout(safety);
-      document.removeEventListener("visibilitychange", onVisible);
-      observer.disconnect();
-      cancelAnimationFrame(frame);
-    };
-  }, [ref, target, onTick, decimals]);
+  return () => {
+    observer.disconnect();
+    timers.forEach((id) => window.clearTimeout(id));
+    frames.forEach((id) => cancelAnimationFrame(id));
+  };
 }

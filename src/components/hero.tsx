@@ -89,7 +89,10 @@ export function Hero({ t }: { t: Dictionary }) {
                   className="ms-lift-in"
                   style={{ animationDelay: `${660 + i * 70}ms` }}
                 >
-                  <dt className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]">
+                  <dt
+                    className="ms-figure ms-gold whitespace-nowrap text-[1.25rem]"
+                    data-count={660 + i * 70}
+                  >
                     {item.value}
                   </dt>
                   <dd className="ms-mono mt-1.5 text-[0.5625rem]">{item.label}</dd>
@@ -177,7 +180,7 @@ function EarningsCard({ t }: { t: Dictionary }) {
     <div className="ms-panel ms-gloss ms-rim p-5 shadow-[0_28px_70px_-30px_rgba(0,0,0,0.9)] sm:p-6">
       <p className="ms-mono text-[0.5625rem]">{t.hero.earnings.lead}</p>
 
-      <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]">
+      <p className="ms-figure ms-money mt-2.5 text-[clamp(1.9rem,3.6vw,2.75rem)]" data-count={900}>
         {money.format(SAMPLE_REVENUE)}
       </p>
 

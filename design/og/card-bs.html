@@ -36,10 +36,15 @@
 
   .badge { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em;
            text-transform:uppercase; color:#e8c271; border:1px solid rgba(217,169,76,0.34);
-           border-radius:999px; padding:8px 16px; white-space:nowrap; }
+           border-radius:999px; padding:8px 16px 8px 12px; white-space:nowrap; display:flex; align-items:center; gap:10px;
+           background:rgba(8,7,6,.55); }
+  .badge i { width:22px; height:22px; border-radius:50%; flex:none;
+             background:linear-gradient(160deg,#f7e7bc,#d9a94c 55%,#a9762a); position:relative; }
+  .badge i::after { content:''; position:absolute; left:8.5px; top:6px;
+             border-left:7px solid #080706; border-top:5px solid transparent; border-bottom:5px solid transparent; }
 
-  h1 { margin-top:auto; font-size:66px; font-weight:800; letter-spacing:-.028em; line-height:1.06; max-width:16ch; }
-  .sub { margin-top:22px; font-size:21px; line-height:1.5; color:#a8a099; max-width:30ch; }
+  h1 { margin-top:auto; font-size:62px; font-weight:800; letter-spacing:-.028em; line-height:1.06; max-width:21ch; }
+  .sub { margin-top:22px; font-size:21px; line-height:1.5; color:#a8a099; max-width:38ch; }
 
   .rule { margin-top:auto; height:1px; background:linear-gradient(90deg, rgba(217,169,76,.55), rgba(242,237,227,.06) 72%, transparent); }
 
@@ -73,11 +78,11 @@
               font-family="Archivo,Helvetica,sans-serif" font-weight="800" font-size="34" letter-spacing="-1">MS</text>
       </svg>
       <span class="word"><span class="bone">Minted</span><span class="gold">Scale</span></span>
-      <span class="badge">SADA PRIMAM PARTNERE</span>
+      <span class="badge"><i></i>Pogledaj film · 2:50</span>
     </div>
 
-    <h1><span class="bone">Pretvaram kreatore</span><br><span class="gold">u brendove.</span></h1>
-    <p class="sub">Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda.</p>
+    <h1><span class="bone">Tvoja publika je</span><br><span class="gold">više od pratilaca.</span></h1>
+    <p class="sub">Pretvaram je u brendove, proizvode i biznise — €0 unaprijed, uz podjelu prihoda.</p>
 
     <div class="rule"></div>
     <div class="facts"><b>8+ godina gradnje proizvoda</b> <span class="dot">◆</span> €0 unaprijed <span class="dot">◆</span> Podjela prihoda <span class="dot">◆</span> Est. MMXXVI</div>

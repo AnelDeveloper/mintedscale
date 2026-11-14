@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
-import { site } from "@/lib/config";
+import { media, seo, site } from "@/lib/config";
 import { getDictionary, isLocale, locales } from "@/lib/i18n";
 import "../globals.css";
 
@@ -52,10 +52,11 @@ export function generateStaticParams() {
  */
 function ogCard(t: ReturnType<typeof getDictionary>) {
   return {
-    url: `/og-${t.locale}.jpg`,
+    url: `/og-${t.locale}.jpg?v=${seo.ogVersion}`,
     width: 1200,
     height: 630,
-    alt: `${site.name} — ${t.site.tagline}`,
+    alt: t.seo.ogAlt,
+    type: "image/jpeg",
   };
 }
 
@@ -66,14 +67,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = getDictionary(locale);
+  const film = media.heroVideo;
 
   return {
     metadataBase: new URL(site.url),
     title: {
-      default: `${site.name} — ${t.site.tagline}`,
+      default: t.seo.title,
       template: `%s — ${site.name}`,
     },
-    description: t.site.description,
+    description: t.seo.description,
+    applicationName: site.name,
+    authors: [{ name: site.founder, url: site.url }],
+    creator: site.founder,
+    publisher: site.name,
+    category: "business",
+    // Bare digit runs in the copy (follower counts, prices) are not phone
+    // numbers; iOS Safari would otherwise turn them into tap-to-call links.
+    formatDetection: { telephone: false, email: false, address: false },
     alternates: {
       canonical: `/${t.locale}`,
       languages: { en: "/en", bs: "/bs", "x-default": "/en" },
@@ -81,19 +91,40 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: `/${t.locale}`,
-      locale: t.locale,
-      title: `${site.name} — ${t.site.tagline}`,
-      description: t.site.description,
+      locale: seo.ogLocale[t.locale],
+      alternateLocale: locales.filter((l) => l !== t.locale).map((l) => seo.ogLocale[l]),
+      title: t.seo.title,
+      description: t.seo.description,
       siteName: site.name,
       images: [ogCard(t)],
+      videos: [
+        {
+          // Absolute on purpose: metadataBase resolves images but not videos.
+          url: `${site.url}${film.src}`,
+          secureUrl: `${site.url}${film.src}`,
+          type: "video/mp4",
+          width: film.width,
+          height: film.height,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${site.name} — ${t.site.tagline}`,
-      description: t.site.description,
+      title: t.seo.title,
+      description: t.seo.description,
       images: [ogCard(t)],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+        "max-snippet": -1,
+      },
+    },
   };
 }
 

@@ -36,7 +36,9 @@ export function SiteNav({ t }: { t: Dictionary }) {
     >
       <div className="mx-auto flex h-[4.5rem] w-full max-w-[var(--shell)] items-center justify-between gap-4 px-[var(--gutter)]">
         <a href="#top" className="flex items-center gap-2.5" aria-label={site.name}>
-          <CoinMark size={30} id="nav" />
+          <span className="ms-coin-flip">
+            <CoinMark size={30} id="nav" />
+          </span>
           <span className="ms-display text-[1rem] leading-none tracking-[0.01em]">
             <span className="text-bone">Minted</span>
             <span className="ms-gold">Scale</span>

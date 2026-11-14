@@ -22,6 +22,7 @@ export function Studio({ t }: { t: Dictionary }) {
               {/* A word like "Rev share" needs its own size, or it wraps
                   awkwardly beside the single-token figures. */}
               <p
+                data-count={i * 70 + 150}
                 className={`ms-figure ms-gold whitespace-nowrap ${
                   stat.value.length > 4
                     ? "text-[clamp(1.15rem,1.9vw,1.5rem)]"

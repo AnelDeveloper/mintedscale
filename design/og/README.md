@@ -10,7 +10,8 @@ previewed under someone else's brand.
 
 ## Regenerating
 
-The copy on the card repeats the tagline and the founder stats. **If either
+The card leads with the hero headline ("Your audience is more than
+followers.") and a "watch the film · 2:50" badge, then the founder stats. **If either
 changes in `src/lib/i18n/`, the card is now wrong** — nothing enforces this,
 because a JPEG cannot import a dictionary. Re-render both:
 
@@ -24,7 +25,13 @@ done
 ```
 
 Then convert to JPEG — PNG at this size is ~1MB and some scrapers cap the
-download:
+download. On a Mac without Pillow, `sips` does the same job:
+
+```sh
+for l in en bs; do sips -s format jpeg -s formatOptions 86 og-$l.png --out ../../public/og-$l.jpg; done
+```
+
+Or with Pillow:
 
 ```sh
 python3 -c "
@@ -35,7 +42,12 @@ for l in ('en','bs'):
 "
 ```
 
-Both land around 75KB.
+Both land around 75KB with Pillow, ~130KB with `sips` — either is well under
+the ~300KB WhatsApp will still fetch.
+
+**Then bump `seo.ogVersion` in `src/lib/config.ts`.** The image URL carries it
+as `?v=`, and that is the only thing that makes WhatsApp, LinkedIn and
+Facebook drop a preview they have already cached.
 
 ## Notes
 
@@ -44,6 +56,5 @@ Both land around 75KB.
   `display=block` so Chrome waits for them instead of screenshotting fallbacks.
 - Chrome needs `--allow-file-access-from-files` or the portrait silently
   renders as an empty box.
-- The filenames are stable, so a preview a platform has already cached will
-  not update on its own — see the note about re-scraping in the commit that
-  added these.
+- The filenames are stable on purpose; `?v=` on the og:image URL is what
+  forces a re-fetch (see above).

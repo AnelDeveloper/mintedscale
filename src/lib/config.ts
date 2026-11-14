@@ -26,6 +26,21 @@ export const site = {
 };
 
 /**
+ * Share-card and search-result plumbing. Bump `ogVersion` whenever the cards
+ * in design/og are re-rendered: the filenames stay stable, and WhatsApp,
+ * LinkedIn and Facebook cache a preview by URL, so only a new query string
+ * makes them fetch the new image.
+ */
+export const seo = {
+  ogVersion: 2,
+  logo: "/logo.png",
+  /** Also the source photo for the share cards in design/og. */
+  founderPhoto: "/portrait/anel.jpg",
+  /** Open Graph wants language_TERRITORY, not the bare ISO code the URLs use. */
+  ogLocale: { en: "en_US", bs: "bs_BA" } as Record<string, string>,
+};
+
+/**
  * Real prior engagements.
  *
  * Every `logo` path is wired whether or not the file exists yet — a missing
@@ -93,6 +108,14 @@ export const media = {
     src: "/videos/how-the-mint-works.mp4",
     poster: "/videos/how-the-mint-works.jpg",
     duration: "2:50",
+    /** The same facts in the forms search engines want (VideoObject, sitemap). */
+    seconds: 170,
+    isoDuration: "PT2M50S",
+    width: 1920,
+    height: 1080,
+    uploaded: "2026-11-13T12:00:00+01:00",
+    /** The film is narrated in Bosnian, whichever page it sits on. */
+    language: "bs",
   },
   engineVideo: { src: "/engine/engine-demo.mp4", poster: "/engine/engine-demo-poster.jpg" },
   /** Screens from the real product, shown under the AI system section. */

@@ -25,6 +25,18 @@ export const bs: Dictionary = {
       "MintedScale pretvara publiku kreatora u brendove, proizvode i biznise. Strategija, proizvod i tehnologija od jednog čovjeka — uz podjelu prihoda, tako da unaprijed ne plaćaš ništa.",
   },
 
+  seo: {
+    title: "MintedScale — Brend i proizvodi za kreatore i influencere",
+    description:
+      "Pretvaram publiku kreatora i influencera u brendove, proizvode i aplikacije — strategija, razvoj i lansiranje uz podjelu prihoda. Unaprijed ne plaćaš ništa.",
+    ogAlt: "MintedScale — tvoja publika je više od pratilaca. Brendovi za kreatore uz podjelu prihoda.",
+    film: {
+      name: "Kako sve funkcioniše — MintedScale",
+      description:
+        "Anel Kujović, osnivač MintedScale-a, objašnjava kako publika kreatora postaje brend i biznis: strategija, proizvod i lansiranje, uz podjelu prihoda.",
+    },
+  },
+
   nav: ["Rad", "Izgradnja", "AI sistem", "Kalkulator", "Koncepti"],
   applyCta: "Prijavi se",
   langLabel: "Jezik",

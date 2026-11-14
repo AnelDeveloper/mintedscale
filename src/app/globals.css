@@ -614,6 +614,74 @@
   box-shadow: 0 0 0 1px rgba(249, 237, 203, 0.9), 0 18px 56px -8px rgba(240, 212, 134, 0.9);
 }
 
+/*
+  The edge light: a short arc of gold travelling round the film's frame.
+  A conic gradient whose start angle is animated through a registered
+  custom property, masked down to a 2px ring. Browsers without @property
+  show the arc standing still at the top, which still reads as a highlight.
+  It fades out the moment the film starts — once someone is watching, the
+  frame has done its job.
+*/
+@property --ms-edge-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.ms-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--ms-edge-angle),
+    transparent 0deg,
+    transparent 200deg,
+    rgba(184, 132, 47, 0.55) 260deg,
+    rgba(240, 212, 134, 0.95) 315deg,
+    #fff8e6 335deg,
+    rgba(217, 169, 76, 0.7) 350deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: ms-edge-orbit 7s linear infinite;
+  transition: opacity 0.6s ease;
+}
+
+.ms-video.is-playing .ms-edge {
+  opacity: 0;
+  animation-play-state: paused;
+}
+
+@keyframes ms-edge-orbit {
+  to {
+    --ms-edge-angle: 360deg;
+  }
+}
+
+/*
+  The coin flip: the nav mark turns over once on hover or keyboard focus,
+  the way a struck coin is checked — a reply to the visitor, never idle.
+*/
+.ms-coin-flip {
+  display: inline-flex;
+  perspective: 240px;
+}
+
+.ms-coin-flip > svg {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a:hover > .ms-coin-flip > svg,
+a:focus-visible > .ms-coin-flip > svg {
+  transform: rotateY(360deg);
+}
+
 /* The glossy crown. Sits above the surface, below the content. */
 .ms-gloss::before {
   content: "";
@@ -1033,6 +1101,7 @@ html:has(dialog.ms-lightbox[open]) {
 
   .ms-strike-beam,
   .ms-grain,
+  .ms-edge,
   .ms-ring::before,
   .ms-ring::after {
     display: none;

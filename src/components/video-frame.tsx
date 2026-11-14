@@ -59,7 +59,10 @@ export function VideoFrame({
   }
 
   return (
-    <div className={`ms-video group ${aspect} ${className}`}>
+    <div className={`ms-video group ${aspect} ${playing ? "is-playing" : ""} ${className}`}>
+      {/* A light that circles the frame until the film is started — the one
+          thing on the page that should keep asking for attention. */}
+      <span className="ms-edge" aria-hidden="true" />
       <video
         ref={videoRef}
         src={src}
