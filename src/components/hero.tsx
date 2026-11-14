@@ -112,6 +112,7 @@ export function Hero({ t }: { t: Dictionary }) {
             src={media.heroVideo.src}
             poster={media.heroVideo.poster}
             label={h.videoLabel}
+            duration={media.heroVideo.duration}
             reservedLabel={t.video.reserved}
             playLabel={t.video.play}
             ratio="16/9"

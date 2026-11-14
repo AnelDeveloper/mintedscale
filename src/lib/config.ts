@@ -8,9 +8,6 @@
  *
  * Slots waiting on real material (they render as marked reserved frames, so
  * the layout is already correct):
- *   • media.portrait     — a photo of you
- *   • media.heroVideo    — the intro film, under the hero headline
- *   • media.engineVideo  — a screen recording of the system
  *   • media.films        — partner films, once they exist
  */
 
@@ -86,15 +83,17 @@ export const clients = [
 ];
 
 export const media = {
-  portrait: { src: "/portrait/anel.jpg" },
-
   /**
    * The intro film, under the headline. Drop the file in /public/videos and
    * point `src` at it ("/videos/intro.mp4"); a still from it in `poster`
    * keeps the frame from flashing black before the first frame decodes.
    * Empty, it renders as a reserved frame at exactly the right size.
    */
-  heroVideo: { src: "", poster: "" },
+  heroVideo: {
+    src: "/videos/how-the-mint-works.mp4",
+    poster: "/videos/how-the-mint-works.jpg",
+    duration: "2:50",
+  },
   engineVideo: { src: "/engine/engine-demo.mp4", poster: "/engine/engine-demo-poster.jpg" },
   /** Screens from the real product, shown under the AI system section. */
   engineShots: [

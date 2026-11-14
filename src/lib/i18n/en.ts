@@ -104,15 +104,6 @@ export const en = {
       { value: "Rev share", label: "I earn when you earn", note: "No win, no fee" },
       { value: "4", label: "Practices, one person", note: "Brand · Product · Growth · Tech" },
     ],
-    portraitAlt: "Anel Kujović, founder of MintedScale",
-    portraitSlot: "Portrait slot reserved",
-    note: {
-      lead: "I'm Anel. For over eight years I've built software and commerce products for companies — platforms, apps, storefronts and payment systems. The unglamorous infrastructure that makes a business actually run.",
-      body: "MintedScale is that capability pointed at creators. Most people offering to build your brand are marketers who can't ship software, so the strategy deck arrives and the product never does. I ship the product.",
-      offer:
-        "Creator brands are new for me, and I'd rather say that than invent a client list. That's why partners pay nothing upfront: I build, you launch, and I take a share of what it earns. If it earns nothing, I earn nothing.",
-      signature: "Anel Kujović · Founder",
-    },
     clientsLabel: "Prior product work",
     clientsCaveat:
       "Software and commerce work I delivered for these companies. Creator brands are the new chapter — those results go here as they land, not before.",

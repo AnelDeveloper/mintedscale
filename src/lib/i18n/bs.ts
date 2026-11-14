@@ -132,15 +132,6 @@ export const bs: Dictionary = {
         note: "Brend · Proizvod · Rast · Tehnologija",
       },
     ],
-    portraitAlt: "Anel Kujović, osnivač MintedScale-a",
-    portraitSlot: "Mjesto za fotografiju",
-    note: {
-      lead: "Ja sam Anel. Preko osam godina radim na razvoju softvera i sistema za online prodaju — platforme, aplikacije, web prodavnice i naplata. Ona infrastruktura o kojoj niko ne priča, a bez koje biznis ne radi.",
-      body: "MintedScale je isti pristup, samo usmjeren na kreatore. Većina onih koji Vam nude da izgrade brend su iz marketinga, ne znaju napraviti softver — strategija stigne, a proizvod nikad. Ja nudim i strategiju i proizvod.",
-      offer:
-        "Brendovi za kreatore su moj novi proizvod i radije ću to reći nego izmisliti listu klijenata. Zato partneri unaprijed ne plaćaju ništa: ja razvijam proizvod, ti lansiraš, a ja uzimam dio onoga što zaradi. Ako ne zaradi ništa, ne zarađujem ni ja.",
-      signature: "Anel Kujović · Osnivač",
-    },
     clientsLabel: "Dosadašnji rad na proizvodima",
     clientsCaveat:
       "Softver i sistemi za prodaju koje sam napravio za ove kompanije. Brendovi kreatora su novo poglavlje — ti rezultati dolaze ovdje kada se dogode, ne prije.",
