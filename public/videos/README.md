@@ -24,3 +24,17 @@ already correct before the footage exists.
 
 Encode as H.264 MP4 (`-crf 23`, AAC audio) and always ship a poster image —
 without one the frame is black until the first byte arrives.
+
+## Subtitles
+
+`how-the-mint-works.en.vtt` and `.bs.vtt` are the intro film's subtitle
+tracks, wired through `media.heroVideo.captions`. The English page switches
+English on from the first frame (the film is narrated in Bosnian); the
+Bosnian page leaves both off but offers them in the player's CC menu. The
+English file also feeds the VideoObject `transcript`, so editing a line here
+changes what search engines index — keep the two in step by editing the VTT
+only.
+
+SRT copies for uploading to YouTube, TikTok and the like are in
+`design-assets/subtitles/`. If you change a VTT, change its SRT too (same cue
+numbers and wording, `,` instead of `.` before the milliseconds).

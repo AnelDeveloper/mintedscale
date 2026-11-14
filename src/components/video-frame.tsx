@@ -2,16 +2,26 @@
 
 import { useRef, useState } from "react";
 
+export type CaptionTrack = { src: string; srclang: string; label: string };
+
 /**
  * A video slot. Give it a `src` and it plays; leave `src` empty and it renders
  * a reserved frame so the layout is already right when the footage lands.
  * Files go in /public/videos — reference them as "/videos/name.mp4".
+ *
+ * `captions` become <track>s, offered in the player's CC menu; the one named
+ * by `defaultCaption` is switched on from the first frame. `note` is a short
+ * line under the play button — the place to tell someone the film is in a
+ * language they may not speak, and that it is subtitled.
  */
 export function VideoFrame({
   src,
   poster,
   label,
   duration,
+  note,
+  captions = [],
+  defaultCaption,
   reservedLabel,
   playLabel,
   ratio = "16/9",
@@ -21,6 +31,9 @@ export function VideoFrame({
   poster?: string;
   label: string;
   duration?: string;
+  note?: string;
+  captions?: CaptionTrack[];
+  defaultCaption?: string;
   reservedLabel: string;
   playLabel: string;
   ratio?: "16/9" | "9/16";
@@ -73,7 +86,18 @@ export function VideoFrame({
         className="absolute inset-0 h-full w-full object-cover"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-      />
+      >
+        {captions.map((track) => (
+          <track
+            key={track.srclang}
+            kind="subtitles"
+            src={track.src}
+            srcLang={track.srclang}
+            label={track.label}
+            default={track.srclang === defaultCaption}
+          />
+        ))}
+      </video>
 
       {!playing ? (
         <button
@@ -87,6 +111,11 @@ export function VideoFrame({
           </span>
           <span className="ms-mono text-gold-200">{label}</span>
           {duration ? <span className="ms-mono text-[0.5625rem]">{duration}</span> : null}
+          {note ? (
+            <span className="ms-mono text-[0.5625rem] normal-case tracking-[0.14em] text-bone">
+              {note}
+            </span>
+          ) : null}
         </button>
       ) : null}
     </div>

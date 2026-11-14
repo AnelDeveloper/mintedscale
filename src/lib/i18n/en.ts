@@ -47,6 +47,8 @@ export const en = {
     primaryCta: "Build my brand",
     secondaryCta: "See how it works",
     videoLabel: "How the mint works",
+    /** Under the play button. The film is in Bosnian; say so, and that it is subtitled. */
+    videoNote: "In Bosnian · English subtitles",
     bar: [
       { value: "€0", label: "Upfront" },
       { value: "Rev share", label: "I earn when you earn" },

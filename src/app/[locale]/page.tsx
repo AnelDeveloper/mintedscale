@@ -15,6 +15,7 @@ import { Studio } from "@/components/studio";
 import { Work } from "@/components/work";
 import { media, seo, site } from "@/lib/config";
 import { getDictionary, locales } from "@/lib/i18n";
+import { transcriptFrom } from "@/lib/transcript";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -28,6 +29,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   */
   const pageUrl = `${site.url}/${t.locale}`;
   const film = media.heroVideo;
+  const pageCaptions =
+    film.captions.find((c) => c.srclang === t.locale) ?? film.captions[0];
   const ids = {
     org: `${site.url}/#organization`,
     founder: `${site.url}/#founder`,
@@ -97,6 +100,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         contentUrl: `${site.url}${film.src}`,
         embedUrl: `${pageUrl}#top`,
         inLanguage: film.language,
+        // What is said, in this page's language, from the subtitle file.
+        transcript: transcriptFrom(pageCaptions.src),
+        caption: film.captions.map((c) => ({
+          "@type": "MediaObject",
+          contentUrl: `${site.url}${c.src}`,
+          encodingFormat: "text/vtt",
+          inLanguage: c.srclang,
+        })),
         width: film.width,
         height: film.height,
         publisher: { "@id": ids.org },

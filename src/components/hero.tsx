@@ -116,6 +116,12 @@ export function Hero({ t }: { t: Dictionary }) {
             poster={media.heroVideo.poster}
             label={h.videoLabel}
             duration={media.heroVideo.duration}
+            note={h.videoNote}
+            captions={media.heroVideo.captions}
+            // Subtitles on from the start only where the page's language is
+            // not the film's — an English visitor gets English, a Bosnian
+            // visitor hears it as narrated and can still turn them on.
+            defaultCaption={t.locale === media.heroVideo.language ? undefined : t.locale}
             reservedLabel={t.video.reserved}
             playLabel={t.video.play}
             ratio="16/9"

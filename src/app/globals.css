@@ -665,6 +665,19 @@
 }
 
 /*
+  Subtitles: the house body face on a smoked panel rather than the browser's
+  white-on-black slab. Safari on iOS applies the system caption style
+  instead, which is the viewer's own choice and should win.
+*/
+.ms-video video::cue {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+  line-height: 1.4;
+  color: #f2ede3;
+  background-color: rgba(8, 7, 6, 0.72);
+}
+
+/*
   The coin flip: the nav mark turns over once on hover or keyboard focus,
   the way a struck coin is checked — a reply to the visitor, never idle.
 */

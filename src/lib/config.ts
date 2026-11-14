@@ -116,6 +116,15 @@ export const media = {
     uploaded: "2026-11-13T12:00:00+01:00",
     /** The film is narrated in Bosnian, whichever page it sits on. */
     language: "bs",
+    /**
+     * Subtitle tracks (WebVTT). The SRT twins for uploading to YouTube,
+     * TikTok and the like live in design-assets/subtitles. Both were
+     * transcribed from the film and translated by hand, cue by cue.
+     */
+    captions: [
+      { src: "/videos/how-the-mint-works.en.vtt", srclang: "en", label: "English" },
+      { src: "/videos/how-the-mint-works.bs.vtt", srclang: "bs", label: "Bosanski" },
+    ],
   },
   engineVideo: { src: "/engine/engine-demo.mp4", poster: "/engine/engine-demo-poster.jpg" },
   /** Screens from the real product, shown under the AI system section. */

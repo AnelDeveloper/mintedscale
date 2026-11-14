@@ -50,6 +50,7 @@ export const bs: Dictionary = {
     primaryCta: "Izgradi moj brend",
     secondaryCta: "Vidi kako radi",
     videoLabel: "Kako sve funkcioniše",
+    videoNote: "",
     bar: [
       { value: "€0", label: "Unaprijed" },
       { value: "Podjela", label: "Zarađujem kad ti zaradiš" },
